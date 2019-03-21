@@ -43,6 +43,7 @@ public class ControllerGrabObject : MonoBehaviour
                 if (collidingObject.GetComponent<GrablableObject>() != null)
                 {
                     objectInHand = collidingObject;
+                    collidingObject = null;
                     objectInHand.GetComponent<GrablableObject>().Grab(controllerPose);
                 }
                 // else, we grab it has a regular object
