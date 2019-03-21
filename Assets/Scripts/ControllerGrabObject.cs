@@ -36,26 +36,36 @@ public class ControllerGrabObject : MonoBehaviour
         // we attempt to grab an object
         if (grabAction.GetLastStateDown(handType))
         {
-            if (collidingObject.tag == "CanneAPeche")
+            // if there is an object near our hand
+            if (collidingObject)
             {
-                GrabCanneAPeche();
-            }
-            else
-            {
-                GrabStandardObject();
+                // if the object has a special action when grabbed
+                if (collidingObject.GetComponent<GrablableObject>() != null)
+                {
+                    objectInHand = collidingObject;
+                    objectInHand.GetComponent<GrablableObject>().Grab(controllerPose);
+                }
+                // else, we grab it has a regular object
+                else
+                {
+                    GrabStandardObject();
+                }
             }
         }
 
         // we attempt to release an holded object
         if (grabAction.GetLastStateUp(handType))
         {
-            if (objectInHand.tag == "CanneAPeche")
+            if (objectInHand)
             {
-                ReleaseCanneAPeche();
-            }
-            else
-            {
-                ReleaseObject();
+                if (objectInHand.GetComponent<GrablableObject>() != null)
+                {
+                    objectInHand.GetComponent<GrablableObject>().Release(controllerPose);
+                }
+                else
+                {
+                    ReleaseStandardObject();
+                }
             }
         }
 
@@ -94,7 +104,7 @@ public class ControllerGrabObject : MonoBehaviour
 
 
 
-    private void ReleaseObject()
+    private void ReleaseStandardObject()
     {
         GetComponent<FixedJoint>().connectedBody = null;
         Destroy(GetComponent<FixedJoint>());

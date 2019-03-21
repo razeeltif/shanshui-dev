@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class CanneAPeche : GrablableObject
 {
@@ -20,12 +21,12 @@ public class CanneAPeche : GrablableObject
         
     }
 
-    protected override void Grab()
+    public override void Grab(SteamVR_Behaviour_Pose pose)
     {
         isGrabbed = true;
     }
 
-    protected override void Release()
+    public override void Release(SteamVR_Behaviour_Pose pose)
     {
         isGrabbed = false;
     }
