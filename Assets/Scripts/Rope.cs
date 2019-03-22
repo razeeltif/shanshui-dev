@@ -7,6 +7,8 @@ public class Rope : MonoBehaviour
 
     public GameObject linkPrefab;
 
+    public GameObject lineEndPrefab;
+
     public int links = 7;
 
     // Start is called before the first frame update
@@ -24,11 +26,20 @@ public class Rope : MonoBehaviour
 
         for (int i = 0; i < links; i++)
         {
-            GameObject link = Instantiate(linkPrefab, transform);
+            GameObject link;
+            if (i < links - 1)
+            {
+                link = Instantiate(linkPrefab);
+            }
+            else
+            {
+                link = Instantiate(lineEndPrefab);
+            }
             HingeJoint joint = link.GetComponent<HingeJoint>();
-            joint.connectedBody = hook;
+            joint.connectedBody = previousRB;
 
             previousRB = link.GetComponent<Rigidbody>();
+
         }
     }
 
