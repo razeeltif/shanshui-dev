@@ -74,23 +74,6 @@ public class ControllerGrabObject : MonoBehaviour
         
     }
 
-    private void GrabCanneAPeche()
-    {
-        // check if the object we want to grab is not already in the other hand
-        if (collidingObject == otherHand.objectInHand)
-        {
-            Debug.Log("Je suis le meme ");
-        }
-
-        objectInHand = collidingObject;
-        collidingObject = null;
-
-        objectInHand.GetComponent<Collider>().enabled = false;
-        objectInHand.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x + 90, this.transform.rotation.eulerAngles.y, this.transform.rotation.eulerAngles.z + 180);
-
-        objectInHand.transform.position = this.transform.position + (objectInHand.transform.position - objectInHand.transform.GetChild(0).position);
-
-    }
 
     private void GrabStandardObject()
     {
@@ -124,7 +107,7 @@ public class ControllerGrabObject : MonoBehaviour
 
         objectInHand = null;
     }
-
+    
 
 
 

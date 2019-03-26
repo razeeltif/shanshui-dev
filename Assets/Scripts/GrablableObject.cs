@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
+
+// more or less an interface for grabbable object
 public abstract class GrablableObject : MonoBehaviour
 {
 
+    // if the object is grabbed, turn this to true
     protected bool isGrabbed = false;
 
 
@@ -20,7 +23,6 @@ public abstract class GrablableObject : MonoBehaviour
     {
         
     }
-
 
     abstract public void Grab(SteamVR_Behaviour_Pose pose);
 
