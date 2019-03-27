@@ -5,12 +5,13 @@ using UnityEngine;
 public class BendInterpolation : MonoBehaviour
 {
 
+    // nombre d'éléments bendable de la canne à peche (correspondra aux bones de la canne par la suite)
     [SerializeField]
     private int nbStep = 10;
 
-
     [SerializeField]
-    private GameObject gamePrefab;
+    private GameObject stepPrefab;
+    private GameObject[] stepPrefabArray;
 
 
     [SerializeField]
@@ -19,12 +20,7 @@ public class BendInterpolation : MonoBehaviour
     [SerializeField]
     private GameObject BendableFishRod;
 
-    // the reference to the instantiated prefab above
-    private GameObject testObject;
-
     private float ratio;
-
-    public float val = 0;
 
 
     
@@ -33,7 +29,13 @@ public class BendInterpolation : MonoBehaviour
     void Start()
     {
 
-        testObject = Instantiate(gamePrefab);
+        stepPrefabArray = new GameObject[nbStep];
+
+        // instanciation des éléments bendables
+        for (int i = 0; i < nbStep; i++)
+        {
+            stepPrefabArray[i] = Instantiate(stepPrefab);
+        }
 
     }
 
@@ -41,16 +43,37 @@ public class BendInterpolation : MonoBehaviour
     void Update()
     {
 
-        testObject.transform.position = new Vector3(fishRod.transform.position.x, fishRod.transform.position.y, fishRod.transform.position.z);
-        testObject.transform.position += fishRod.transform.up * val;
+        Vector3 rigidRodPosition = fishRod.transform.position;
+        Vector3 bendyRodPosition = BendableFishRod.transform.position;
 
-        /*
-         * ratio = ( (step / nbStep)² * (3 * fishRodScale - step / nbStep) ) / ( 2 * fishRodScale^3 )
-         * 
-         * position de la canne a peche :
-         * 
-         * newPosition = 
-         * */
+        for (int step = 0; step < nbStep; step++)
+        {
+
+            // offset de la position de l'élément bendable par rapport au centre de la canne
+            float val = fishRod.transform.localScale.y - step * (fishRod.transform.localScale.y * 2 / (nbStep-1));
+
+
+            // -- utilisation des coordonnées de rigidRod et bendyRod pour calculer l'interpolation de la canne -- //
+
+            // longueur de la canne
+            float L = fishRod.transform.localScale.y * 2;
+            // step du calcul du ratio
+            float x = ((step) / (float)nbStep) * L;
+            // calcul du ratio entre la rigidRod et la bendyRod
+            ratio = (Mathf.Pow(x, 2) * (3 * L - x)) / (2 * Mathf.Pow(L, 3));
+
+            // 
+            Vector3 rigid = rigidRodPosition + fishRod.transform.up * val;
+            Vector3 bend = bendyRodPosition + BendableFishRod.transform.up * val;
+
+            // on défini la nouvelle position du prochain step en appliquant le ratio calculé ci-dessus
+            Vector3 newPosition = (rigid) + ((bend) - (rigid)) * ratio;
+
+
+            // on déplace le step vers la position calculée
+            stepPrefabArray[step].transform.position = newPosition;
+        }
+       
 
     }
 }
