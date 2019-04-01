@@ -8,6 +8,8 @@ using Valve.VR;
 public abstract class GrablableObject : MonoBehaviour
 {
 
+
+
     // if the object is grabbed, turn this to true
     protected bool isGrabbed = false;
 

@@ -16,7 +16,8 @@ public class ControllerGrabObject : MonoBehaviour
     private GameObject collidingObject;
 
     // Serves as a reference to the GameObject that the player is currently grabbing.
-    private GameObject objectInHand;
+    [HideInInspector]
+    public GameObject objectInHand;
 
 
     // Start is called before the first frame update
@@ -33,12 +34,14 @@ public class ControllerGrabObject : MonoBehaviour
     void Update()
     {
 
+
         // we attempt to grab an object
         if (grabAction.GetLastStateDown(handType))
         {
             // if there is an object near our hand
             if (collidingObject)
             {
+                Debug.Log(collidingObject.gameObject.name);
                 // if the object has a special action when grabbed
                 if (collidingObject.GetComponent<GrablableObject>() != null)
                 {
@@ -49,6 +52,12 @@ public class ControllerGrabObject : MonoBehaviour
                 // else, we grab it has a regular object
                 else
                 {
+                    // we check if the object we want to grab is not already grabbed by the other hand
+                    if(otherHand.objectInHand == collidingObject)
+                    {
+                        // if so, we release the object from the other hand, and we grab it with this hand
+                        otherHand.ReleaseStandardObject();
+                    }
                     GrabStandardObject();
                 }
             }
@@ -62,6 +71,7 @@ public class ControllerGrabObject : MonoBehaviour
                 if (objectInHand.GetComponent<GrablableObject>() != null)
                 {
                     objectInHand.GetComponent<GrablableObject>().Release(controllerPose);
+                    objectInHand = null;
                 }
                 else
                 {
@@ -75,7 +85,7 @@ public class ControllerGrabObject : MonoBehaviour
     }
 
 
-    private void GrabStandardObject()
+    public void GrabStandardObject()
     {
         objectInHand = collidingObject;
         collidingObject = null;
@@ -88,7 +98,7 @@ public class ControllerGrabObject : MonoBehaviour
 
 
 
-    private void ReleaseStandardObject()
+    public void ReleaseStandardObject()
     {
         GetComponent<FixedJoint>().connectedBody = null;
         Destroy(GetComponent<FixedJoint>());
