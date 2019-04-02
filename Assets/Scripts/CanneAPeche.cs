@@ -43,14 +43,12 @@ public class CanneAPeche : GrablableObject
         {
             if (isDualWield)
             {
+                // on récupère le vecteur de direction entre la premiere main et la seconde
                 Vector3 heading = secondHandHoldingThis.transform.position - firstHandHoldingThis.transform.position;
                 Vector3 direction = heading.normalized;
+                // on fait en sorte que la canne pointe vers le vecteur de direction
+                this.transform.up = -direction;
 
-                Vector3 dir = new Vector3((direction.x * 180), direction.y * 180, direction.z * 180);
-
-                Debug.Log(dir);
-                this.transform.rotation = Quaternion.Euler(0, 0, -((direction.x * 180)) / 2 + 180);
-                //this.transform.Rotate(new Vector3(-90, 0, 0));
                 this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * FirstHandPosition;
             }
             else
@@ -65,7 +63,7 @@ public class CanneAPeche : GrablableObject
 
     public override void Grab(SteamVR_Behaviour_Pose pose)
     {
-        Debug.Log("GRAB m!");
+
         if (isGrabbed)
         {
             secondHandHoldingThis = pose;
