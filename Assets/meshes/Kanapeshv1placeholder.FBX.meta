@@ -1,0 +1,162 @@
+fileFormatVersion: 2
+guid: 70863ef4ca0ab724f9c0093c03e7b992
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bone001
+    100002: Bone002
+    100004: Bone003
+    100006: Bone004
+    100008: Bone005
+    100010: Bone006
+    100012: Kanapesh
+    100014: //RootNode
+    400000: Bone001
+    400002: Bone002
+    400004: Bone003
+    400006: Bone004
+    400008: Bone005
+    400010: Bone006
+    400012: Kanapesh
+    400014: //RootNode
+    2100000: No Name
+    2300000: Kanapesh
+    3300000: Kanapesh
+    4300000: Kanapesh
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Kanapesh
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 0
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths:
+    - Bone001
+    - Bone001/Bone002
+    - Bone001/Bone002/Bone003
+    - Bone001/Bone002/Bone003/Bone004
+    - Bone001/Bone002/Bone003/Bone004/Bone005
+    - Bone001/Bone002/Bone003/Bone004/Bone005/Bone006
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.0254
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton:
+    - name: Kanapeshv1placeholder(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Kanapesh
+      parentName: Kanapeshv1placeholder(Clone)
+      position: {x: 0.023071365, y: 0.0040885587, z: -0.00088736764}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.70710677}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone001
+      parentName: Kanapeshv1placeholder(Clone)
+      position: {x: 0.000000010891837, y: 0.00054999755, z: -0.002106718}
+      rotation: {x: -0.50000006, y: 0.49999988, z: -0.49999997, w: 0.5000001}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone002
+      parentName: Bone001
+      position: {x: -0.25359097, y: 0.000000048446655, z: 1.4438228e-13}
+      rotation: {x: -0.000000043711395, y: 0.00000004371138, z: 0.00000019470718,
+        w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone003
+      parentName: Bone002
+      position: {x: -0.75259244, y: -0.0000001209274, z: -0.000000065795724}
+      rotation: {x: 2.818502e-10, y: -0.000000042844096, z: 0.006578398, w: 0.99997836}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone004
+      parentName: Bone003
+      position: {x: -0.6217605, y: -0.00000014533997, z: 3.6095572e-15}
+      rotation: {x: -2.650597e-11, y: -0.0000000018722923, z: -0.014153521, w: 0.99989986}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone005
+      parentName: Bone004
+      position: {x: -0.5399618, y: 0, z: -2.3101166e-13}
+      rotation: {x: -3.5308515e-15, y: -1.9141818e-15, z: 0.0075754398, w: 0.99997133}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone006
+      parentName: Bone005
+      position: {x: -0.507182, y: 0, z: 0.000000001016213}
+      rotation: {x: -3.5452511e-15, y: -1.8873791e-15, z: -6.691233e-30, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

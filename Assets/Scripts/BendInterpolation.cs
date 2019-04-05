@@ -10,6 +10,9 @@ public class BendInterpolation : MonoBehaviour
     private int nbStep = 10;
 
     [SerializeField]
+    private GameObject[] fishrodBones;
+
+    [SerializeField]
     private GameObject stepPrefab;
     private GameObject[] stepPrefabArray;
 
@@ -22,12 +25,22 @@ public class BendInterpolation : MonoBehaviour
 
     private float ratio;
 
+    [SerializeField]
+    private bool debug = false;
+
 
     
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if(fishrodBones.Length != nbStep)
+        {
+            Debug.LogError("the number of steps and the number of fishrodBones don't match\n" +
+                            "debug mode automaticaly enabled");
+            debug = true;
+        }
 
         stepPrefabArray = new GameObject[nbStep];
 
@@ -69,9 +82,15 @@ public class BendInterpolation : MonoBehaviour
             // on défini la nouvelle position du prochain step en appliquant le ratio calculé ci-dessus
             Vector3 newPosition = (rigid) + ((bend) - (rigid)) * ratio;
 
-
-            // on déplace le step vers la position calculée
-            stepPrefabArray[step].transform.position = newPosition;
+            if (debug)
+            {
+                // on déplace le step vers la position calculée
+                stepPrefabArray[step].transform.position = newPosition;
+            }
+            else
+            {
+                fishrodBones[step].transform.position = newPosition;
+            }
         }
        
 

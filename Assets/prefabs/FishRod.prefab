@@ -27,9 +27,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7957146520700032405}
-  m_LocalRotation: {x: 0.000029403669, y: -0.0000351348, z: -0.7071069, w: 0.7071067}
-  m_LocalPosition: {x: 0.009, y: -1.0248, z: 0.01}
-  m_LocalScale: {x: 0.12479275, y: 0.6489222, z: 0.648923}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.0089966515, y: -1.0248005, z: 0.009999871}
+  m_LocalScale: {x: 0.055555575, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7957146520870280433}
   m_RootOrder: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7957146520700032405}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9495bc873c7763e418caa445d5eeff17, type: 3}
   m_Name: 
@@ -113,6 +113,9 @@ MonoBehaviour:
   lineEndPrefab: {fileID: 1055601991108960595, guid: dfe1c8d71244b744ea6d24b667a0a1e2,
     type: 3}
   links: 40
+  coefGrowLine: 2
+  MinHookVelocity: 40
+  MaxHookVelocity: 80
 --- !u!1 &7957146520870280442
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,7 +150,7 @@ Transform:
   m_Children:
   - {fileID: 7957146520700032401}
   m_Father: {fileID: 7957146521038954123}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!33 &7957146520870280438
 MeshFilter:
@@ -164,7 +167,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7957146520870280442}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -504,8 +507,8 @@ Transform:
   m_LocalPosition: {x: -0.384, y: 2.182, z: -0.946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7957146520870280433}
   - {fileID: 7957146521463933108}
+  - {fileID: 7957146520870280433}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.58}
@@ -523,7 +526,7 @@ GameObject:
   - component: {fileID: 7957146521463933110}
   - component: {fileID: 7957146521463933104}
   m_Layer: 0
-  m_Name: firstHandPosition
+  m_Name: FishingRigidRod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +546,7 @@ Transform:
   - {fileID: 7957146520885011304}
   - {fileID: 7957146522159927403}
   m_Father: {fileID: 7957146521038954123}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!54 &7957146521463933105
 Rigidbody:
@@ -603,10 +606,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nbStep: 20
+  fishrodBones: []
   stepPrefab: {fileID: 167788352706796383, guid: af0d87d04aaa2d44e90ed3fbcd2c6ac5,
     type: 3}
   fishRod: {fileID: 7957146522159927400}
   BendableFishRod: {fileID: 7957146520870280442}
+  debug: 0
 --- !u!1 &7957146522159927400
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ TagManager:
   - CanneAPeche
   - projectile
   - FxTemporaire
+  - water
   layers:
   - Default
   - TransparentFX
