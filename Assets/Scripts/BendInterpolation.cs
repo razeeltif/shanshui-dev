@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BendInterpolation : MonoBehaviour
 {
+#pragma warning disable 0649
 
     // nombre d'éléments bendable de la canne à peche (correspondra aux bones de la canne par la suite)
     [SerializeField]
@@ -28,8 +29,10 @@ public class BendInterpolation : MonoBehaviour
     [SerializeField]
     private bool debug = false;
 
+#pragma warning restore 0649
 
-    
+
+
 
     // Start is called before the first frame update
     void Start()

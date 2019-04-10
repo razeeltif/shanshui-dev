@@ -5,13 +5,15 @@ using System.Collections;
 
 public class CableComponent : MonoBehaviour
 {
-	#region Class members
+    #region Class members
 
-	[SerializeField] private Transform endPoint;
+#pragma warning disable 0649 
+    [SerializeField] private Transform endPoint;
 	[SerializeField] private Material cableMaterial;
+#pragma warning restore 0649
 
-	// Cable config
-	[SerializeField] private float cableLength = 0.5f;
+    // Cable config
+    [SerializeField] private float cableLength = 0.5f;
 	[SerializeField] private int totalSegments = 5;
 	[SerializeField] private float segmentsPerUnit = 2f;
 	private int segments = 0;
@@ -22,7 +24,7 @@ public class CableComponent : MonoBehaviour
 	[SerializeField] private int solverIterations = 1;
 
 	//[Range(0,3)]
-	[SerializeField] private float stiffness = 1f;
+	//[SerializeField] private float stiffness = 1f;
 
 	private LineRenderer line;
 	private CableParticle[] points;
@@ -76,8 +78,9 @@ public class CableComponent : MonoBehaviour
 	void InitLineRenderer()
 	{
 		line = this.gameObject.AddComponent<LineRenderer>();
-		line.SetWidth(cableWidth, cableWidth);
-		line.SetVertexCount(segments + 1);
+        line.startWidth = cableWidth;
+        line.endWidth = cableWidth;
+        line.positionCount = segments + 1;
 		line.material = cableMaterial;
 		line.GetComponent<Renderer>().enabled = true;
 	}

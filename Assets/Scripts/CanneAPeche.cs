@@ -9,6 +9,8 @@ public class CanneAPeche : GrablableObject
     private SteamVR_Behaviour_Pose firstHandHoldingThis;
     private SteamVR_Behaviour_Pose secondHandHoldingThis;
 
+#pragma warning disable 0649 
+
     [SerializeField]
     private float FirstHandPosition;
     [SerializeField]
@@ -16,6 +18,7 @@ public class CanneAPeche : GrablableObject
 
     [SerializeField]
     private Rigidbody bendyRod;
+#pragma warning restore 0649
 
     private bool isDualWield = false;
 
