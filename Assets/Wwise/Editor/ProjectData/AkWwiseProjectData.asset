@@ -197,7 +197,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 47e4058fd0f1ef49976ad56548cd1f3f
     GuidInternal: 
-    m_lastTime: -8586467186462174983
+    m_lastTime: -8586467175143117479
     List:
     - name: ShanShui_Test
       guid: 3a3e7ea1147096498fd3014ca437fb2d
@@ -213,26 +213,26 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 65ff1045aeb4324e99ada7bb8743ae13
     GuidInternal: 
-    m_lastTime: -8586467185696082147
+    m_lastTime: -8586467177151543643
+    List: []
+  - PhysicalPath: Events\ShanShui_Test_Music.wwu
+    ParentPhysicalPath: 
+    guid: 5b5bf650f8ba9e44b6bf955973c02e80
+    GuidInternal: 
+    m_lastTime: -8586467177151653621
     List:
     - name: Play_Loops_TEST
       guid: 3febaa666d4e974da8582c4003b449b5
       id: 493892362
       PathAndIcons:
-      - ElementName: Default Work Unit
+      - ElementName: ShanShui_Test_Music
         ObjectType: 12
       - ElementName: Play_Loops_TEST
         ObjectType: 3
-      Path: Default Work Unit\Play_Loops_TEST
+      Path: ShanShui_Test_Music\Play_Loops_TEST
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-  - PhysicalPath: Events\ShanShui_Test_Music.wwu
-    ParentPhysicalPath: 
-    guid: 5b5bf650f8ba9e44b6bf955973c02e80
-    GuidInternal: 
-    m_lastTime: -8586477455680305422
-    List: []
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     ParentPhysicalPath: 
@@ -472,6 +472,9 @@ MonoBehaviour:
     GuidInternal: 
     m_lastTime: -8586484286060888960
     List: []
-  ExpandedItems: []
+  ExpandedItems:
+  - /M1_SHANSHUI
+  - /M1_SHANSHUI/Events
+  - /M1_SHANSHUI/SoundBanks
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
