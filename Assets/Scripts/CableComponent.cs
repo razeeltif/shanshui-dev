@@ -13,7 +13,7 @@ public class CableComponent : MonoBehaviour
 #pragma warning restore 0649
 
     // Cable config
-    [SerializeField] private float cableLength = 0.5f;
+    public float cableLength = 0.5f;
 	[SerializeField] private int totalSegments = 5;
 	[SerializeField] private float segmentsPerUnit = 2f;
 	private int segments = 0;

@@ -5,5 +5,6 @@ using UnityEngine;
 public enum EventsName {
     InWater,
     OutWater,
-    CatchFish
+    CatchFish,
+    ReleaseFish
 };

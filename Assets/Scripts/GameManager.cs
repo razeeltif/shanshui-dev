@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour
     // in seconds
     public float TimeBeforeShoeFish = 5f;
     public float RandomOnTimeBeforeShoeFish = 1f;
+    public float TimerBeforeRelease = 5f;
 
-    private Timer FishTimer;
+    private UTimer FishTimer;
+    private UTimer UnfishTimer;
 
 
 
@@ -31,7 +33,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        FishTimer = UTimer.Initialize(0, this, StartShoeFish);
+        UnfishTimer = UTimer.Initialize(0, this, ReleaseFish);
     }
 
     // Update is called once per frame
@@ -49,29 +52,27 @@ public class GameManager : MonoBehaviour
         checkVariable();
 
         float time = TimeBeforeShoeFish + Random.Range(-RandomOnTimeBeforeShoeFish, RandomOnTimeBeforeShoeFish);
+        FishTimer.start(time);
 
-        // start Timer
-        FishTimer = new Timer(time * 1000);
-        FishTimer.Elapsed += HandleTimerElapsed;
-        FishTimer.Enabled = true;
-        FishTimer.AutoReset = false;
+
     }
 
     // the bobber exit the water
     void OnOutWater()
     {
-        // if the timer is running, we reset it
-        if (FishTimer != null && FishTimer.Enabled)
-        {
-            FishTimer.Dispose();
-        }
+        FishTimer.Stop();
     }
 
-    // callback function called at the end of the timer 
-    public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
+
+    public void StartShoeFish()
     {
-        // do whatever it is that you need to do on a timer
-        Debug.Log("JE FERRE LE POISSON PUTAIN");
+        EventManager.TriggerEvent(EventsName.CatchFish);
+        UnfishTimer.start(TimerBeforeRelease);
+    }
+
+    public void ReleaseFish()
+    {
+        EventManager.TriggerEvent(EventsName.ReleaseFish);
     }
 
     private void checkVariable()
