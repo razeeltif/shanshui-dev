@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.shanshui.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\ulysse.rouault\\Documents\\shanshui-dev\\actions.json",
+      "action_manifest_path": "C:\\Users\\florent.vain\\Documents\\shanshui-dev\\actions.json",
       "strings": {
         "en_us": {
           "name": "SHANSHUI [Testing]"

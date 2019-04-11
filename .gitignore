@@ -5,7 +5,8 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
-Assets/Wwise/
+Assets/Wwise*
+Assets/Wwise/*
 WwiseUnity*
 
 # Visual Studio cache directory

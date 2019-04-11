@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d2805c7dffc8a145995f5fdc6bd22b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ab4ae6e0935d3b43abe81c289f9ff8c, type: 3}
   m_Name: AkWwiseProjectData
   m_EditorClassIdentifier: 
   AcousticTextureWwu:
@@ -17,13 +17,13 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 6c0c91555cf9ed488d6d3a454cba76d2
     GuidInternal: 
-    m_lastTime: -8586484286061138299
+    m_lastTime: -8586484286054775808
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
     ParentPhysicalPath: 
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8586492251203608549
+    m_lastTime: -8586492251194775808
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -184,20 +184,20 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 3fe32c662ad01942a40d196cf2a1b635
     GuidInternal: 
-    m_lastTime: -8586467987491211153
+    m_lastTime: -8586467987474775808
     List: []
   BankWwu:
   - PhysicalPath: SoundBanks\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: 0ab70a8f1aec33468dd816435978ade1
     GuidInternal: 
-    m_lastTime: -8586484286061576730
+    m_lastTime: -8586484286054775808
     List: []
   - PhysicalPath: SoundBanks\ShanShui_Test_Musique.wwu
     ParentPhysicalPath: 
     guid: 47e4058fd0f1ef49976ad56548cd1f3f
     GuidInternal: 
-    m_lastTime: -8586467175143117479
+    m_lastTime: -8586467175134775808
     List:
     - name: ShanShui_Test
       guid: 3a3e7ea1147096498fd3014ca437fb2d
@@ -213,13 +213,13 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 65ff1045aeb4324e99ada7bb8743ae13
     GuidInternal: 
-    m_lastTime: -8586467177151543643
+    m_lastTime: -8586467177134775808
     List: []
   - PhysicalPath: Events\ShanShui_Test_Music.wwu
     ParentPhysicalPath: 
     guid: 5b5bf650f8ba9e44b6bf955973c02e80
     GuidInternal: 
-    m_lastTime: -8586467177151653621
+    m_lastTime: -8586467177134775808
     List:
     - name: Play_Loops_TEST
       guid: 3febaa666d4e974da8582c4003b449b5
@@ -238,13 +238,13 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: e516f280c224204abe3022daf1f248f4
     GuidInternal: 
-    m_lastTime: -8586484286060709449
+    m_lastTime: -8586484286054775808
     List: []
   - PhysicalPath: Game Parameters\Factory Motion.wwu
     ParentPhysicalPath: 
     guid: 225213d7dbd1d042adc0930743567776
     GuidInternal: 
-    m_lastTime: -8586492251301721390
+    m_lastTime: -8586492251294775808
     List:
     - name: Playback_Rate
       guid: e37e38283ac11643b9c3db5c521624af
@@ -268,7 +268,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 5577163b42fb8b4598bf96f557afb3b9
     GuidInternal: 
-    m_lastTime: -8586492251237422934
+    m_lastTime: -8586492251234775808
     List:
     - name: SS_Air_Fear
       guid: 59062ef746431c4ea1b1dab46a05101e
@@ -364,7 +364,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 97bdcb0b5177774a85bb6ac940f8cc3f
     GuidInternal: 
-    m_lastTime: -8586492184586019047
+    m_lastTime: -8586492184574775808
     List:
     - name: Density_FA_SSGrain
       guid: 9ef2b363f3048748ba1a4d7694644b24
@@ -425,7 +425,7 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 1cc5bc7ecf421c44815bd86e7780fe73
     GuidInternal: 
-    m_lastTime: -8586482522729002640
+    m_lastTime: -8586482522714775808
     List:
     - name: music
       guid: 901492045f23eb498600110ddbc54be7
@@ -463,18 +463,18 @@ MonoBehaviour:
     ParentPhysicalPath: 
     guid: 84e64bb73ac4da44a6564df0848c3db2
     GuidInternal: 
-    m_lastTime: -8586484286061307848
+    m_lastTime: -8586484286054775808
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
     ParentPhysicalPath: 
     guid: bf9eca8f60194144838153343c71ee46
     GuidInternal: 
-    m_lastTime: -8586484286060888960
+    m_lastTime: -8586484286054775808
     List: []
   ExpandedItems:
   - /M1_SHANSHUI
   - /M1_SHANSHUI/Events
-  - /M1_SHANSHUI/SoundBanks
+  - /M1_SHANSHUI/Events/ShanShui_Test_Music
   autoPopulateEnabled: 1
   CurrentPluginConfig: 

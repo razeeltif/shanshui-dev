@@ -29,7 +29,7 @@ public class WaterPassRenderer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         RenderTerrainNormals();
         RenderWaterPrePass();
