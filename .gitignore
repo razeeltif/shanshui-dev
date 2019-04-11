@@ -5,6 +5,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+Assets/Wwise/
+WwiseUnity*
+
 # Visual Studio cache directory
 .vs/
 
@@ -34,3 +37,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets/WwiseSettings\.xml
