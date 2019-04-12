@@ -80,8 +80,6 @@ public class ControllerGrabObject : MonoBehaviour
             }
         }
 
-
-        
     }
 
 
@@ -108,18 +106,6 @@ public class ControllerGrabObject : MonoBehaviour
 
         objectInHand = null;
     }
-
-    private void ReleaseCanneAPeche()
-    {
-        objectInHand.GetComponent<Collider>().enabled = true;
-        objectInHand.GetComponent<Rigidbody>().velocity = controllerPose.GetVelocity();
-        objectInHand.GetComponent<Rigidbody>().angularVelocity = controllerPose.GetAngularVelocity();
-
-        objectInHand = null;
-    }
-    
-
-
 
     // create a joint between the controller and the holded object, and add some forces so the joint won't break easily
     private FixedJoint AddFixedJoint()

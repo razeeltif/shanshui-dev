@@ -25,10 +25,15 @@ public class Bobber : MonoBehaviour
     [SerializeField]
     float hook_spring_when_shoe = 1000f;
     [SerializeField]
+    float forceOfTheFish = 20f;
+    [SerializeField]
+    GameObject fishPrefab;
+    [SerializeField]
     GameObject bendRod;
 
 #pragma warning restore 0649
 
+    private GameObject hookedFish;
     private float forceFactor;
     private Vector3 actionPoint;
     private Vector3 upLift;
@@ -73,7 +78,7 @@ public class Bobber : MonoBehaviour
         if (this.GetComponent<SpringJoint>())
         {
             Debug.Log(this.GetComponent<SpringJoint>().currentForce);
-            bendRod.GetComponent<Rigidbody>().AddForce(this.GetComponent<SpringJoint>().currentForce *10);
+            bendRod.GetComponent<Rigidbody>().AddForce(this.GetComponent<SpringJoint>().currentForce * forceOfTheFish);
         }
 
     }
@@ -97,9 +102,6 @@ public class Bobber : MonoBehaviour
 
     private void OnCatchFish()
     {
-        Debug.Log("Poisson ferré");
-
-
 
          miamPoisson = new GameObject("fixed poisson");
          miamPoisson.AddComponent<Rigidbody>();
@@ -128,6 +130,18 @@ public class Bobber : MonoBehaviour
         Destroy(this.gameObject.GetComponent<SpringJoint>());
 
         Destroy(miamPoisson);
+
+        /*if(hookedFish == null)
+        {*/
+            hookedFish = Instantiate(fishPrefab);
+
+            hookedFish.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.4f, this.transform.position.z);
+
+            hookedFish.AddComponent<FixedJoint>();
+            hookedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
+            hookedFish.GetComponent<FixedJoint>().breakForce = 500;
+      /*  }*/
+
 
     }
 
