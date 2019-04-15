@@ -19,6 +19,7 @@ public class ControllerGrabObject : MonoBehaviour
     [HideInInspector]
     public GameObject objectInHand;
 
+    private bool isGrabbing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,38 +35,11 @@ public class ControllerGrabObject : MonoBehaviour
     void Update()
     {
 
-
-        // we attempt to grab an object
-        if (grabAction.GetLastStateDown(handType))
-        {
-            // if there is an object near our hand
-            if (collidingObject)
-            {
-                Debug.Log(collidingObject.gameObject.name);
-                // if the object has a special action when grabbed
-                if (collidingObject.GetComponent<GrablableObject>() != null)
-                {
-                    objectInHand = collidingObject;
-                    collidingObject = null;
-                    objectInHand.GetComponent<GrablableObject>().Grab(controllerPose);
-                }
-                // else, we grab it has a regular object
-                else
-                {
-                    // we check if the object we want to grab is not already grabbed by the other hand
-                    if(otherHand.objectInHand == collidingObject)
-                    {
-                        // if so, we release the object from the other hand, and we grab it with this hand
-                        otherHand.ReleaseStandardObject();
-                    }
-                    GrabStandardObject();
-                }
-            }
-        }
-
         // we attempt to release an holded object
         if (grabAction.GetLastStateUp(handType))
         {
+            Debug.Log("PATETA");
+            Debug.Log(objectInHand);
             if (objectInHand)
             {
                 if (objectInHand.GetComponent<GrablableObject>() != null)
@@ -79,7 +53,6 @@ public class ControllerGrabObject : MonoBehaviour
                 }
             }
         }
-
     }
 
 
@@ -125,6 +98,37 @@ public class ControllerGrabObject : MonoBehaviour
         {
                 collidingObject = col.gameObject;
         }
+
+        if (grabAction.GetLastState(handType) && objectInHand == null)
+        {
+            // if there is an object near our hand
+            if (collidingObject)
+            {
+                // if the object has a special action when grabbed
+                if (collidingObject.GetComponent<GrablableObject>() != null)
+                {
+                    objectInHand = collidingObject;
+                    collidingObject = null;
+                    objectInHand.GetComponent<GrablableObject>().Grab(controllerPose);
+                }
+                // else, we grab it has a regular object
+                else
+                {
+                    // we check if the object we want to grab is not already grabbed by the other hand
+                    if (otherHand.objectInHand == collidingObject)
+                    {
+                        // if so, we release the object from the other hand, and we grab it with this hand
+                        otherHand.ReleaseStandardObject();
+                    }
+                    GrabStandardObject();
+                }
+            }
+        }
+
+
+
+
+
     }
 
 

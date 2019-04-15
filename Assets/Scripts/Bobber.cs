@@ -77,7 +77,7 @@ public class Bobber : MonoBehaviour
 
         if (this.GetComponent<SpringJoint>())
         {
-            Debug.Log(this.GetComponent<SpringJoint>().currentForce);
+            //Debug.Log(this.GetComponent<SpringJoint>().currentForce);
             bendRod.GetComponent<Rigidbody>().AddForce(this.GetComponent<SpringJoint>().currentForce * forceOfTheFish);
         }
 
