@@ -19,8 +19,6 @@ public class Bobber : MonoBehaviour
     Vector3 bouncyCenterOffset;
 
     [SerializeField]
-    GameObject cable_start;
-    [SerializeField]
     float cable_start_spring_when_shoe = 10f;
     [SerializeField]
     float hook_spring_when_shoe = 1000f;
@@ -60,11 +58,15 @@ public class Bobber : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        WaterSimulationOnBobber();
+    }
 
+    private void WaterSimulationOnBobber()
+    {
         actionPoint = transform.position + transform.TransformDirection(bouncyCenterOffset);
         forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
 
-        if(forceFactor > 0f)
+        if (forceFactor > 0f)
         {
             upLift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody>().velocity.y * bounceDamp);
             GetComponent<Rigidbody>().AddForceAtPosition(upLift, actionPoint);
@@ -74,13 +76,6 @@ public class Bobber : MonoBehaviour
         {
             GetComponent<Rigidbody>().drag = initialDrag;
         }
-
-        if (this.GetComponent<SpringJoint>())
-        {
-            //Debug.Log(this.GetComponent<SpringJoint>().currentForce);
-            bendRod.GetComponent<Rigidbody>().AddForce(this.GetComponent<SpringJoint>().currentForce * forceOfTheFish);
-        }
-
     }
 
 
@@ -114,9 +109,9 @@ public class Bobber : MonoBehaviour
         this.gameObject.GetComponent<SpringJoint>().connectedAnchor = Vector3.zero;
         this.gameObject.GetComponent<SpringJoint>().spring = hook_spring_when_shoe;
 
-        cable_start_previous_spring = cable_start.GetComponent<SpringJoint>().spring;
-        cable_start.GetComponent<SpringJoint>().spring = cable_start_spring_when_shoe;
-        cable_start.GetComponent<CableComponent>().cableLength = 1;
+        cable_start_previous_spring = bendRod.GetComponent<SpringJoint>().spring;
+        bendRod.GetComponent<SpringJoint>().spring = cable_start_spring_when_shoe;
+        bendRod.GetComponent<CableComponent>().cableLength = 1;
 
 
 
@@ -124,8 +119,8 @@ public class Bobber : MonoBehaviour
 
     private void OnReleaseFish()
     {
-        cable_start.GetComponent<CableComponent>().cableLength = 4;
-        cable_start.GetComponent<SpringJoint>().spring = cable_start_previous_spring;
+        bendRod.GetComponent<CableComponent>().cableLength = 4;
+        bendRod.GetComponent<SpringJoint>().spring = cable_start_previous_spring;
 
         Destroy(this.gameObject.GetComponent<SpringJoint>());
 

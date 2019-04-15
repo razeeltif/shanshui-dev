@@ -5,7 +5,7 @@ public class CableParticle
 {
 	#region Class member variables
 
-	private Vector3 _position, _oldPosition;
+	private Vector3 _position, _oldPosition, _offset;
 	private Transform _boundTo = null;
 	private Rigidbody _boundRigid = null;
 
@@ -43,18 +43,18 @@ public class CableParticle
 		if (this.IsBound())
 		{
 			if (_boundRigid == null) {
-				this.UpdatePosition(_boundTo.position);		
+				this.UpdatePosition(_boundTo.position + _boundTo.right * _offset.x + _boundTo.up * _offset.y + _boundTo.forward * _offset.z);		
 			}
 			else
 			{
 				switch (_boundRigid.interpolation) 
 				{
 				case RigidbodyInterpolation.Interpolate:
-					this.UpdatePosition(_boundRigid.position + (_boundRigid.velocity * Time.fixedDeltaTime) / 2);
+					this.UpdatePosition(_boundRigid.position + _boundTo.right * _offset.x + _boundTo.up * _offset.y + _boundTo.forward * _offset.z + (_boundRigid.velocity * Time.fixedDeltaTime) / 2);
 					break;
 				case RigidbodyInterpolation.None:
 				default:
-					this.UpdatePosition(_boundRigid.position + _boundRigid.velocity * Time.fixedDeltaTime);
+					this.UpdatePosition(_boundRigid.position + _boundTo.right * _offset.x + _boundTo.up * _offset.y + _boundTo.forward * _offset.z  + _boundRigid.velocity * Time.fixedDeltaTime);
 					break;
 				}
 			}
@@ -72,11 +72,12 @@ public class CableParticle
 		_position = newPos;
 	}
 
-	public void Bind(Transform to)
+	public void Bind(Transform to, Vector3 off)
 	{
 		_boundTo = to;
+        _offset = off;
 		_boundRigid = to.GetComponent<Rigidbody>();
-		_oldPosition = _position = _boundTo.position;
+		_oldPosition = _position = _boundTo.position + _boundTo.right * _offset.x + _boundTo.up * _offset.y + _boundTo.forward * _offset.z;
 	}
 		
 	public void UnBind()

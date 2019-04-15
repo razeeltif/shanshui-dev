@@ -8,11 +8,13 @@ public class CableComponent : MonoBehaviour
     #region Class members
 
 #pragma warning disable 0649 
-    [SerializeField] private Transform endPoint;
+    [SerializeField] private Transform cableEnd;
 	[SerializeField] private Material cableMaterial;
 #pragma warning restore 0649
 
     // Cable config
+    [SerializeField] private Vector3 cableStartOffset;
+    [SerializeField] private Vector3 cableEndOffset;
     public float cableLength = 0.5f;
 	[SerializeField] private int totalSegments = 5;
 	[SerializeField] private float segmentsPerUnit = 2f;
@@ -26,6 +28,9 @@ public class CableComponent : MonoBehaviour
 	//[Range(0,3)]
 	//[SerializeField] private float stiffness = 1f;
 
+    private Vector3 cableEndPosition;
+    private Vector3 cableStartPosition;
+
 	private LineRenderer line;
 	private CableParticle[] points;
 
@@ -36,7 +41,13 @@ public class CableComponent : MonoBehaviour
 
 	void Start()
 	{
-		InitCableParticles();
+
+        // init cable start and end position
+        cableStartPosition = this.transform.position + this.transform.right * cableStartOffset.x + this.transform.up * cableStartOffset.y + this.transform.forward * cableStartOffset.z;
+        cableEndPosition = cableEnd.position + cableEnd.right * cableEndOffset.x + cableEnd.up * cableEndOffset.y + cableEnd.forward * cableEndOffset.z;
+
+
+        InitCableParticles();
 		InitLineRenderer();
 	}
 
@@ -54,22 +65,22 @@ public class CableComponent : MonoBehaviour
 		else
 			segments = Mathf.CeilToInt (cableLength * segmentsPerUnit);
 
-		Vector3 cableDirection = (endPoint.position - transform.position).normalized;
+		Vector3 cableDirection = (cableEndPosition - cableStartPosition).normalized;
 		float initialSegmentLength = cableLength / segments;
 		points = new CableParticle[segments + 1];
 
 		// Foreach point
 		for (int pointIdx = 0; pointIdx <= segments; pointIdx++) {
 			// Initial position
-			Vector3 initialPosition = transform.position + (cableDirection * (initialSegmentLength * pointIdx));
+			Vector3 initialPosition = cableStartPosition + (cableDirection * (initialSegmentLength * pointIdx));
 			points[pointIdx] = new CableParticle(initialPosition);
 		}
 
 		// Bind start and end particles with their respective gameobjects
 		CableParticle start = points[0];
 		CableParticle end = points[segments];
-		start.Bind(this.transform);
-		end.Bind(endPoint.transform);
+		start.Bind(this.transform, cableStartOffset);
+        end.Bind(cableEnd.transform, cableEndOffset);
 	}
 
 	/**
@@ -154,6 +165,7 @@ public class CableComponent : MonoBehaviour
 	#endregion
 
 
+
 	#region Solver Constraints
 
 	/**
@@ -230,5 +242,28 @@ public class CableComponent : MonoBehaviour
 
 	}
 
-	#endregion
+    #endregion
+
+    #region On Draw Gizmo
+
+    private void OnDrawGizmos()
+    {
+        Vector3 p;
+
+
+        // anchor position for the beginning of the line
+        Gizmos.color = Color.yellow;
+        p = this.transform.position + this.transform.right * cableStartOffset.x + this.transform.up * cableStartOffset.y + this.transform.forward * cableStartOffset.z;
+        Gizmos.DrawSphere(p, 0.1f);
+
+        // panchor position for the end of the line
+        Gizmos.color = Color.red;
+        p = cableEnd.position + cableEnd.right * cableEndOffset.x + cableEnd.up * cableEndOffset.y + cableEnd.forward * cableEndOffset.z;
+        Gizmos.DrawSphere(p, 0.1f);
+
+    }
+
+
+    #endregion
+
 }
