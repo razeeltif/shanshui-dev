@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class CanneAPeche : GrablableObject
+public class CanneAPeche : GrablableObject, IUseSettings
 {
+
+    public FishRodSettings settings;
 
     private SteamVR_Behaviour_Pose firstHandHoldingThis;
     private SteamVR_Behaviour_Pose secondHandHoldingThis;
@@ -12,12 +14,7 @@ public class CanneAPeche : GrablableObject
 #pragma warning disable 0649 
 
     [SerializeField]
-    private float FirstHandPosition;
-    [SerializeField]
-    private float SecondHandPosition;
-
-    [SerializeField]
-    private Rigidbody bendyRod;
+    private GameObject bendyRod;
 #pragma warning restore 0649
 
     private bool isDualWield = false;
@@ -27,14 +24,34 @@ public class CanneAPeche : GrablableObject
     private float bendyDrag;
     private float bendyAngularDrag;
 
+    private float bendyrod_previous_spring = 0;
+    private float bendyrod_previous_damper = 0;
 
 
 
+    private void OnEnable()
+    {
+        settings.AddGameObjectListening(this);
+        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
+    }
 
+    private void OnDisable()
+    {
+        settings.RemoveGameObjectListening(this);
+        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
+    }
+
+    void Awake()
+    {
+
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        setCableComponentValues();
         unsetBendyPhysic();
     }
 
@@ -52,13 +69,13 @@ public class CanneAPeche : GrablableObject
                 // on fait en sorte que la canne pointe vers le vecteur de direction
                 this.transform.up = -direction;
 
-                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * FirstHandPosition;
+                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
             }
             else
             {
                 this.transform.rotation = firstHandHoldingThis.transform.rotation;
                 this.transform.Rotate(new Vector3(-90, 0, 0));
-                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * FirstHandPosition;
+                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
             }
 
         }
@@ -116,6 +133,22 @@ public class CanneAPeche : GrablableObject
         }
     }
 
+    private void OnCatchFish()
+    {
+        bendyrod_previous_spring = bendyRod.GetComponent<SpringJoint>().spring;
+        bendyrod_previous_damper = bendyRod.GetComponent<SpringJoint>().damper;
+        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthWhenCatchAFish;
+        bendyRod.GetComponent<SpringJoint>().spring = settings.SpringCatchState;
+        bendyRod.GetComponent<SpringJoint>().damper = settings.DamperCatchState;
+    }
+
+    private void OnReleaseFish()
+    {
+        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        bendyRod.GetComponent<SpringJoint>().spring = bendyrod_previous_spring;
+        bendyRod.GetComponent<SpringJoint>().damper = bendyrod_previous_damper;
+    }
+
 
     private void OnDrawGizmos()
     {
@@ -123,35 +156,49 @@ public class CanneAPeche : GrablableObject
 
         // position de la  premiere main sur l'éditor
         Gizmos.color = Color.yellow;
-        p = this.transform.position + this.transform.up * FirstHandPosition;
+        p = this.transform.position + this.transform.up * settings.handPosition;
         Gizmos.DrawSphere(p, 0.1f);
         
         // position de la  deuxième main sur l'éditor
         Gizmos.color = Color.red;
-        p = this.transform.position + this.transform.up * SecondHandPosition;
+        p = this.transform.position + this.transform.up * settings.handPosition;
         Gizmos.DrawSphere(p, 0.1f);
 
     }
 
     private void setBendyPhysic()
     {
-        bendyRod.mass = bendyMass;
-        bendyRod.drag = bendyDrag;
-        bendyRod.angularDrag = bendyAngularDrag;
+        bendyRod.GetComponent<Rigidbody>().mass = settings.mass;
+        bendyRod.GetComponent<Rigidbody>().drag = settings.drag;
+        bendyRod.GetComponent<Rigidbody>().angularDrag = settings.angularDrag;
     }
 
     private void unsetBendyPhysic()
     {
-        bendyMass = bendyRod.mass;
-        bendyDrag = bendyRod.drag;
-        bendyAngularDrag = bendyRod.angularDrag;
 
-
-        bendyRod.mass = 1;
-        bendyRod.drag = 0;
-        bendyRod.angularDrag = 0;
+        bendyRod.GetComponent<Rigidbody>().mass = 1;
+        bendyRod.GetComponent<Rigidbody>().drag = 0;
+        bendyRod.GetComponent<Rigidbody>().angularDrag = 0;
 
     }
 
+    private void setCableComponentValues()
+    {
+        bendyRod.GetComponent<CableComponent>().totalSegments = settings.totalSegments;
+        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        bendyRod.GetComponent<CableComponent>().cableWidth = settings.width;
+        bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
+        bendyRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, -bendyRod.transform.localScale.y, 0);
+        bendyRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, bendyRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
+    }
 
+    public void OnModifySettings()
+    {
+        if (isGrabbed)
+        {
+            setBendyPhysic();
+        }
+        bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
+        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+    }
 }

@@ -2,56 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bobber : MonoBehaviour
+public class Bobber : MonoBehaviour, IUseSettings
 {
 
     [SerializeField]
-    float waterLevel = -3.2f;
-    [SerializeField]
-    float waterViscosity = 10f;
-    [SerializeField]
-    float floatHeight = 2;
-    [SerializeField]
-    float bounceDamp = 0.05f;
+    FishRodSettings settings;
 
 #pragma warning disable 0649
-    [SerializeField]
-    Vector3 bouncyCenterOffset;
-
-    [SerializeField]
-    float cable_start_spring_when_shoe = 10f;
-    [SerializeField]
-    float hook_spring_when_shoe = 1000f;
-    [SerializeField]
-    float forceOfTheFish = 20f;
     [SerializeField]
     GameObject fishPrefab;
     [SerializeField]
     GameObject bendRod;
-
 #pragma warning restore 0649
 
     private GameObject hookedFish;
     private float forceFactor;
     private Vector3 actionPoint;
     private Vector3 upLift;
-    private float initialDrag;
-
-    private float cable_start_previous_spring = 0;
-    
     
     private GameObject miamPoisson;
 
 
     private void OnEnable()
     {
+        settings.AddGameObjectListening(this);
+
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        initialDrag = GetComponent<Rigidbody>().drag;
+        settings.RemoveGameObjectListening(this);
+
+        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
 
@@ -63,18 +48,18 @@ public class Bobber : MonoBehaviour
 
     private void WaterSimulationOnBobber()
     {
-        actionPoint = transform.position + transform.TransformDirection(bouncyCenterOffset);
-        forceFactor = 1f - ((actionPoint.y - waterLevel) / floatHeight);
+        actionPoint = transform.position + transform.TransformDirection(settings.BouncyCenterOffset);
+        forceFactor = 1f - ((actionPoint.y - settings.waterLevel) / settings.wave);
 
         if (forceFactor > 0f)
         {
-            upLift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody>().velocity.y * bounceDamp);
+            upLift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody>().velocity.y * settings.bounceDamp);
             GetComponent<Rigidbody>().AddForceAtPosition(upLift, actionPoint);
-            GetComponent<Rigidbody>().drag = waterViscosity;
+            GetComponent<Rigidbody>().drag = settings.viscosity;
         }
         else
         {
-            GetComponent<Rigidbody>().drag = initialDrag;
+            GetComponent<Rigidbody>().drag = settings.HookDrag;
         }
     }
 
@@ -101,26 +86,18 @@ public class Bobber : MonoBehaviour
          miamPoisson = new GameObject("fixed poisson");
          miamPoisson.AddComponent<Rigidbody>();
          miamPoisson.GetComponent<Rigidbody>().isKinematic = true;
-         miamPoisson.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 0.5f, this.transform.position.z);
+         miamPoisson.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
 
         this.gameObject.AddComponent<SpringJoint>();
         this.gameObject.GetComponent<SpringJoint>().connectedBody = miamPoisson.GetComponent<Rigidbody>();
         this.gameObject.GetComponent<SpringJoint>().autoConfigureConnectedAnchor = false;
         this.gameObject.GetComponent<SpringJoint>().connectedAnchor = Vector3.zero;
-        this.gameObject.GetComponent<SpringJoint>().spring = hook_spring_when_shoe;
-
-        cable_start_previous_spring = bendRod.GetComponent<SpringJoint>().spring;
-        bendRod.GetComponent<SpringJoint>().spring = cable_start_spring_when_shoe;
-        bendRod.GetComponent<CableComponent>().cableLength = 1;
-
-
-
+        this.gameObject.GetComponent<SpringJoint>().anchor = new Vector3(0, -this.transform.localScale.y, 0);
+        this.gameObject.GetComponent<SpringJoint>().spring = settings.forceFish;
     }
 
     private void OnReleaseFish()
     {
-        bendRod.GetComponent<CableComponent>().cableLength = 4;
-        bendRod.GetComponent<SpringJoint>().spring = cable_start_previous_spring;
 
         Destroy(this.gameObject.GetComponent<SpringJoint>());
 
@@ -130,7 +107,7 @@ public class Bobber : MonoBehaviour
         {*/
             hookedFish = Instantiate(fishPrefab);
 
-            hookedFish.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.4f, this.transform.position.z);
+            hookedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -0.4f, 0));
 
             hookedFish.AddComponent<FixedJoint>();
             hookedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
@@ -140,4 +117,15 @@ public class Bobber : MonoBehaviour
 
     }
 
+    public void OnModifySettings()
+    {
+        GetComponent<Rigidbody>().mass = settings.HookMass;
+        GetComponent<Rigidbody>().drag = settings.HookDrag;
+        GetComponent<Rigidbody>().angularDrag = settings.HookAngularDrag;
+
+        if (this.gameObject.GetComponent<SpringJoint>())
+        {
+            this.gameObject.GetComponent<SpringJoint>().spring = settings.forceFish;
+        }
+    }
 }
