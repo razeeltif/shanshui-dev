@@ -42,6 +42,8 @@ public class CableComponent : MonoBehaviour
 	void Start()
 	{
 
+        Debug.Log("START");
+
         // init cable start and end position
         cableStartPosition = this.transform.position + this.transform.right * cableStartOffset.x + this.transform.up * cableStartOffset.y + this.transform.forward * cableStartOffset.z;
         cableEndPosition = cableEnd.position + cableEnd.right * cableEndOffset.x + cableEnd.up * cableEndOffset.y + cableEnd.forward * cableEndOffset.z;

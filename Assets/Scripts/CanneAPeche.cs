@@ -24,9 +24,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     private float bendyDrag;
     private float bendyAngularDrag;
 
-    private float bendyrod_previous_spring = 0;
-    private float bendyrod_previous_damper = 0;
-
+    private bool isCatching = false;
 
 
     private void OnEnable()
@@ -52,6 +50,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     void Start()
     {
         setCableComponentValues();
+        setBendySpringJointNormalState();
         unsetBendyPhysic();
     }
 
@@ -99,6 +98,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
             this.GetComponent<Collider>().isTrigger = true;
 
             setBendyPhysic();
+            
         }
 
 
@@ -131,22 +131,21 @@ public class CanneAPeche : GrablableObject, IUseSettings
             this.GetComponent<Rigidbody>().angularVelocity = firstHandHoldingThis.GetAngularVelocity();
             firstHandHoldingThis = null;
         }
+        
     }
 
     private void OnCatchFish()
     {
-        bendyrod_previous_spring = bendyRod.GetComponent<SpringJoint>().spring;
-        bendyrod_previous_damper = bendyRod.GetComponent<SpringJoint>().damper;
+        isCatching = true;
         bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthWhenCatchAFish;
-        bendyRod.GetComponent<SpringJoint>().spring = settings.SpringCatchState;
-        bendyRod.GetComponent<SpringJoint>().damper = settings.DamperCatchState;
+        setBendySpringJointCatchState();
     }
 
     private void OnReleaseFish()
     {
+        isCatching = false;
         bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
-        bendyRod.GetComponent<SpringJoint>().spring = bendyrod_previous_spring;
-        bendyRod.GetComponent<SpringJoint>().damper = bendyrod_previous_damper;
+        setBendySpringJointNormalState();
     }
 
 
@@ -182,6 +181,20 @@ public class CanneAPeche : GrablableObject, IUseSettings
 
     }
 
+    private void setBendySpringJointNormalState()
+    {
+        bendyRod.GetComponent<SpringJoint>().spring = settings.SpringNormalState;
+        bendyRod.GetComponent<SpringJoint>().damper = settings.DamperNormalState;
+        bendyRod.GetComponent<SpringJoint>().massScale = settings.MassScaleNormalState;
+    }
+
+    private void setBendySpringJointCatchState()
+    {
+        bendyRod.GetComponent<SpringJoint>().spring = settings.SpringCatchState;
+        bendyRod.GetComponent<SpringJoint>().damper = settings.DamperCatchState;
+        bendyRod.GetComponent<SpringJoint>().massScale = settings.MassScaleCatchState;
+    }
+
     private void setCableComponentValues()
     {
         bendyRod.GetComponent<CableComponent>().totalSegments = settings.totalSegments;
@@ -198,6 +211,13 @@ public class CanneAPeche : GrablableObject, IUseSettings
         {
             setBendyPhysic();
         }
+
+        if (isCatching)
+            setBendySpringJointCatchState();
+        else
+            setBendySpringJointNormalState();
+
+
         bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
         bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
     }

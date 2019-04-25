@@ -30,8 +30,10 @@ public class FishRodSettings : ScriptableObject
     public int rigidity = 6;
     public float SpringNormalState = 500;
     public float DamperNormalState = 100;
+    public float MassScaleNormalState = 1;
     public float SpringCatchState = 100;
     public float DamperCatchState = 100;
+    public float MassScaleCatchState = 4;
 
 
     [Header("Water Settings")]

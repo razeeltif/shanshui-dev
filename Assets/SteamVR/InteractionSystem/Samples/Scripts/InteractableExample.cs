@@ -13,8 +13,8 @@ namespace Valve.VR.InteractionSystem.Sample
 	[RequireComponent( typeof( Interactable ) )]
 	public class InteractableExample : MonoBehaviour
     {
-        private TextMesh generalText;
-        private TextMesh hoveringText;
+       /* private TextMesh generalText;
+        private TextMesh hoveringText;*/
         private Vector3 oldPosition;
 		private Quaternion oldRotation;
 
@@ -27,14 +27,15 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		void Awake()
 		{
-			var textMeshs = GetComponentsInChildren<TextMesh>();
+            interactable = this.GetComponent<Interactable>();
+
+            /*var textMeshs = GetComponentsInChildren<TextMesh>();
             generalText = textMeshs[0];
             hoveringText = textMeshs[1];
 
             generalText.text = "No Hand Hovering";
-            hoveringText.text = "Hovering: False";
+            hoveringText.text = "Hovering: False";*/
 
-            interactable = this.GetComponent<Interactable>();
 		}
 
 
@@ -43,8 +44,9 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		private void OnHandHoverBegin( Hand hand )
 		{
-			generalText.text = "Hovering hand: " + hand.name;
-		}
+            //generalText.text = "Hovering hand: " + hand.name;
+            Debug.Log("Hovering hand: ");
+        }
 
 
 		//-------------------------------------------------
@@ -52,8 +54,9 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		private void OnHandHoverEnd( Hand hand )
 		{
-			generalText.text = "No Hand Hovering";
-		}
+            //generalText.text = "No Hand Hovering";
+            Debug.Log("No Hand Hovering");
+        }
 
 
 		//-------------------------------------------------
@@ -97,7 +100,8 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		private void OnAttachedToHand( Hand hand )
         {
-            generalText.text = string.Format("Attached: {0}", hand.name);
+            // generalText.text = string.Format("Attached: {0}", hand.name);
+            Debug.Log("Attached: ");
             attachTime = Time.time;
 		}
         
@@ -108,8 +112,9 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		private void OnDetachedFromHand( Hand hand )
 		{
-            generalText.text = string.Format("Detached: {0}", hand.name);
-		}
+            //  generalText.text = string.Format("Detached: {0}", hand.name);
+            Debug.Log("Detached: ");
+        }
 
 
 		//-------------------------------------------------
@@ -117,7 +122,7 @@ namespace Valve.VR.InteractionSystem.Sample
 		//-------------------------------------------------
 		private void HandAttachedUpdate( Hand hand )
 		{
-            generalText.text = string.Format("Attached: {0} :: Time: {1:F2}", hand.name, (Time.time - attachTime));
+          //  generalText.text = string.Format("Attached: {0} :: Time: {1:F2}", hand.name, (Time.time - attachTime));
 		}
 
         private bool lastHovering = false;
@@ -125,7 +130,8 @@ namespace Valve.VR.InteractionSystem.Sample
         {
             if (interactable.isHovering != lastHovering) //save on the .tostrings a bit
             {
-                hoveringText.text = string.Format("Hovering: {0}", interactable.isHovering);
+                //  hoveringText.text = string.Format("Hovering: {0}", interactable.isHovering);
+                Debug.Log("Hovering: ");
                 lastHovering = interactable.isHovering;
             }
         }
