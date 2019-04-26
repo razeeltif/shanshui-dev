@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fdd5b49e4d0e744eae9f93d77061d71, type: 3}
+  m_Name: SettingsTest
+  m_EditorClassIdentifier: 
+  handPosition: 1.87
+  nbSteps: 20
+  mass: 0.8
+  drag: 30
+  angularDrag: 0.5
+  totalSegments: 10
+  lengthNormalState: 4
+  lengthWhenCatchAFish: 1
+  width: 0.01
+  rigidity: 6
+  SpringNormalState: 500
+  DamperNormalState: 500
+  SpringCatchState: 300
+  DamperCatchState: 100
+  waterLevel: -1.18
+  viscosity: 20
+  bounceDamp: 1
+  wave: 0.05
+  forceFish: 1000
+  BouncyCenterOffset: {x: 0, y: 0.05, z: 0}
+  HookMass: 1
+  HookDrag: 1
+  HookAngularDrag: 1
