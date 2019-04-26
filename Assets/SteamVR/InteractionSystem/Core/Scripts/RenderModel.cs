@@ -60,6 +60,9 @@ namespace Valve.VR.InteractionSystem
                 if (displayHandByDefault == false)
                     SetHandVisibility(false);
 
+                if (displayControllerByDefault == false)
+                    handSkeleton.rangeOfMotion = EVRSkeletalMotionRange.WithoutController;
+
                 handAnimator = handInstance.GetComponentInChildren<Animator>();
 
                 if (handSkeleton.skeletonAction.activeBinding == false)

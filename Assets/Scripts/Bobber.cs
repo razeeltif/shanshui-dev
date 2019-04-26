@@ -11,8 +11,6 @@ public class Bobber : MonoBehaviour, IUseSettings
 #pragma warning disable 0649
     [SerializeField]
     GameObject fishPrefab;
-    [SerializeField]
-    GameObject bendRod;
 #pragma warning restore 0649
 
     private GameObject hookedFish;

@@ -23,10 +23,10 @@ MonoBehaviour:
   width: 0.01
   rigidity: 6
   SpringNormalState: 500
-  DamperNormalState: 500
-  SpringCatchState: 300
-  DamperCatchState: 100
-  waterLevel: -1.18
+  DamperNormalState: 300
+  SpringCatchState: 100
+  DamperCatchState: 0
+  waterLevel: -0.05
   viscosity: 20
   bounceDamp: 1
   wave: 0.05
