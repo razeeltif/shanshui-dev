@@ -1589,7 +1589,7 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
+  m_MassScale: 4
   m_ConnectedMassScale: 1
 --- !u!114 &2126867135
 MonoBehaviour:
@@ -2483,7 +2483,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7530313280271911878}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -1.74, y: -0.52, z: 0.009000003}
+  m_LocalPosition: {x: -1.55, y: 0.3, z: 0.36}
   m_LocalScale: {x: 0.2000001, y: 0.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 498908477319230438}
@@ -2577,9 +2577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 17cf1892ff0829e4b95fb670e539903e, type: 2}
-  fishPrefab: {fileID: 1848295821653441765, guid: 32daec5138a70e246bb242fb510914ca,
-    type: 3}
-  bendRod: {fileID: 498908477091836311}
 --- !u!1001 &7530313278895495604
 PrefabInstance:
   m_ObjectHideFlags: 0

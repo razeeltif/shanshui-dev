@@ -8,33 +8,20 @@ public class Bobber : MonoBehaviour, IUseSettings
     [SerializeField]
     FishRodSettings settings;
 
-#pragma warning disable 0649
-    [SerializeField]
-    GameObject fishPrefab;
-#pragma warning restore 0649
-
-    private GameObject hookedFish;
+    private GameObject catchedFish;
     private float forceFactor;
     private Vector3 actionPoint;
     private Vector3 upLift;
-    
-    private GameObject miamPoisson;
 
 
     private void OnEnable()
     {
         settings.AddGameObjectListening(this);
-
-        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
-        EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
     private void OnDisable()
     {
         settings.RemoveGameObjectListening(this);
-
-        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
-        EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
 
@@ -78,40 +65,35 @@ public class Bobber : MonoBehaviour, IUseSettings
         }
     }
 
-    private void OnCatchFish()
+    // setup the physics to simulate a fish shoeing the bobber
+    public void hookedFish(GameObject obj) 
     {
 
-         miamPoisson = new GameObject("fixed poisson");
-         miamPoisson.AddComponent<Rigidbody>();
-         miamPoisson.GetComponent<Rigidbody>().isKinematic = true;
-         miamPoisson.transform.position = new Vector3(this.transform.position.x, this.transform.position.y - 1f, this.transform.position.z);
-
         this.gameObject.AddComponent<SpringJoint>();
-        this.gameObject.GetComponent<SpringJoint>().connectedBody = miamPoisson.GetComponent<Rigidbody>();
+        this.gameObject.GetComponent<SpringJoint>().connectedBody = obj.GetComponent<Rigidbody>();
         this.gameObject.GetComponent<SpringJoint>().autoConfigureConnectedAnchor = false;
         this.gameObject.GetComponent<SpringJoint>().connectedAnchor = Vector3.zero;
         this.gameObject.GetComponent<SpringJoint>().anchor = new Vector3(0, -this.transform.localScale.y, 0);
         this.gameObject.GetComponent<SpringJoint>().spring = settings.forceFish;
+
     }
 
-    private void OnReleaseFish()
+    public void detachFish()
     {
+        Destroy(this.gameObject.GetComponent<SpringJoint>());
+    }
 
+    public void attachFishToBobber(GameObject fish)
+    {
         Destroy(this.gameObject.GetComponent<SpringJoint>());
 
-        Destroy(miamPoisson);
+        catchedFish = Instantiate(fish);
 
-        /*if(hookedFish == null)
-        {*/
-            hookedFish = Instantiate(fishPrefab);
+        catchedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -0.4f, 0));
 
-            hookedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -0.4f, 0));
-
-            hookedFish.AddComponent<FixedJoint>();
-            hookedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
-            hookedFish.GetComponent<FixedJoint>().breakForce = 500;
-      /*  }*/
-
+        catchedFish.AddComponent<FixedJoint>();
+        catchedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
+        catchedFish.GetComponent<FixedJoint>().breakForce = 500;
 
     }
 

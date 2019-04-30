@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour
+public class RespawnFishRod : MonoBehaviour
 {
 
     public GameObject prefab;
@@ -31,9 +31,13 @@ public class Respawn : MonoBehaviour
 
     void respawn()
     {
+        EventManager.TriggerEvent(EventsName.ReleaseFish);
         GameObject obj = Instantiate(prefab);
-        //obj.transform.position = initialPosition;
         Destroy(monitoredObject.gameObject.transform.parent.gameObject);
         monitoredObject = obj.GetComponentInChildren<Rigidbody>().gameObject;
+        PoissonFishing.instance.bobber = obj.GetComponentInChildren<Bobber>().transform;
+        PoissonFishing.instance.poseFishing.canneAPeche = obj.GetComponentInChildren<Rigidbody>().transform;
+
+
     }
 }

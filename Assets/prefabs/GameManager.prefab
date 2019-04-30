@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3589936601008142271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3589936601008142268}
+  - component: {fileID: 3589936601008142269}
+  - component: {fileID: 3589936601008142242}
+  - component: {fileID: 3589936601008142243}
+  - component: {fileID: 3589936601008142240}
+  - component: {fileID: 3589936601008142241}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3589936601008142268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3589936601008142269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853c76c42333a53409ca4a6257e83cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeBeforeShoeFish: 1
+  RandomOnTimeBeforeShoeFish: 1
+  TimerBeforeRelease: 100
+--- !u!114 &3589936601008142242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98779523eb0f8f34798776527c3728ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 498908477319230437, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
+  limits: -3
+  monitoredObject: {fileID: 0}
+--- !u!114 &3589936601008142243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bc3d6bacdbb5d4ebc65c507d6e14e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VRCamera: {fileID: 0}
+  debugText: {fileID: 0}
+  canneAPeche: {fileID: 0}
+  minDistance: 0.3
+  maxDistance: 0.5
+  maxAngleX: 109.3
+  minAngleY: 20
+  maxAngleY: 75.7
+  middleZoneAngle: 50
+  distance: 0
+  angleX: 83.68
+  angleY: 38.77
+  tolerance: 0.3
+--- !u!114 &3589936601008142240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead84305015004f47afd36dffaf73ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterPlane: {fileID: 0}
+  initialLength: 10.19
+  difficulty: 4
+  coefReduction: 1.155
+  minimalDistanceFromBerge: 0.1
+  distanceStep: 0
+--- !u!114 &3589936601008142241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f6b7f96a65ba0418ef5749ef27d954, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishingManagement: {fileID: 3589936601008142240}
+  poseFishing: {fileID: 3589936601008142243}
+  bobber: {fileID: 0}
+  playerPosition: {fileID: 0}
+  fishPrefab: {fileID: 1848295821653441765, guid: 32daec5138a70e246bb242fb510914ca,
+    type: 3}
+  fishSpeed: 1
+  tractionSpeed: 0.2
+  fishDepth: 1

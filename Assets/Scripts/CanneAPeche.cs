@@ -11,11 +11,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     private SteamVR_Behaviour_Pose firstHandHoldingThis;
     private SteamVR_Behaviour_Pose secondHandHoldingThis;
 
-#pragma warning disable 0649 
-
-    [SerializeField]
-    private GameObject bendyRod;
-#pragma warning restore 0649
+    public GameObject bendyRod;
 
     private bool isDualWield = false;
 
@@ -30,14 +26,14 @@ public class CanneAPeche : GrablableObject, IUseSettings
     private void OnEnable()
     {
         settings.AddGameObjectListening(this);
-        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StartListening(EventsName.HookFish, OnHookFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
     private void OnDisable()
     {
         settings.RemoveGameObjectListening(this);
-        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StopListening(EventsName.HookFish, OnHookFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
@@ -90,7 +86,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
         }
         else
         {
-            firstHandHoldingThis = pose;
+            setFirstHand(pose);
 
             isGrabbed = true;
 
@@ -98,7 +94,10 @@ public class CanneAPeche : GrablableObject, IUseSettings
             this.GetComponent<Collider>().isTrigger = true;
 
             setBendyPhysic();
-            
+
+
+
+
         }
 
 
@@ -113,7 +112,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
             // si la main qui lâche la canne est la premiere main, on passe la seconde main en premiere main
             if(pose == firstHandHoldingThis)
             {
-                firstHandHoldingThis = secondHandHoldingThis;
+                setFirstHand(secondHandHoldingThis);
             }
             isDualWield = false;
         }
@@ -134,7 +133,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
         
     }
 
-    private void OnCatchFish()
+    private void OnHookFish()
     {
         isCatching = true;
         bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthWhenCatchAFish;
@@ -203,6 +202,16 @@ public class CanneAPeche : GrablableObject, IUseSettings
         bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
         bendyRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, -bendyRod.transform.localScale.y, 0);
         bendyRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, bendyRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
+    }
+
+    public Vector3 getTipOfFishRod()
+    {
+        return bendyRod.transform.position + bendyRod.transform.right * bendyRod.GetComponent<CableComponent>().cableStartOffset.x + bendyRod.transform.up * bendyRod.GetComponent<CableComponent>().cableStartOffset.y + bendyRod.transform.forward * bendyRod.GetComponent<CableComponent>().cableStartOffset.z;
+    }
+
+    private void setFirstHand(SteamVR_Behaviour_Pose hand)
+    {
+        firstHandHoldingThis = hand;
     }
 
     public void OnModifySettings()

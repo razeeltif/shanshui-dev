@@ -12,7 +12,7 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     public Text debugText;
 
-    public SteamVR_Behaviour_Pose hand;
+    public Transform canneAPeche;
 
     public float minDistance;
     public float maxDistance;
@@ -36,41 +36,6 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     private Vector3 PosePosition;
 
-    private bool onCatch;
-
-
-    private void OnEnable()
-    {
-        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
-    }
-
-    private void OnDisable()
-    {
-        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        updatePosePosition();
-
-        if (debugText != null)
-        {
-            if (checkControllerInZone()){
-                spawnNewPoseRightSection();
-            }
-        }
-
-    }
-
-
-
 
     private void OnDrawGizmos()
     {
@@ -91,16 +56,11 @@ public class RepresentationPositionFishing : MonoBehaviour
     }
 
 
-    private void OnCatchFish()
-    {
-        onCatch = true;
-    }
-
     private void angleBetweenControllerAndCamera()
     {
-        Vector3 vectorHand = hand.gameObject.transform.position;
+        //Vector3 vectorHand = hand.gameObject.transform.position;
         Vector3 vectorCamera = VRCamera.gameObject.transform.position;
-        Vector3 vectorDistance = vectorHand - vectorCamera;
+        Vector3 vectorDistance = getHandPosition() - vectorCamera;
         float angleX = Vector3.SignedAngle(vectorDistance, Vector3.forward, Vector3.up);
         float angleY = Vector3.SignedAngle(vectorDistance, Vector3.up, Vector3.forward);
         debugText.text = " X : " + angleX.ToString() + "\n"
@@ -111,9 +71,9 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     private void distanceBetweenHandAndCamera()
     {
-        Vector3 vectorHand = hand.gameObject.transform.position;
+        //Vector3 vectorHand = hand.gameObject.transform.position;
         Vector3 vectorCamera = VRCamera.gameObject.transform.position;
-        Vector3 vectorDistance = vectorHand - vectorCamera;
+        Vector3 vectorDistance = getHandPosition() - vectorCamera;
         debugText.text = vectorDistance.ToString();
     }
 
@@ -122,29 +82,19 @@ public class RepresentationPositionFishing : MonoBehaviour
     // check si le controler du joueur est dans la zone de pose
     private bool checkControllerInZone()
     {
-
-        bool returnvalue = false;
-        // récupération de la distance entre le controller et la position de la pose
-        Vector3 vecDist = hand.gameObject.transform.position - PosePosition;
-        float dist = vecDist.magnitude;
-
-
-        // float distance = vectorDistance.magnitude;
-
-        string stringText = " distance : " + dist;
-
-        if(dist < tolerance)
-        {
-            stringText += "\nDans la zone";
-            returnvalue = true;
-        }
-
-        debugText.text = stringText;
-
-        return returnvalue;
+        return distanceBetweenFishRodAndPose() < tolerance;
     }
 
-    private void spawnNewPose()
+    // récupération de la distance entre le controller et la position de la pose
+    public float distanceBetweenFishRodAndPose()
+    {
+        Vector3 vecDist = getHandPosition() - PosePosition;
+        float dist = vecDist.magnitude;
+        debugText.text = dist.ToString();
+        return dist;
+    }
+
+    public void spawnNewPose()
     {
         // generate new angleX
         angleX = Random.Range(-maxAngleX, maxAngleX);
@@ -159,8 +109,14 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     }
 
+    Vector3 getHandPosition()
+    {
+        return canneAPeche.transform.position + canneAPeche.transform.up * canneAPeche.gameObject.GetComponent<CanneAPeche>().settings.handPosition;
+    }
 
-    private void spawnNewPoseLeftSection()
+
+
+    public void spawnNewPoseLeftSection()
     {
         angleX = Random.Range(-maxAngleX, -middleZoneAngle);
 
@@ -168,12 +124,9 @@ public class RepresentationPositionFishing : MonoBehaviour
         angleY = Random.Range(minAngleY, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
-
-        // récupération du vecteur de la Pose
-        updatePosePosition();
     }
 
-    private void spawnNewPoseRightSection()
+    public void spawnNewPoseRightSection()
     {
         angleX = Random.Range(middleZoneAngle, maxAngleX);
 
@@ -181,12 +134,9 @@ public class RepresentationPositionFishing : MonoBehaviour
         angleY = Random.Range(minAngleY, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
-
-        // récupération du vecteur de la Pose
-        updatePosePosition();
     }
 
-    private void SpawnNewPoseMiddleSection()
+    public void SpawnNewPoseMiddleSection()
     {
         // generate new angleX
         angleX = Random.Range(-middleZoneAngle, middleZoneAngle);
@@ -195,13 +145,10 @@ public class RepresentationPositionFishing : MonoBehaviour
         angleY = Random.Range(0, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
-
-        // récupération du vecteur de la Pose
-        updatePosePosition();
     }
 
     // update de la position de la pose en fonction du casque
-    private void updatePosePosition()
+    public void updatePosePosition()
     {
         // récupération du vecteur de la Pose
         Vector3 posXv2 = Quaternion.AngleAxis(angleX + 90, Vector3.up) * Vector3.forward * distance;
@@ -213,9 +160,9 @@ public class RepresentationPositionFishing : MonoBehaviour
     private void checkZone()
     {
         // récupération de l'angle de l'axe des X entre le casque et le controller
-        Vector3 vectorHand = hand.gameObject.transform.position;
+        //Vector3 vectorHand = hand.gameObject.transform.position;
         Vector3 vectorCamera = VRCamera.gameObject.transform.position;
-        Vector3 vectorDistance = vectorHand - vectorCamera;
+        Vector3 vectorDistance = getHandPosition() - vectorCamera;
         float angleX = Vector3.SignedAngle(vectorDistance, Vector3.forward, Vector3.up);
 
         // check dans la zone du milieu

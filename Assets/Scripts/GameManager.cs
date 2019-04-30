@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FishTimer = UTimer.Initialize(0, this, StartShoeFish);
-        UnfishTimer = UTimer.Initialize(0, this, ReleaseFish);
+        //UnfishTimer = UTimer.Initialize(0, this, ReleaseFish);
     }
 
     // Update is called once per frame
@@ -66,8 +66,8 @@ public class GameManager : MonoBehaviour
 
     public void StartShoeFish()
     {
-        EventManager.TriggerEvent(EventsName.CatchFish);
-        UnfishTimer.start(TimerBeforeRelease);
+        EventManager.TriggerEvent(EventsName.HookFish);
+        //UnfishTimer.start(TimerBeforeRelease);
     }
 
     public void ReleaseFish()

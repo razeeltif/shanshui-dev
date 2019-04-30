@@ -38,8 +38,6 @@ public class ControllerGrabObject : MonoBehaviour
         // we attempt to release an holded object
         if (grabAction.GetLastStateUp(handType))
         {
-            Debug.Log("PATETA");
-            Debug.Log(objectInHand);
             if (objectInHand)
             {
                 if (objectInHand.GetComponent<GrablableObject>() != null)
