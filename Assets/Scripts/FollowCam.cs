@@ -32,7 +32,6 @@ public class FollowCam : MonoBehaviour
         if (!Physics.Raycast(rayElse, out hitElse, Mathf.Infinity, ~LayerMask.GetMask("Torus")) && chrono < chronomax)
         {
             chrono += Time.fixedDeltaTime;
-            print("1");
         }
         //Si le RC touche pas l'UI, que le chrono est dépassé et qu'un point du torus est touché
         else if (!Physics.Raycast(rayElse, out hitElse, Mathf.Infinity, ~LayerMask.GetMask("Torus")) && chrono >= chronomax && Physics.Raycast(rayTorus, out hitTorus, Mathf.Infinity, LayerMask.GetMask("Torus")))
@@ -40,12 +39,10 @@ public class FollowCam : MonoBehaviour
             target = hitTorus.point;
             moving = true;
             chrono = 0;
-            print("2");
         }
         else
         {
             chrono = 0;
-            print("3");
         }
 
         if (moving && transform.position != target)
