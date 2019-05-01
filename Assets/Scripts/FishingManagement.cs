@@ -12,7 +12,7 @@ public class FishingManagement : MonoBehaviour
     public const float PLANE_DEFAULT_LENGTH = 5;
 
     public float initialLength = 5;
-    public Vector3 initialDirection;
+    public Vector3 direction;
 
     [Range (1, 10)]
     public int difficulty = 4;
@@ -47,11 +47,12 @@ public class FishingManagement : MonoBehaviour
         // vecteur direction joueur - bouchon
         Vector3 player2D = new Vector3(playerPosition.x, waterPlane.position.y, playerPosition.z);
         Vector3 bobber2D = new Vector3(bobber.x, waterPlane.position.y, bobber.z);
-        Vector3 initialDirection = player2D - bobber2D;
+        Vector3 initialDirection = getPlayerPositionFromBerge(playerPosition) - bobber2D;
 
         // vecteur perpendiculaire vecteur joueur - bouchon
         Vector3 left = new Vector3(initialDirection.z, 0, -initialDirection.x);
         left = left.normalized;
+        direction = left;
 
         // le pas entre chaque ligne
         float distanceBobber_PlayerBerge = Vector3.Distance(bobber2D, getPlayerPositionFromBerge(playerPosition));
@@ -61,7 +62,7 @@ public class FishingManagement : MonoBehaviour
         for (int i = 0; i < difficulty; i++)
         {
             float nexStep = (distanceStep * i);
-            Vector3 posStep = (bobber2D - player2D).normalized * -nexStep;
+            Vector3 posStep = (bobber2D - getPlayerPositionFromBerge(playerPosition)).normalized * -nexStep;
 
             // génération des lignes de déplacement du poisson
             Vector3 startLine = bobber2D + posStep + left * (initialLength - (coefReduction * i));
@@ -105,6 +106,17 @@ public class FishingManagement : MonoBehaviour
         float posZ = waterPlane.position.z - PLANE_DEFAULT_LENGTH * waterPlane.localScale.z;
         Vector3 ret = new Vector3(playerPosition.x, waterPlane.position.y, posZ);
         return ret;
+    }
+
+    public Vector3 getDistanceDeMesCouilles(Vector3 pos, Vector3 playerPosition)
+    {
+
+        Vector3 position = Vector3.ProjectOnPlane(pos, direction.normalized);
+        position = position + playerPosition;
+        position.y = waterPlane.transform.position.y;
+        return position;
+
+
     }
 
     private void clearFishPoints()

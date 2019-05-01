@@ -222,9 +222,14 @@ public class PoissonFishing : MonoBehaviour
                 Gizmos.DrawLine(fishingManagement.fishDifficultyLines[i, 0], fishingManagement.fishDifficultyLines[i, 1]);
                 Gizmos.DrawSphere(fishingManagement.fishPoint[i].point, 0.1f);
             }
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(fishingManagement.getDistanceDeMesCouilles(fishInWater.transform.position, fishingManagement.getPlayerPositionFromBerge(playerPosition.position)), 0.11f);
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(fishingManagement.getPlayerPositionFromBerge(playerPosition.position), 0.1f);
         }
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(fishingManagement.getPlayerPositionFromBerge(playerPosition.position), 0.11f);
+
     }
 }
