@@ -90,7 +90,6 @@ public class PoissonFishing : MonoBehaviour
                 {
                     Debug.Log("END !!");
                 }
-
             }
             else
             {
@@ -101,7 +100,8 @@ public class PoissonFishing : MonoBehaviour
                 {
 
                     // the fish go toward to the player
-                    Vector3 targetPosition = new Vector3(poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().x, fishingManagement.waterPlane.position.y - fishDepth, poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().z); ;
+                    // Vector3 targetPosition = new Vector3(poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().x, fishingManagement.waterPlane.position.y - fishDepth, poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().z);
+                    Vector3 targetPosition = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
                     fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, tractionSpeed / 100);
                 }
                 else
@@ -114,12 +114,8 @@ public class PoissonFishing : MonoBehaviour
                         fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);
 
                 }
-                
             }
-
-
         }
-
     }
 
 

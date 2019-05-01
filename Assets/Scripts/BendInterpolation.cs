@@ -29,6 +29,9 @@ public class BendInterpolation : MonoBehaviour
     [SerializeField]
     private bool debug = false;
 
+    [SerializeField]
+    private float factor = 1;
+
 #pragma warning restore 0649
 
 
@@ -61,6 +64,8 @@ public class BendInterpolation : MonoBehaviour
 
         Vector3 rigidRodPosition = fishRod.transform.position;
         Vector3 bendyRodPosition = BendableFishRod.transform.position;
+        
+        Vector3[] posArray = new Vector3[nbStep];
 
         for (int step = 0; step < nbStep; step++)
         {
@@ -89,10 +94,26 @@ public class BendInterpolation : MonoBehaviour
             {
                 // on déplace le step vers la position calculée
                 stepPrefabArray[step].transform.position = newPosition;
+                if(step > 0)
+                {
+                    // récupération de la direction entre ce bone et celui d'avant
+                    Vector3 dir = (stepPrefabArray[step].transform.position - stepPrefabArray[step - 1].transform.position);
+                    stepPrefabArray[step - 1].transform.forward = dir;
+                }
             }
             else
             {
-                fishrodBones[step].transform.position = newPosition;
+                posArray[step] = newPosition;
+                if(step == 0)
+                {
+                    fishrodBones[step].transform.right = -fishRod.transform.up;
+                }
+                if (step > 0)
+                {
+                    // récupération de la direction entre ce bone et celui d'avant
+                    Vector3 dir = (posArray[step]* factor - posArray[step - 1]);
+                    fishrodBones[step - 1].transform.right = - dir;
+                }
             }
         }
        

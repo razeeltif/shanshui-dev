@@ -12,6 +12,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     private SteamVR_Behaviour_Pose secondHandHoldingThis;
 
     public GameObject bendyRod;
+    public GameObject tipRod;
 
     private bool isDualWield = false;
 
@@ -45,6 +46,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     // Start is called before the first frame update
     void Start()
     {
+        bendyRod.GetComponent<Renderer>().enabled = false;
         setCableComponentValues();
         setBendySpringJointNormalState();
         unsetBendyPhysic();
@@ -200,8 +202,8 @@ public class CanneAPeche : GrablableObject, IUseSettings
         bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
         bendyRod.GetComponent<CableComponent>().cableWidth = settings.width;
         bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
-        bendyRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, -bendyRod.transform.localScale.y, 0);
-        bendyRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, bendyRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
+        bendyRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, 0, 0);
+        bendyRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, tipRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
     }
 
     public Vector3 getTipOfFishRod()

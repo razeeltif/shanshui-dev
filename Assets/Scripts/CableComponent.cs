@@ -13,7 +13,7 @@ public class CableComponent : MonoBehaviour
 #pragma warning restore 0649
 
     // Cable config
-    [HideInInspector] public Vector3 cableStartOffset;
+     public Vector3 cableStartOffset;
     [HideInInspector] public Vector3 cableEndOffset;
     [HideInInspector] public float cableLength = 0.5f;
 	[HideInInspector] public int totalSegments = 5;

@@ -12,6 +12,7 @@ public class FishingManagement : MonoBehaviour
     public const float PLANE_DEFAULT_LENGTH = 5;
 
     public float initialLength = 5;
+    public Vector3 initialDirection;
 
     [Range (1, 10)]
     public int difficulty = 4;
@@ -46,10 +47,10 @@ public class FishingManagement : MonoBehaviour
         // vecteur direction joueur - bouchon
         Vector3 player2D = new Vector3(playerPosition.x, waterPlane.position.y, playerPosition.z);
         Vector3 bobber2D = new Vector3(bobber.x, waterPlane.position.y, bobber.z);
-        Vector3 dir = player2D - bobber2D;
+        Vector3 initialDirection = player2D - bobber2D;
 
         // vecteur perpendiculaire vecteur joueur - bouchon
-        Vector3 left = new Vector3(dir.z, 0, -dir.x);
+        Vector3 left = new Vector3(initialDirection.z, 0, -initialDirection.x);
         left = left.normalized;
 
         // le pas entre chaque ligne

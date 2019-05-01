@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class ImageSwitch : MonoBehaviour
 {
-    [SerializeField] Sprite image1;
-    [SerializeField] Sprite image2;
-    [SerializeField] Sprite image3;
-    [SerializeField] Sprite image4;
+
+    [SerializeField] Sprite[] images;
     Color currColor;
     SpriteRenderer sRenderer;
 
     [SerializeField] float chronoMax;
     float chrono;
 
+    private int currentImageIndex = 0;
+
 
     // Start is called before the first frame update
     void Start()
     {
         sRenderer = GetComponent<SpriteRenderer>();
-        sRenderer.sprite = image1;
+        sRenderer.sprite = images[currentImageIndex];
         currColor = sRenderer.color;
         currColor.a = 0f;
         sRenderer.color = currColor;
@@ -48,20 +48,18 @@ public class ImageSwitch : MonoBehaviour
                 sRenderer.color = currColor;
                 chrono++;
             }
-            else if(sRenderer.sprite = image1)
+            else
             {
-                sRenderer.sprite = image2;
-                chrono = 0;
-            }
-            else if (sRenderer.sprite = image2)
-            {
-                sRenderer.sprite = image3;
-                chrono = 0;
-            }
-            else if (sRenderer.sprite = image3)
-            {
-                sRenderer.sprite = image4;
-                chrono = 0;
+                if(currentImageIndex < images.Length - 1)
+                {
+                    currentImageIndex++;
+                    sRenderer.sprite = images[currentImageIndex];
+                    chrono = 0;
+                }
+                else
+                {
+                    this.enabled = false;
+                }
             }
         }
     }
