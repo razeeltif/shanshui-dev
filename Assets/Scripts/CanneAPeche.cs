@@ -28,6 +28,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     {
         settings.AddGameObjectListening(this);
         EventManager.StartListening(EventsName.HookFish, OnHookFish);
+        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
@@ -35,6 +36,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
     {
         settings.RemoveGameObjectListening(this);
         EventManager.StopListening(EventsName.HookFish, OnHookFish);
+        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
@@ -138,14 +140,21 @@ public class CanneAPeche : GrablableObject, IUseSettings
     private void OnHookFish()
     {
         isCatching = true;
-        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthWhenCatchAFish;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthWhenCatchAFish;
         setBendySpringJointCatchState();
     }
 
     private void OnReleaseFish()
     {
         isCatching = false;
-        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        setBendySpringJointNormalState();
+    }
+
+    private void OnCatchFish()
+    {
+        isCatching = false;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
         setBendySpringJointNormalState();
     }
 
@@ -198,12 +207,12 @@ public class CanneAPeche : GrablableObject, IUseSettings
 
     private void setCableComponentValues()
     {
-        bendyRod.GetComponent<CableComponent>().totalSegments = settings.totalSegments;
-        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
-        bendyRod.GetComponent<CableComponent>().cableWidth = settings.width;
-        bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
-        bendyRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, 0, 0);
-        bendyRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, tipRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
+        tipRod.GetComponent<CableComponent>().totalSegments = settings.totalSegments;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableWidth = settings.width;
+        tipRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
+        tipRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, 0, 0);
+        tipRod.GetComponent<CableComponent>().cableEndOffset = new Vector3(0, tipRod.GetComponent<CableComponent>().cableEnd.localScale.y / 2, 0);
     }
 
     public Vector3 getTipOfFishRod()
@@ -229,7 +238,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
             setBendySpringJointNormalState();
 
 
-        bendyRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
-        bendyRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
     }
 }

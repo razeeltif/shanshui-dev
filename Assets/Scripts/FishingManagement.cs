@@ -12,7 +12,7 @@ public class FishingManagement : MonoBehaviour
     public const float PLANE_DEFAULT_LENGTH = 5;
 
     public float initialLength = 5;
-    public Vector3 direction;
+    Vector3 direction;
 
     [Range (1, 10)]
     public int difficulty = 4;
@@ -108,15 +108,23 @@ public class FishingManagement : MonoBehaviour
         return ret;
     }
 
-    public Vector3 getDistanceDeMesCouilles(Vector3 pos, Vector3 playerPosition)
+    public Vector3 getVectorOnProjectionDirection(Vector3 pos, Vector3 playerPosition)
     {
 
-        Vector3 position = Vector3.ProjectOnPlane(pos, direction.normalized);
-        position = position + playerPosition;
-        position.y = waterPlane.transform.position.y;
-        return position;
+        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos, direction.normalized);
+        projectedPosition = projectedPosition + playerPosition;
+        projectedPosition.y = waterPlane.transform.position.y;
+        return projectedPosition;
 
 
+    }
+
+    public float getDistanceOnProjectionDirection(Vector3 pos, Vector3 playerPosition)
+    {
+        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos, direction.normalized);
+        projectedPosition = projectedPosition + playerPosition;
+        projectedPosition.y = waterPlane.transform.position.y;
+        return Vector3.Distance(projectedPosition, playerPosition);
     }
 
     private void clearFishPoints()

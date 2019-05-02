@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
+[RequireComponent(typeof(FishingManagement))]
+[RequireComponent(typeof(RepresentationPositionFishing))]
 public class PoissonFishing : MonoBehaviour
 {
 
     public static PoissonFishing instance;
 
-
-    [SerializeField]
     FishingManagement fishingManagement;
-
+    [HideInInspector]
     public RepresentationPositionFishing poseFishing;
     
     public Transform bobber;
@@ -61,6 +61,9 @@ public class PoissonFishing : MonoBehaviour
         {
             instance = this;
         }
+
+        fishingManagement = GetComponent<FishingManagement>();
+        poseFishing = GetComponent<RepresentationPositionFishing>();
     }
 
     // Update is called once per frame
@@ -74,7 +77,9 @@ public class PoissonFishing : MonoBehaviour
 
             // get distance2D between the berge and the fish, relative to the water plane
             Vector3 fishInWater2D = new Vector3(fishInWater.transform.position.x, fishingManagement.waterPlane.position.y, fishInWater.transform.position.z);
-            float distancePlayerFish = Vector3.Distance(fishingManagement.getPlayerPositionFromBerge(playerPosition.position), fishInWater2D);
+            float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater.transform.position, fishingManagement.getPlayerPositionFromBerge(playerPosition.position));
+
+            Debug.Log(distancePlayerFish);
 
             //check if we have to change step
             if (distancePlayerFish <= fishingManagement.distanceStep * (fishingManagement.difficulty - currentStep) )
@@ -88,7 +93,8 @@ public class PoissonFishing : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("END !!");
+                    EventManager.TriggerEvent(EventsName.CatchFish);
+                    Debug.Log("END !! ------------------------------------------------------------------------");
                 }
             }
             else
@@ -146,6 +152,7 @@ public class PoissonFishing : MonoBehaviour
     private void OnCatchFish()
     {
         bobber.GetComponent<Bobber>().attachFishToBobber(fishPrefab);
+        onCath = false;
     }
 
     private void OnReleaseFish()
@@ -224,7 +231,7 @@ public class PoissonFishing : MonoBehaviour
             }
 
             Gizmos.color = Color.blue;
-            Gizmos.DrawSphere(fishingManagement.getDistanceDeMesCouilles(fishInWater.transform.position, fishingManagement.getPlayerPositionFromBerge(playerPosition.position)), 0.11f);
+            Gizmos.DrawSphere(fishingManagement.getVectorOnProjectionDirection(fishInWater.transform.position, fishingManagement.getPlayerPositionFromBerge(playerPosition.position)), 0.11f);
 
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(fishingManagement.getPlayerPositionFromBerge(playerPosition.position), 0.1f);

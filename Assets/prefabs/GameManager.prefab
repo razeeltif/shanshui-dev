@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterPlane: {fileID: 0}
-  initialLength: 10.19
+  initialLength: 5
   difficulty: 4
   coefReduction: 1.155
   minimalDistanceFromBerge: 0.1
@@ -120,12 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74f6b7f96a65ba0418ef5749ef27d954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishingManagement: {fileID: 3589936601008142240}
   poseFishing: {fileID: 3589936601008142243}
   bobber: {fileID: 0}
   playerPosition: {fileID: 0}
   fishPrefab: {fileID: 1848295821653441765, guid: 32daec5138a70e246bb242fb510914ca,
     type: 3}
-  fishSpeed: 1
-  tractionSpeed: 0.2
+  fishSpeed: 2
+  tractionSpeed: 0.5
   fishDepth: 1
