@@ -35,5 +35,5 @@ MonoBehaviour:
   forceFish: 1000
   BouncyCenterOffset: {x: 0, y: 0.05, z: 0}
   HookMass: 1
-  HookDrag: 1
+  HookDrag: 20
   HookAngularDrag: 1

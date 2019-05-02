@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fdd5b49e4d0e744eae9f93d77061d71, type: 3}
-  m_Name: SettingsTest
+  m_Name: fishrodGiome
   m_EditorClassIdentifier: 
   handPosition: 1.87
   nbSteps: 20
-  mass: 0.8
-  drag: 30
+  mass: 5
+  drag: 1
   angularDrag: 0.5
-  totalSegments: 10
+  totalSegments: 25
   lengthNormalState: 4
   lengthWhenCatchAFish: 1
   width: 0.01
   rigidity: 6
   SpringNormalState: 500
   DamperNormalState: 500
+  MassScaleNormalState: 1
   SpringCatchState: 300
   DamperCatchState: 100
+  MassScaleCatchState: 4
   waterLevel: -1.18
   viscosity: 20
   bounceDamp: 1
   wave: 0.05
   forceFish: 1000
   BouncyCenterOffset: {x: 0, y: 0.05, z: 0}
-  HookMass: 1
-  HookDrag: 1
+  HookMass: 4.8
+  HookDrag: 2.3
   HookAngularDrag: 1
