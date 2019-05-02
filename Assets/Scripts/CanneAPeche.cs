@@ -129,7 +129,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
             unsetBendyPhysic();
 
             this.GetComponent<Rigidbody>().isKinematic = false;
-            this.GetComponent<Collider>().isTrigger = false;
+            //this.GetComponent<Collider>().isTrigger = false;
             this.GetComponent<Rigidbody>().velocity = firstHandHoldingThis.GetVelocity();
             this.GetComponent<Rigidbody>().angularVelocity = firstHandHoldingThis.GetAngularVelocity();
             firstHandHoldingThis = null;
