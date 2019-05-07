@@ -32,8 +32,6 @@ public class FishEventManager : MonoBehaviour
     public void SplashOut()
     {
         psDive.transform.position = new Vector3(koi.transform.position.x, koi.transform.position.y + particlesYOffset, koi.transform.position.z);
-        Debug.Log(particlesYOffset);
-        Debug.Log(koi.transform.position.y + particlesYOffset);
         psDive.Play();
     }
 
