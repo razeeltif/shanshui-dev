@@ -28,7 +28,7 @@ MonoBehaviour:
   SpringCatchState: 100
   DamperCatchState: 0
   MassScaleCatchState: 4
-  waterLevel: -0.03
+  waterLevel: -0.06
   viscosity: 20
   bounceDamp: 1
   wave: 0.05

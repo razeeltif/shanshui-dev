@@ -20,19 +20,28 @@ public class PoissonFishing : MonoBehaviour
 
 #pragma warning disable 0649
     [SerializeField]
-    GameObject fishPrefab;
+    GameObject fishInWaterPrefab;
+    [SerializeField]
+    GameObject fishModelPrefab;
 #pragma warning restore 0649
 
+    // variables for fish comportement
+    [Range(0, 180)]
+    public float AngleEscapingFish;
+    public float distance;
 
     public float fishSpeed = 2f;
     public float tractionSpeed = 1f;
     public float fishDepth = 1;
 
+    private UTimer fishEscapingTimer;
+    public float fishEscapingFrequence;
+    //
 
     private GameObject fishInWater;
 
 
-    private bool onCath = false;
+    private bool onCatch = false;
 
     private int currentStep = 0;
 
@@ -64,13 +73,15 @@ public class PoissonFishing : MonoBehaviour
 
         fishingManagement = GetComponent<FishingManagement>();
         poseFishing = GetComponent<RepresentationPositionFishing>();
+
+        fishEscapingTimer = UTimer.Initialize(5, this, moveEscapingFish);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (onCath)
+        if (onCatch)
         {
 
             poseFishing.updatePosePosition();
@@ -78,8 +89,6 @@ public class PoissonFishing : MonoBehaviour
             // get distance2D between the berge and the fish, relative to the water plane
             Vector3 fishInWater2D = new Vector3(fishInWater.transform.position.x, fishingManagement.waterPlane.position.y, fishInWater.transform.position.z);
             float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater.transform.position, fishingManagement.getPlayerPositionFromBerge(playerPosition.position));
-
-            Debug.Log(distancePlayerFish);
 
             //check if we have to change step
             if (distancePlayerFish <= fishingManagement.distanceStep * (fishingManagement.difficulty - currentStep) )
@@ -131,8 +140,7 @@ public class PoissonFishing : MonoBehaviour
         // if there is already an fish, we remove before adding a new one
         if (fishInWater != null)
         {
-            Destroy(fishInWater);
-            bobber.GetComponent<Bobber>().detachFish();
+            releaseFish();
         }
 
         // generate new fish points
@@ -140,35 +148,44 @@ public class PoissonFishing : MonoBehaviour
 
         // initialyze the fish position
         Vector3 initialPosition = new Vector3(bobber.position.x, bobber.position.y - fishDepth, bobber.position.z);
-        fishInWater = initFish(initialPosition);
-        bobber.GetComponent<Bobber>().hookedFish(fishInWater);
+        fishInWater = initFishInWater(initialPosition);
 
         // init the first pose
-        currentStep = 0;
         initCurrentStep();
+
+        fishEscapingTimer.start(fishEscapingFrequence);
 
     }
 
     private void OnCatchFish()
     {
-        bobber.GetComponent<Bobber>().attachFishToBobber(fishPrefab);
-        onCath = false;
+        bobber.GetComponent<Bobber>().attachFishToBobber(fishModelPrefab);
+        Destroy(fishInWater);
+        onCatch = false;
+        currentStep = 0;
+        fishEscapingTimer.Stop();
     }
 
     private void OnReleaseFish()
     {
-        onCath = false;
+        releaseFish();
+        onCatch = false;
+        currentStep = 0;
+        fishEscapingTimer.Stop();
     }
 
-    public GameObject initFish(Vector3 initialPosition)
+    public GameObject initFishInWater(Vector3 initialPosition)
     {
-        GameObject fish = new GameObject("fishInWater");
-        fish.AddComponent<Rigidbody>();
-        fish.GetComponent<Rigidbody>().isKinematic = true;
-        fish.transform.position = initialPosition;
+        fishInWater = Instantiate(fishInWaterPrefab);
+        fishInWater.transform.position = initialPosition;
+        bobber.GetComponent<Bobber>().hookedFish(getRigidBodyFromChild());
+        return fishInWater;
+    }
 
-        return fish;
-
+    public void releaseFish()
+    {
+        bobber.GetComponent<Bobber>().detachFish();
+        Destroy(fishInWater);
     }
 
     private void spwanNewPose(int direction)
@@ -194,6 +211,8 @@ public class PoissonFishing : MonoBehaviour
     }
 
 
+    
+
     private IEnumerator TravelToNextPoint(Vector3 targetPosition)
     {
 
@@ -204,7 +223,39 @@ public class PoissonFishing : MonoBehaviour
             fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);
             yield return new WaitForSeconds(0.01f);
         }
-        onCath = true;
+        onCatch = true;
+
+    }
+
+    private Vector3 getAngleFishEscaping()
+    {
+        // generate new angleX
+        float angleX = Random.Range(-AngleEscapingFish, AngleEscapingFish);
+        Vector3 posX = Quaternion.AngleAxis(angleX, Vector3.up) * Vector3.forward;
+        return posX;
+    }
+
+    private Rigidbody getRigidBodyFromChild()
+    {
+        Rigidbody returnVal = null;
+        // to get the rigidbody of the child, we need to remove the one from the parent
+        Rigidbody[] ListRigibody = fishInWater.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rig in ListRigibody)
+        {
+            // if the rig possess a parent, it's the child we are looking for
+            if (rig.transform.parent != null)
+                returnVal = rig;
+        }
+        return returnVal;
+    }
+
+    private void moveEscapingFish()
+    {
+        Rigidbody rig = getRigidBodyFromChild();
+        Vector3 angle = getAngleFishEscaping();
+        rig.transform.position = fishInWater.transform.position + angle * distance;
+        //rig.transform.position = -angle * distance;
+        fishEscapingTimer.restart();
 
     }
 
@@ -222,7 +273,7 @@ public class PoissonFishing : MonoBehaviour
     {
 
         Gizmos.color = Color.green;
-        if (onCath)
+        if (onCatch)
         {
             for (int i = 0; i < fishingManagement.difficulty; i++)
             {
@@ -237,6 +288,12 @@ public class PoissonFishing : MonoBehaviour
             Gizmos.DrawSphere(fishingManagement.getPlayerPositionFromBerge(playerPosition.position), 0.1f);
         }
 
+        Gizmos.DrawLine(Vector3.zero, getAngleFishEscaping() * 10);
 
+    }
+
+    public bool isFishing()
+    {
+        return onCatch;
     }
 }

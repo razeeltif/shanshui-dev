@@ -13,6 +13,8 @@ public class Bobber : MonoBehaviour, IUseSettings
     private Vector3 actionPoint;
     private Vector3 upLift;
 
+    private bool inWater = false;
+
 
     private void OnEnable()
     {
@@ -53,6 +55,7 @@ public class Bobber : MonoBehaviour, IUseSettings
     {
         if(other.tag == "water")
         {
+            inWater = true;
             EventManager.TriggerEvent(EventsName.InWater);
         }
     }
@@ -61,16 +64,17 @@ public class Bobber : MonoBehaviour, IUseSettings
     {
         if(other.tag == "water")
         {
+            inWater = false;
             EventManager.TriggerEvent(EventsName.OutWater);
         }
     }
 
     // setup the physics to simulate a fish shoeing the bobber
-    public void hookedFish(GameObject obj) 
+    public void hookedFish(Rigidbody obj) 
     {
 
         this.gameObject.AddComponent<SpringJoint>();
-        this.gameObject.GetComponent<SpringJoint>().connectedBody = obj.GetComponent<Rigidbody>();
+        this.gameObject.GetComponent<SpringJoint>().connectedBody = obj;
         this.gameObject.GetComponent<SpringJoint>().autoConfigureConnectedAnchor = false;
         this.gameObject.GetComponent<SpringJoint>().connectedAnchor = Vector3.zero;
         this.gameObject.GetComponent<SpringJoint>().anchor = new Vector3(0, -this.transform.localScale.y, 0);
@@ -85,7 +89,7 @@ public class Bobber : MonoBehaviour, IUseSettings
 
     public void attachFishToBobber(GameObject fish)
     {
-        Destroy(this.gameObject.GetComponent<SpringJoint>());
+        detachFish();
 
         catchedFish = Instantiate(fish);
 
@@ -107,5 +111,10 @@ public class Bobber : MonoBehaviour, IUseSettings
         {
             this.gameObject.GetComponent<SpringJoint>().spring = settings.forceFish;
         }
+    }
+
+    public bool isInWater()
+    {
+        return inWater;
     }
 }

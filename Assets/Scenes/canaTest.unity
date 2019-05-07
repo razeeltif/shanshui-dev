@@ -687,6 +687,14 @@ PrefabInstance:
       propertyPath: poseAction.actionPath
       value: /actions/default/in/PoseRightHand
       objectReference: {fileID: 0}
+    - target: {fileID: 11494192, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: flashColor.g
+      value: 0.4872246
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494192, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
+      propertyPath: flashColor.b
+      value: 0.45490193
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc06161b6d97feb419f45f03b62e14b9, type: 3}
 --- !u!1 &587627102 stripped
