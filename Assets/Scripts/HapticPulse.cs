@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class HapticPulse : MonoBehaviour
 {
 
-    public SteamVR_Behaviour_Pose pose;
+    public Hand hand;
     public SteamVR_Action_Vibration hapticAction;
     SteamVR_Input_Sources main;
 
@@ -14,47 +15,28 @@ public class HapticPulse : MonoBehaviour
     public float frequency = 150;
     public float amplitude = 75;
 
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        main = pose.inputSource;
-    }
-
-    /*   public SteamVR_Action_Vibration hapticAction;
-
-       IVRSystem device;
+        [Range(0,255)]
+    public ushort pulse;
 
 
-       void RumbleController(float duration, float strength)
-       {
-           StartCoroutine(RumbleControllerRoutine(duration, strength));
-       }
-
-       IEnumerator RumbleControllerRoutine(float duration, float strength)
-       {
-           strength = Mathf.Clamp01(strength);
-           float startTime = Time.realtimeSinceStartup;
-
-           while (Time.realtimeSinceStartup - startTime <= duration)
-           {
-               int valveStrength = Mathf.RoundToInt(Mathf.Lerp(0, 3999, strength));
-
-
-               device.TriggerHapticPulse((ushort)valveStrength);
-
-               yield return null;
-           }
-       }*/
 
     private void Update()
     {
-        Pulse(duration, frequency, amplitude, main);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log("PAUTERF");
+            hand.TriggerHapticPulse((ushort)pulse);
+            Pulse(duration, frequency, amplitude, hand.handType);
+        }
     }
 
+
+    
 
     private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
     {
-        hapticAction.Execute(0, duration, frequency, amplitude, source);
+        hand.hapticAction.Execute(0, duration, frequency, amplitude, source);
     }
+
+
 }

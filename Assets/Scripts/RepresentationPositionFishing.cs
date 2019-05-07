@@ -75,20 +75,6 @@ public class RepresentationPositionFishing : MonoBehaviour
         return dist;
     }
 
-    public void spawnNewPose()
-    {
-        // generate new angleX
-        angleX = Random.Range(-maxAngleX, maxAngleX);
-
-        // generate new angleY
-        angleY = Random.Range(0, maxAngleY);
-
-        distance = Random.Range(minDistance, maxDistance);
-
-        // récupération du vecteur de la Pose
-        updatePosePosition();
-
-    }
 
     Vector3 getHandPosition()
     {
