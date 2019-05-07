@@ -18,6 +18,9 @@ namespace Valve.VR.InteractionSystem
 		public AnimationCurve distanceIntensityCurve = AnimationCurve.Linear( 0.0f, 800.0f, 1.0f, 800.0f );
 		public AnimationCurve pulseIntervalCurve = AnimationCurve.Linear( 0.0f, 0.01f, 1.0f, 0.0f );
 
+        public float pulse = 800;
+        public float nextPulse = 0;
+
 		//-------------------------------------------------
 		IEnumerator Start()
 		{
@@ -28,13 +31,13 @@ namespace Valve.VR.InteractionSystem
                 Hand hand = GetComponentInParent<Hand>();
                 if (hand != null)
                 { 
-					float pulse = distanceIntensityCurve.Evaluate( distance );
+					//pulse = distanceIntensityCurve.Evaluate( distance );
                     hand.TriggerHapticPulse((ushort)pulse);
 
                     //SteamVR_Controller.Input( (int)trackedObject.index ).TriggerHapticPulse( (ushort)pulse );
 				}
 
-				float nextPulse = pulseIntervalCurve.Evaluate( distance );
+				//nextPulse = pulseIntervalCurve.Evaluate( distance );
 
 				yield return new WaitForSeconds( nextPulse );
 			}

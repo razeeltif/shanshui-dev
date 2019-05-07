@@ -83,7 +83,7 @@ public class PoissonFishing : MonoBehaviour
 
         if (onCatch)
         {
-
+            // update of the pose position relative to the player's head
             poseFishing.updatePosePosition();
 
             // get distance2D between the berge and the fish, relative to the water plane

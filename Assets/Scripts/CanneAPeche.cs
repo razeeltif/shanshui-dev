@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
-public class CanneAPeche : GrablableObject, IUseSettings
+public class CanneAPeche : MonoBehaviour, IUseSettings
 {
 
     public FishRodSettings settings;
 
-    private SteamVR_Behaviour_Pose firstHandHoldingThis;
-    private SteamVR_Behaviour_Pose secondHandHoldingThis;
+    private Hand firstHandHoldingThis;
+    private Hand secondHandHoldingThis;
 
     public GameObject bendyRod;
     public GameObject tipRod;
@@ -23,6 +24,9 @@ public class CanneAPeche : GrablableObject, IUseSettings
 
     private bool isCatching = false;
 
+    private bool isGrabbed = false;
+
+    Interactable inter;
 
     private void OnEnable()
     {
@@ -30,6 +34,10 @@ public class CanneAPeche : GrablableObject, IUseSettings
         EventManager.StartListening(EventsName.HookFish, OnHookFish);
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
+
+        // abonnement aux events de Interactable pour la détection du grab et du release
+        GetComponent<Interactable>().onAttachedToHand += Grab;
+        GetComponent<Interactable>().onDetachedFromHand += Release;
     }
 
     private void OnDisable()
@@ -38,6 +46,10 @@ public class CanneAPeche : GrablableObject, IUseSettings
         EventManager.StopListening(EventsName.HookFish, OnHookFish);
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
+
+        // de-abonnement aux events de Interactable pour la détection du grab et du release
+        GetComponent<Interactable>().onAttachedToHand -= Grab;
+        GetComponent<Interactable>().onDetachedFromHand -= Release;
     }
 
     void Awake()
@@ -80,8 +92,9 @@ public class CanneAPeche : GrablableObject, IUseSettings
         }
     }
 
-    public override void Grab(SteamVR_Behaviour_Pose pose)
+    public void Grab(Hand pose)
     {
+        Debug.Log("Canne Grab");
 
         if (isGrabbed)
         {
@@ -90,6 +103,7 @@ public class CanneAPeche : GrablableObject, IUseSettings
         }
         else
         {
+
             setFirstHand(pose);
 
             isGrabbed = true;
@@ -99,15 +113,11 @@ public class CanneAPeche : GrablableObject, IUseSettings
 
             setBendyPhysic();
 
-
-
-
         }
-
 
     }
 
-    public override void Release(SteamVR_Behaviour_Pose pose)
+    public void Release(Hand pose)
     {
 
         // si on tient la canne à peche à 2 mains, on passe son maintient à 1 main
@@ -124,14 +134,15 @@ public class CanneAPeche : GrablableObject, IUseSettings
         // si on tient la canne à peche à 1 main, on la lâche
         else
         {
+            
             isGrabbed = false;
 
             unsetBendyPhysic();
 
             this.GetComponent<Rigidbody>().isKinematic = false;
             //this.GetComponent<Collider>().isTrigger = false;
-            this.GetComponent<Rigidbody>().velocity = firstHandHoldingThis.GetVelocity();
-            this.GetComponent<Rigidbody>().angularVelocity = firstHandHoldingThis.GetAngularVelocity();
+            this.GetComponent<Rigidbody>().velocity = firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
+            this.GetComponent<Rigidbody>().angularVelocity = firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
             firstHandHoldingThis = null;
         }
         
@@ -220,9 +231,10 @@ public class CanneAPeche : GrablableObject, IUseSettings
         return bendyRod.transform.position + bendyRod.transform.right * bendyRod.GetComponent<CableComponent>().cableStartOffset.x + bendyRod.transform.up * bendyRod.GetComponent<CableComponent>().cableStartOffset.y + bendyRod.transform.forward * bendyRod.GetComponent<CableComponent>().cableStartOffset.z;
     }
 
-    private void setFirstHand(SteamVR_Behaviour_Pose hand)
+    private void setFirstHand(Hand hand)
     {
         firstHandHoldingThis = hand;
+
     }
 
     public void OnModifySettings()
