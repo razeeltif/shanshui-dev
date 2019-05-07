@@ -50,10 +50,14 @@ public class BendInterpolation : MonoBehaviour
 
         stepPrefabArray = new GameObject[nbStep];
 
-        // instanciation des éléments bendables
-        for (int i = 0; i < nbStep; i++)
+
+        if (debug)
         {
-            stepPrefabArray[i] = Instantiate(stepPrefab);
+            // instanciation des éléments bendables
+            for (int i = 0; i < nbStep; i++)
+            {
+                stepPrefabArray[i] = Instantiate(stepPrefab);
+            }
         }
 
     }

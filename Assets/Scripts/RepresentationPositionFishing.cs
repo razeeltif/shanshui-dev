@@ -37,25 +37,6 @@ public class RepresentationPositionFishing : MonoBehaviour
     private Vector3 PosePosition;
 
 
-    private void OnDrawGizmos()
-    {
-
-        // zone de distance max d'apparition des poses
-        Gizmos.DrawWireSphere(VRCamera.transform.position, maxDistance);
-
-        // zone de distance min d'apparition des poses
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(VRCamera.transform.position, minDistance);
-
-        // pose actuelle
-        Gizmos.color = Color.green;
-
-        if(PosePosition != null)
-            Gizmos.DrawSphere(PosePosition, tolerance);
-
-    }
-
-
     private void angleBetweenControllerAndCamera()
     {
         //Vector3 vectorHand = hand.gameObject.transform.position;
@@ -151,8 +132,8 @@ public class RepresentationPositionFishing : MonoBehaviour
     public void updatePosePosition()
     {
         // récupération du vecteur de la Pose
-        Vector3 posXv2 = Quaternion.AngleAxis(angleX + 90, Vector3.up) * Vector3.forward * distance;
-        Vector3 posY = Quaternion.AngleAxis(angleY, posXv2) * Vector3.up * distance;
+        Vector3 posX = Quaternion.AngleAxis(angleX + 90, Vector3.up) * Vector3.forward * distance;
+        Vector3 posY = Quaternion.AngleAxis(angleY, posX) * Vector3.up * distance;
         PosePosition = posY + VRCamera.gameObject.transform.position;
     }
 
@@ -188,6 +169,24 @@ public class RepresentationPositionFishing : MonoBehaviour
         }
 
 
+
+    }
+
+    private void OnDrawGizmos()
+    {
+
+        // zone de distance max d'apparition des poses
+        Gizmos.DrawWireSphere(VRCamera.transform.position, maxDistance);
+
+        // zone de distance min d'apparition des poses
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(VRCamera.transform.position, minDistance);
+
+        // pose actuelle
+        Gizmos.color = Color.green;
+
+        if (PosePosition != null)
+            Gizmos.DrawSphere(PosePosition, tolerance);
 
     }
 
