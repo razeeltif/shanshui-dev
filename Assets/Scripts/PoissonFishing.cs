@@ -11,6 +11,7 @@ public class PoissonFishing : MonoBehaviour
     public static PoissonFishing instance;
 
     FishingManagement fishingManagement;
+    HapticDistance hapticDistance;
     [HideInInspector]
     public RepresentationPositionFishing poseFishing;
     
@@ -73,6 +74,8 @@ public class PoissonFishing : MonoBehaviour
 
         fishingManagement = GetComponent<FishingManagement>();
         poseFishing = GetComponent<RepresentationPositionFishing>();
+        hapticDistance = GetComponent<HapticDistance>();
+        hapticDistance.enabled = false;
 
         fishEscapingTimer = UTimer.Initialize(5, this, moveEscapingFish);
     }
@@ -136,7 +139,6 @@ public class PoissonFishing : MonoBehaviour
 
     private void OnHookFish()
     {
-
         // if there is already an fish, we remove before adding a new one
         if (fishInWater != null)
         {
@@ -155,6 +157,9 @@ public class PoissonFishing : MonoBehaviour
 
         fishEscapingTimer.start(fishEscapingFrequence);
 
+        hapticDistance.enabled = true;
+        hapticDistance.hand = poseFishing.getHoldingHand();
+
     }
 
     private void OnCatchFish()
@@ -162,6 +167,7 @@ public class PoissonFishing : MonoBehaviour
         bobber.GetComponent<Bobber>().attachFishToBobber(fishModelPrefab);
         Destroy(fishInWater);
         onCatch = false;
+        hapticDistance.enabled = false;
         currentStep = 0;
         fishEscapingTimer.Stop();
     }
@@ -170,6 +176,7 @@ public class PoissonFishing : MonoBehaviour
     {
         releaseFish();
         onCatch = false;
+        hapticDistance.enabled = false;
         currentStep = 0;
         fishEscapingTimer.Stop();
     }
@@ -211,7 +218,10 @@ public class PoissonFishing : MonoBehaviour
     }
 
 
-    
+    private void initHapticDistance()
+    {
+
+    }
 
     private IEnumerator TravelToNextPoint(Vector3 targetPosition)
     {

@@ -34,7 +34,8 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     public float tolerance;
 
-    private Vector3 PosePosition;
+    [HideInInspector]
+    public Vector3 PosePosition;
 
 
     private void angleBetweenControllerAndCamera()
@@ -79,6 +80,11 @@ public class RepresentationPositionFishing : MonoBehaviour
     Vector3 getHandPosition()
     {
         return canneAPeche.transform.position + canneAPeche.transform.up * canneAPeche.gameObject.GetComponent<CanneAPeche>().settings.handPosition;
+    }
+
+    public Valve.VR.InteractionSystem.Hand getHoldingHand()
+    {
+        return canneAPeche.GetComponent<CanneAPeche>().firstHandHoldingThis;
     }
 
 

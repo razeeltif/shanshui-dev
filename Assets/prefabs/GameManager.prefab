@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3589936601008142243}
   - component: {fileID: 3589936601008142240}
   - component: {fileID: 3589936601008142241}
-  - component: {fileID: 3589936600094053044}
+  - component: {fileID: 1868016203}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -91,6 +91,7 @@ MonoBehaviour:
   angleX: 83.68
   angleY: 38.77
   tolerance: 0.3
+  PosePosition: {x: -0.691, y: 0, z: -0.359}
 --- !u!114 &3589936601008142240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,22 +135,22 @@ MonoBehaviour:
   tractionSpeed: 0.5
   fishDepth: 1
   fishEscapingFrequence: 1
---- !u!114 &3589936600094053044
+--- !u!114 &1868016203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3589936601008142271}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1fd7a6ed90dfd74bb45b582fbe9ea20, type: 3}
+  m_Script: {fileID: 11500000, guid: 706ec672c5bd2cd4ebfaab2c7787cce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pose: {fileID: 0}
-  hapticAction:
-    actionPath: /actions/default/out/Haptic
-    needsReinit: 0
-  duration: 1
-  frequency: 0.01
-  amplitude: 0.01
+  maximumDistance: 3
+  minTimeBetweenPulse: 0.01
+  maxTimeBetweenPulse: 1
+  durationSeconds: 0.05
+  frequency: 50
+  amplitude: 1
+  hand: {fileID: 0}

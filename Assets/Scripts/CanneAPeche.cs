@@ -9,8 +9,10 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     public FishRodSettings settings;
 
-    private Hand firstHandHoldingThis;
-    private Hand secondHandHoldingThis;
+    [HideInInspector]
+    public Hand firstHandHoldingThis;
+    [HideInInspector]
+    public Hand secondHandHoldingThis;
 
     public GameObject bendyRod;
     public GameObject tipRod;
