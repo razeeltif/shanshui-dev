@@ -11,7 +11,12 @@ public class BreathLine : MonoBehaviour
     GameObject breathLineInst;
 
     bool lineSpawned;
-    [SerializeField] float maxCircleSize;
+    [SerializeField] float maxCircleRadius;
+    public AnimationCurve controleSpeed, controleSpeedOut;
+    public float lineSpeed;
+    public float lineMult;
+
+    bool breathingIn;
 
     void Start()
     {
@@ -20,20 +25,40 @@ public class BreathLine : MonoBehaviour
 
     void Update()
     {
+        if (breathLineInst != null)
+        {
+            
+        }
+
         if(bobber.isInWater() && !lineSpawned)
         {
             breathLineInst = Instantiate(breathLinePref);
             breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
             lineSpawned = true;
+            breathingIn = true;
         }
         else if(bobber.isInWater() && lineSpawned)
         {
-            breathLineInst.transform.localScale += new Vector3(0.001f, 0.001f, 0.001f);
-            breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
-
+            if (breathLineInst.transform.localScale.x < maxCircleRadius && breathingIn)
+            {
+                lineSpeed = controleSpeed.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
+                breathLineInst.transform.localScale += new Vector3(lineSpeed, lineSpeed, lineSpeed);
+                breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
+            }
+            else if (breathLineInst.transform.localScale.x >= 0 && !breathingIn)
+            {
+                lineSpeed = controleSpeedOut.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
+                breathLineInst.transform.localScale -= new Vector3(lineSpeed, lineSpeed, lineSpeed);
+                breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
+            }
+            else
+            {
+                breathingIn = !breathingIn;
+            }
         }
         else if(breathLineInst != null && !bobber.isInWater())
         {
+            breathingIn = true; 
             Destroy(breathLineInst);
             lineSpawned = false;
         }

@@ -11,6 +11,7 @@ public class WildlifeManager : MonoBehaviour
 
     [SerializeField] GameObject fishPrefab;
     [SerializeField] GameObject birdPrefab;
+    [SerializeField] GameObject boatPrefab;
     [SerializeField] GameObject waterPlane;
     GameObject newFish;
     GameObject newBirdFlock;
