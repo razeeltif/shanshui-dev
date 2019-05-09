@@ -31,6 +31,7 @@ public class RespawnFishRod : MonoBehaviour
 
     void respawn()
     {
+        Debug.Log("RESPAWN");
         EventManager.TriggerEvent(EventsName.ReleaseFish);
         GameObject obj = Instantiate(prefab);
         Destroy(monitoredObject.gameObject.transform.parent.gameObject);
