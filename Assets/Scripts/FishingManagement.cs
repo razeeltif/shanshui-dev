@@ -12,6 +12,7 @@ public class FishingManagement : MonoBehaviour
     public const float PLANE_DEFAULT_LENGTH = 5;
 
     public float initialLength = 5;
+    Vector3 initialDirection;
     Vector3 direction;
 
     [Range (1, 10)]
@@ -47,7 +48,7 @@ public class FishingManagement : MonoBehaviour
         // vecteur direction joueur - bouchon
         Vector3 player2D = new Vector3(playerPosition.x, waterPlane.position.y, playerPosition.z);
         Vector3 bobber2D = new Vector3(bobber.x, waterPlane.position.y, bobber.z);
-        Vector3 initialDirection = getPlayerPositionFromBerge(playerPosition) - bobber2D;
+        initialDirection = getPlayerPositionFromBerge(playerPosition) - bobber2D;
 
         // vecteur perpendiculaire vecteur joueur - bouchon
         Vector3 left = new Vector3(initialDirection.z, 0, -initialDirection.x);
@@ -111,7 +112,7 @@ public class FishingManagement : MonoBehaviour
     public Vector3 getVectorOnProjectionDirection(Vector3 pos, Vector3 playerPosition)
     {
 
-        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos, direction.normalized);
+        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos - playerPosition, direction);
         projectedPosition = projectedPosition + playerPosition;
         projectedPosition.y = waterPlane.transform.position.y;
         return projectedPosition;
@@ -121,7 +122,7 @@ public class FishingManagement : MonoBehaviour
 
     public float getDistanceOnProjectionDirection(Vector3 pos, Vector3 playerPosition)
     {
-        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos, direction.normalized);
+        Vector3 projectedPosition = Vector3.ProjectOnPlane(pos - playerPosition, direction);
         projectedPosition = projectedPosition + playerPosition;
         projectedPosition.y = waterPlane.transform.position.y;
         return Vector3.Distance(projectedPosition, playerPosition);

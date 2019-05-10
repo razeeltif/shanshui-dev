@@ -1964,7 +1964,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8076cc0af7920143acf72b32561bfed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 17cf1892ff0829e4b95fb670e539903e, type: 2}
+  settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
+  firstHandHoldingThis: {fileID: 0}
+  secondHandHoldingThis: {fileID: 0}
   bendyRod: {fileID: 498908477091836311}
   tipRod: {fileID: 5641763992707982067}
 --- !u!114 &730034839
@@ -2111,7 +2113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041f9889836b12b4980f7d308738e00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 17cf1892ff0829e4b95fb670e539903e, type: 2}
+  settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
 --- !u!1001 &5641763992708015173
 PrefabInstance:
   m_ObjectHideFlags: 0

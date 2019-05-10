@@ -94,19 +94,20 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         }
     }
 
-    public void Grab(Hand pose)
+    public void Grab(Hand hand)
     {
-        Debug.Log("Canne Grab");
+
+        Haptic.GrabObject(hand);
 
         if (isGrabbed)
         {
-            secondHandHoldingThis = pose;
+            secondHandHoldingThis = hand;
             isDualWield = true;
         }
         else
         {
 
-            setFirstHand(pose);
+            setFirstHand(hand);
 
             isGrabbed = true;
 
