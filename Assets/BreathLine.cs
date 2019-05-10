@@ -13,9 +13,10 @@ public class BreathLine : MonoBehaviour
     bool lineSpawned;
     [SerializeField] float maxCircleRadius;
     public AnimationCurve controleSpeed, controleSpeedOut;
-    public float lineSpeed;
-    public float lineMult;
+    float lineSpeed;
+    [SerializeField] float lineMult;
 
+    Color circleColor;
     bool breathingIn;
 
     void Start()
@@ -25,15 +26,12 @@ public class BreathLine : MonoBehaviour
 
     void Update()
     {
-        if (breathLineInst != null)
-        {
-            
-        }
-
         if(bobber.isInWater() && !lineSpawned)
         {
             breathLineInst = Instantiate(breathLinePref);
             breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
+            circleColor = breathLineInst.GetComponent<SpriteRenderer>().color;
+            circleColor.a = 0f;
             lineSpawned = true;
             breathingIn = true;
         }
@@ -44,12 +42,14 @@ public class BreathLine : MonoBehaviour
                 lineSpeed = controleSpeed.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
                 breathLineInst.transform.localScale += new Vector3(lineSpeed, lineSpeed, lineSpeed);
                 breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
+                circleColor.a += 0.001f;
             }
             else if (breathLineInst.transform.localScale.x >= 0 && !breathingIn)
             {
                 lineSpeed = controleSpeedOut.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
                 breathLineInst.transform.localScale -= new Vector3(lineSpeed, lineSpeed, lineSpeed);
                 breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
+                circleColor.a -= 0.001f;
             }
             else
             {

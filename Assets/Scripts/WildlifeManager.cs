@@ -12,8 +12,11 @@ public class WildlifeManager : MonoBehaviour
     float rotationRand;
 
     [SerializeField] GameObject fishPrefab;
+    [SerializeField] GameObject spawnerFish;
     [SerializeField] GameObject birdPrefab;
+    [SerializeField] GameObject spawnerBird;
     [SerializeField] GameObject boatPrefab;
+    [SerializeField] GameObject spawnerBoat;
     [SerializeField] GameObject waterPlane;
     GameObject newFish;
     GameObject newBirdFlock;
@@ -25,19 +28,9 @@ public class WildlifeManager : MonoBehaviour
     void Start()
     {
         anim = fishPrefab.GetComponent<Animator>();
-        chanceJumpFish = 2000;
-        chanceJumpBird = 2000;
-        chanceSpawnBoat = 2000;
-        xMinBoat = 40;
-        xMaxBoat = 100;
-        xMinF = waterPlane.transform.position.x;
-        xMaxF = waterPlane.transform.position.x + 10;
-        zMinF = waterPlane.transform.position.z - 10;
-        zMaxF = waterPlane.transform.position.z + 10;
-        yMinB = 20;
-        yMaxB = 50;
-        zMinB = -60;
-        zMaxB = 60;
+        chanceJumpFish = 5000;
+        chanceJumpBird = 5000;
+        chanceSpawnBoat = 50;
     }
 
     // Update is called once per frame
@@ -69,25 +62,27 @@ public class WildlifeManager : MonoBehaviour
     {
         newFish = Instantiate(fishPrefab, transform);
         newFish.transform.rotation = Quaternion.Euler(newFish.transform.rotation.x, Random.Range(-180, 180), newFish.transform.rotation.z);
-        newFish.transform.position = new Vector3(Random.Range(xMinF, xMaxF), waterPlane.transform.position.y -0.5f, Random.Range(zMinF, zMaxF));
+        newFish.transform.position = new Vector3(Random.Range(spawnerFish.transform.position.x - 15, spawnerFish.transform.position.x + 15) , waterPlane.transform.position.y -0.5f, Random.Range(spawnerFish.transform.position.z - 10, spawnerFish.transform.position.z + 10));
     }
 
     void SpawnBirdFlock()
     {
         newBirdFlock = Instantiate(birdPrefab, transform);
-        newBirdFlock.transform.position = new Vector3(20, Random.Range(yMinB, yMaxB), Random.Range(zMinB, zMaxB));
+        newBirdFlock.transform.position = new Vector3(Random.Range(spawnerBird.transform.position.x - 60, spawnerFish.transform.position.x + 60), Random.Range(spawnerBird.transform.position.y - 50, spawnerBird.transform.position.y + 50), spawnerBird.transform.position.z);
+        newBirdFlock.transform.rotation = Quaternion.Euler(0, -90, 0);
     }
 
     void SpawnBoat()
     {
         newBoat = Instantiate(boatPrefab, transform);
-        newBoat.transform.position = new Vector3(Random.Range(xMinBoat, xMaxBoat), waterPlane.transform.position.y - 0.5f, -150);
+        newBoat.transform.position = new Vector3(-30, waterPlane.transform.position.y, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
+        newBoat.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
     void SpawnBoat2()
     {
         newBoat = Instantiate(boatPrefab, transform);
-        newBoat.transform.position = new Vector3(Random.Range(xMinBoat, xMaxBoat), waterPlane.transform.position.y - 0.5f, 150);
-        newBoat.transform.rotation = Quaternion.Euler(0, 180, 0);
+        newBoat.transform.position = new Vector3(30, waterPlane.transform.position.y - 0.5f, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
+        newBoat.transform.rotation = Quaternion.Euler(0, 270, 0);
     }
 }
