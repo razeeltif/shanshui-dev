@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterPlane: {fileID: 0}
   initialLength: 5
-  difficulty: 4
+  difficulty: 3
   coefReduction: 1.155
   minimalDistanceFromBerge: 0.1
   distanceStep: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   distance: 0.5
   fishSpeed: 2
   tractionSpeed: 0.5
-  fishDepth: 1
+  fishDepth: 2
   fishEscapingFrequence: 1
 --- !u!114 &1868016203
 MonoBehaviour:
