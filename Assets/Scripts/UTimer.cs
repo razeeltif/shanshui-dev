@@ -32,7 +32,6 @@ public class UTimer {
 
 	public void Stop (bool deb = false){
 		this.debug = deb;
-        Debug.Log("mono : " + mono.name);
 
         if(instanceCoroutine != null)
 		    mono.StopCoroutine(instanceCoroutine);
