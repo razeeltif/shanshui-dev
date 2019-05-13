@@ -19,6 +19,7 @@ MonoBehaviour:
   angularDrag: 0.5
   totalSegments: 25
   lengthNormalState: 4
+  maximumLength: 15
   lengthWhenCatchAFish: 1
   width: 0.01
   rigidity: 6

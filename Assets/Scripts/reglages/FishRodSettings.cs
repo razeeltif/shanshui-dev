@@ -23,6 +23,8 @@ public class FishRodSettings : ScriptableObject
     [Range(0, 100)]
     public float lengthNormalState = 4;
     [Range(0, 100)]
+    public float maximumLength = 15;
+    [Range(0, 100)]
     public float lengthWhenCatchAFish = 1;
     [Range(0, 5)]
     public float width = 0.1f;
