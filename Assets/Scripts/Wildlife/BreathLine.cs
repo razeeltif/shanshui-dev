@@ -16,7 +16,8 @@ public class BreathLine : MonoBehaviour
     float lineSpeed;
     [SerializeField] float lineMult;
 
-    Color circleColor;
+    Color currColor;
+    SpriteRenderer circleSRenderer;
     bool breathingIn;
 
     void Start()
@@ -30,8 +31,10 @@ public class BreathLine : MonoBehaviour
         {
             breathLineInst = Instantiate(breathLinePref);
             breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
-            circleColor = breathLineInst.GetComponent<SpriteRenderer>().color;
-            circleColor.a = 0f;
+            circleSRenderer = breathLineInst.GetComponent<SpriteRenderer>();
+            currColor = circleSRenderer.color;
+            currColor.a = 0f;
+            circleSRenderer.color = currColor;
             lineSpawned = true;
             breathingIn = true;
         }
@@ -42,17 +45,18 @@ public class BreathLine : MonoBehaviour
                 lineSpeed = controleSpeed.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
                 breathLineInst.transform.localScale += new Vector3(lineSpeed, lineSpeed, lineSpeed);
                 breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
-                circleColor.a += 0.001f;
+                circleSRenderer.color = currColor;
             }
             else if (breathLineInst.transform.localScale.x >= 0 && !breathingIn)
             {
                 lineSpeed = controleSpeedOut.Evaluate(breathLineInst.transform.localScale.x / maxCircleRadius) * lineMult;
                 breathLineInst.transform.localScale -= new Vector3(lineSpeed, lineSpeed, lineSpeed);
                 breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
-                circleColor.a -= 0.001f;
+                circleSRenderer.color = currColor;
             }
             else
             {
+                currColor.a += 0.2f;
                 breathingIn = !breathingIn;
             }
         }
