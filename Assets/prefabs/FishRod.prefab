@@ -1983,8 +1983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
-  firstHandHoldingThis: {fileID: 0}
-  secondHandHoldingThis: {fileID: 0}
+  hapticSettings: {fileID: 11400000, guid: 97cbc03445a7930439a8985abea71ca0, type: 2}
   bendyRod: {fileID: 498908477091836311}
   tipRod: {fileID: 5641763992707982067}
 --- !u!114 &730034839

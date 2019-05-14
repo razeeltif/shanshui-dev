@@ -3,9 +3,13 @@ using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
+using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager instance;
 
     // in seconds
     public float TimeBeforeShoeFish = 5f;
@@ -14,6 +18,11 @@ public class GameManager : MonoBehaviour
 
     private UTimer FishTimer;
     private UTimer UnfishTimer;
+
+    [HideInInspector]
+    public Hand firstHandHoldingThis;
+    [HideInInspector]
+    public Hand secondHandHoldingThis;
 
 
 
@@ -29,6 +38,12 @@ public class GameManager : MonoBehaviour
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
     }
 
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

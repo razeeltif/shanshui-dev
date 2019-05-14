@@ -8,11 +8,12 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 {
 
     public FishRodSettings settings;
+    public HapticSettings hapticSettings;
 
-    [HideInInspector]
+    /*[HideInInspector]
     public Hand firstHandHoldingThis;
     [HideInInspector]
-    public Hand secondHandHoldingThis;
+    public Hand secondHandHoldingThis;*/
 
     public GameObject bendyRod;
     public GameObject tipRod;
@@ -74,21 +75,25 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
         if (isGrabbed)
         {
+            // on veut faire vibrer la manette seulement quand on l'a en main et qu'on n'a pas ferré un poisson
+            if(!isCatching)
+                vibrationWhenMoving();
+
             if (isDualWield)
             {
                 // on récupère le vecteur de direction entre la premiere main et la seconde
-                Vector3 heading = secondHandHoldingThis.transform.position - firstHandHoldingThis.transform.position;
+                Vector3 heading = GameManager.instance.secondHandHoldingThis.transform.position - GameManager.instance.firstHandHoldingThis.transform.position;
                 Vector3 direction = heading.normalized;
                 // on fait en sorte que la canne pointe vers le vecteur de direction
                 this.transform.up = -direction;
 
-                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
+                this.transform.position = GameManager.instance.firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
             }
             else
             {
-                this.transform.rotation = firstHandHoldingThis.transform.rotation;
+                this.transform.rotation = GameManager.instance.firstHandHoldingThis.transform.rotation;
                 this.transform.Rotate(new Vector3(-90, 0, 0));
-                this.transform.position = firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
+                this.transform.position = GameManager.instance.firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
             }
 
         }
@@ -101,7 +106,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
         if (isGrabbed)
         {
-            secondHandHoldingThis = hand;
+            GameManager.instance.secondHandHoldingThis = hand;
             isDualWield = true;
         }
         else
@@ -120,16 +125,16 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     }
 
-    public void Release(Hand pose)
+    public void Release(Hand hand)
     {
 
         // si on tient la canne à peche à 2 mains, on passe son maintient à 1 main
         if (isDualWield)
         {
             // si la main qui lâche la canne est la premiere main, on passe la seconde main en premiere main
-            if(pose == firstHandHoldingThis)
+            if(hand == GameManager.instance.firstHandHoldingThis)
             {
-                setFirstHand(secondHandHoldingThis);
+                setFirstHand(GameManager.instance.secondHandHoldingThis);
             }
             isDualWield = false;
         }
@@ -144,11 +149,30 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
             this.GetComponent<Rigidbody>().isKinematic = false;
             //this.GetComponent<Collider>().isTrigger = false;
-            this.GetComponent<Rigidbody>().velocity = firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
-            this.GetComponent<Rigidbody>().angularVelocity = firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
-            firstHandHoldingThis = null;
+            this.GetComponent<Rigidbody>().velocity = GameManager.instance.firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
+            this.GetComponent<Rigidbody>().angularVelocity = GameManager.instance.firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
+            GameManager.instance.firstHandHoldingThis = null;
         }
         
+    }
+
+    // vibration quand la canne à pêche est trop remuée
+    private void vibrationWhenMoving()
+    {
+        Vector3 velocity = bendyRod.GetComponent<Rigidbody>().velocity;
+        float speed = velocity.magnitude;
+        float difference = hapticSettings.maximumSpeedToFullVibration - hapticSettings.minimumSpeedToVibrate;
+        //amplitude = 0f;
+
+        if (speed > hapticSettings.minimumSpeedToVibrate)
+        {
+            //amplitude = Mathf.Clamp01(speed / difference);
+            float amplitude = (speed - hapticSettings.minimumSpeedToVibrate) / difference;
+            Haptic.vibrationWHenMoving(GameManager.instance.firstHandHoldingThis, amplitude);
+        }
+
+
+        Debug.Log(speed);
     }
 
     private void OnHookFish()
@@ -236,8 +260,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     private void setFirstHand(Hand hand)
     {
-        firstHandHoldingThis = hand;
-
+        GameManager.instance.firstHandHoldingThis = hand;
     }
 
     public void OnModifySettings()

@@ -54,13 +54,13 @@ public class CableElongation : MonoBehaviour, IUseSettings
     // Start is called before the first frame update
     void Start()
     {
+        waterPlane = GameManager.instance.GetComponent<FishingManagement>().waterPlane;
         bendyRod.GetComponent<SpringJoint>().maxDistance = settings.lengthNormalState;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(bendyRod.GetComponent<Rigidbody>().velocity.z);
 
         switch (actualState)
         {

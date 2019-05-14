@@ -56,6 +56,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         if(other.tag == "water")
         {
             inWater = true;
+            Haptic.bobberInWater(GameManager.instance.firstHandHoldingThis);
             EventManager.TriggerEvent(EventsName.InWater);
         }
     }
@@ -65,6 +66,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         if(other.tag == "water")
         {
             inWater = false;
+            Haptic.bobberOutWater(GameManager.instance.firstHandHoldingThis);
             EventManager.TriggerEvent(EventsName.OutWater);
         }
     }
