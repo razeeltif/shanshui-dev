@@ -30,7 +30,7 @@ public class WildlifeManager : MonoBehaviour
         anim = fishPrefab.GetComponent<Animator>();
         chanceJumpFish = 500;
         chanceJumpBird = 2000;
-        chanceSpawnBoat = 10000;
+        chanceSpawnBoat = 500;
     }
 
     // Update is called once per frame
