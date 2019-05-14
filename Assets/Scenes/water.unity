@@ -1963,30 +1963,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 379178162}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &381335891 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 498908477091836311, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1264899975}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &381335899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381335891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200eac1d32ea0e74aaa20fa04392a2ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
-  waterPlane: {fileID: 1470676267}
-  bobber: {fileID: 1264899976}
-  bendyRod: {fileID: 381335891}
-  tipFishrod: {fileID: 750608943}
-  inWater: 0
 --- !u!1 &381382945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,12 +3763,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 178186409}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &750608943 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5641763992708153043, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1264899975}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &757129650 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8af338a4ca6d946368f9d4f3fa1e2373,
@@ -5447,31 +5417,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.00001
       objectReference: {fileID: 0}
-    - target: {fileID: 5656758710533576328, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-        type: 3}
-      propertyPath: settings
+    - target: {fileID: 381335899, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
+      propertyPath: waterPlane
       value: 
-      objectReference: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8,
-        type: 2}
-    - target: {fileID: 5656758710533576328, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081112978, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
-      propertyPath: settings
-      value: 
-      objectReference: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8,
-        type: 2}
-    - target: {fileID: 2081112978, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 498908477752600024, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1470676267}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
 --- !u!4 &1264899976 stripped
