@@ -62,8 +62,14 @@ public class CableElongation : MonoBehaviour, IUseSettings
     void Update()
     {
 
+        if (getDistanceBerge(bobber.position.z) < 0)
+        {
+            actualState = State.outWater;
+        }
+
         switch (actualState)
         {
+
             case State.outWater:
 
                 // le bobber est au dessus de l'eau ?
@@ -76,12 +82,6 @@ public class CableElongation : MonoBehaviour, IUseSettings
 
 
             case State.lance:
-
-                // le bobber est au dessus de la berge ?
-                if (getDistanceBerge(bobber.position.z) < 0)
-                {
-                    actualState = State.outWater;
-                }
 
                 // la canne a peche effectue un mouvement de retrait ?
                 if (bendyRod.GetComponent<Rigidbody>().velocity.z < -settings.pullbackForce)

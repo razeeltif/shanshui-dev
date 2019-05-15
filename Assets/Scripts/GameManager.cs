@@ -63,9 +63,6 @@ public class GameManager : MonoBehaviour
     // the bobber comes into the water
     void OnInWater()
     {
-
-        Debug.Log("PAATTE PUTATEINSFDE");
-
         // we check the variables before putting them in the timer
         checkVariable();
 

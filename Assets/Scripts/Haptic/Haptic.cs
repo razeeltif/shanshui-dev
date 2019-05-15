@@ -23,24 +23,36 @@ public static class Haptic
 
 
 
-    public static void vibrationWHenMoving(Hand hand, float amplitude)
+    public static void vibrationWHenMoving(Hand firstHand, Hand secondHand, float amplitude)
     {
-        hand.hapticAction.Execute(0, vibrationWHenMovingDurationSeconds, vibrationWHenMovingFrequency, amplitude, hand.handType);
+        firstHand.hapticAction.Execute(0, vibrationWHenMovingDurationSeconds, vibrationWHenMovingFrequency, amplitude, firstHand.handType);
+        if(secondHand != null)
+        {
+            secondHand.hapticAction.Execute(0, vibrationWHenMovingDurationSeconds, vibrationWHenMovingFrequency, amplitude, secondHand.handType);
+        }
     }
 
-    public static void GrabObject(Hand hand)
+    public static void GrabObject(Hand firstHand)
     {
-        hand.hapticAction.Execute(0, grabDurationSeconds, grabFrequency, grabAmplitude, hand.handType);
+        firstHand.hapticAction.Execute(0, grabDurationSeconds, grabFrequency, grabAmplitude, firstHand.handType);
     }
 
-    public static void bobberInWater(Hand hand)
+    public static void bobberInWater(Hand firstHand, Hand secondHand)
     {
-        hand.hapticAction.Execute(0, bobberInWaterDurationSeconds, bobberInWaterFrequency, bobberInWaterAmplitude, hand.handType);
+        firstHand.hapticAction.Execute(0, bobberInWaterDurationSeconds, bobberInWaterFrequency, bobberInWaterAmplitude, firstHand.handType);
+        if (secondHand != null)
+        {
+            secondHand.hapticAction.Execute(0, bobberInWaterDurationSeconds, bobberInWaterFrequency, bobberInWaterAmplitude, secondHand.handType);
+        }
     }
 
-    public static void bobberOutWater(Hand hand)
+    public static void bobberOutWater(Hand firstHand, Hand secondHand)
     {
-        hand.hapticAction.Execute(0, bobberOutWaterDurationSeconds, bobberOutWaterFrequency, bobberOutWaterAmplitude, hand.handType);
+        firstHand.hapticAction.Execute(0, bobberOutWaterDurationSeconds, bobberOutWaterFrequency, bobberOutWaterAmplitude, firstHand.handType);
+        if (secondHand != null)
+        {
+            secondHand.hapticAction.Execute(0, bobberOutWaterDurationSeconds, bobberOutWaterFrequency, bobberOutWaterAmplitude, secondHand.handType);
+        }
     }
 
 }

@@ -32,7 +32,7 @@ public class PoissonFishing : MonoBehaviour
     public float distance;
 
     public float fishSpeed = 2f;
-    public float tractionSpeed = 1f;
+    public float tractionSpeedMultiplicator = 1f;
     public float fishDepth = 1;
 
     private UTimer fishEscapingTimer;
@@ -47,6 +47,8 @@ public class PoissonFishing : MonoBehaviour
     private int currentStep = 0;
 
     private IEnumerator fishGoToThePointCoroutine;
+
+    private float initialDistanceBetweenBobberAndBerge;
 
 
 
@@ -91,12 +93,13 @@ public class PoissonFishing : MonoBehaviour
 
             // get distance2D between the berge and the fish, relative to the water plane
             Vector3 fishInWater2D = new Vector3(fishInWater.transform.position.x, fishingManagement.waterPlane.position.y, fishInWater.transform.position.z);
-            float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, fishingManagement.getPlayerPositionFromBerge(playerPosition.position));
-
+            Vector3 player2D = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
+            float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, player2D);
 
             if( currentStep == fishingManagement.difficulty - 1)
             {
-                moveFishTowardPlayerIfNeeded();
+                moveFishTowardPlayerOrBackwardIfNeeded(player2D, distancePlayerFish);
+
                 if (distancePlayerFish < fishingManagement.distanceStep / 2)
                 {
                     EventManager.TriggerEvent(EventsName.CatchFish);
@@ -110,16 +113,7 @@ public class PoissonFishing : MonoBehaviour
             }
             else
             {
-                if(!moveFishTowardPlayerIfNeeded())
-                {
-                    // the fish try to return to its ititial position
-                    Vector3 targetPosition = fishingManagement.fishPoint[currentStep].point;
-                    targetPosition = new Vector3(targetPosition.x, targetPosition.y - fishDepth, targetPosition.z);
-
-                    if(Vector3.Distance(fishInWater.transform.position, targetPosition) > 0.1f)
-                        fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);
-
-                }
+                moveFishTowardPlayerOrBackwardIfNeeded(player2D, distancePlayerFish);
             }
         }
     }
@@ -139,6 +133,11 @@ public class PoissonFishing : MonoBehaviour
         // initialyze the fish position
         Vector3 initialPosition = new Vector3(bobber.position.x, bobber.position.y - fishDepth, bobber.position.z);
         fishInWater = initFishInWater(initialPosition);
+
+        // get distance between the bobber and the berge
+        Vector3 fishInWater2D = new Vector3(fishInWater.transform.position.x, fishingManagement.waterPlane.position.y, fishInWater.transform.position.z);
+        Vector3 player2D = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
+        initialDistanceBetweenBobberAndBerge = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, player2D);
 
         // init the first pose
         initCurrentStep();
@@ -252,21 +251,32 @@ public class PoissonFishing : MonoBehaviour
 
     }
 
-    private bool moveFishTowardPlayerIfNeeded()
+    private void moveFishTowardPlayerOrBackwardIfNeeded(Vector3 player2DPosition, float distancePlayerFish)
     {
         float dist = poseFishing.distanceBetweenFishRodAndPose();
-        bool returnValue = dist < poseFishing.tolerance;
+
+        // the fish move forward the player
         if (dist < poseFishing.tolerance)
         {
 
             // the fish go toward to the player
-            // Vector3 targetPosition = new Vector3(poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().x, fishingManagement.waterPlane.position.y - fishDepth, poseFishing.canneAPeche.GetComponent<CanneAPeche>().getTipOfFishRod().z);
-            Vector3 targetPosition = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
+            Vector3 targetPosition = player2DPosition;
             targetPosition = new Vector3(targetPosition.x, targetPosition.y - fishDepth, targetPosition.z);
 
-            fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, tractionSpeed / 100);
+            float tractionSpeed = (initialDistanceBetweenBobberAndBerge / fishingManagement.difficulty) * (tractionSpeedMultiplicator/100);
+
+            fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, tractionSpeed);
         }
-        return returnValue;
+        else
+        {
+            // the fish try to return to its ititial position
+            Vector3 targetPosition = fishingManagement.fishPoint[currentStep].point;
+            targetPosition = new Vector3(targetPosition.x, targetPosition.y - fishDepth, targetPosition.z);
+
+            if (Vector3.Distance(fishInWater.transform.position, targetPosition) > 0.1f)
+                fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);
+
+        }
     }
 
     private void initCurrentStep()
