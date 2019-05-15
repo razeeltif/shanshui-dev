@@ -75,14 +75,14 @@ public class WildlifeManager : MonoBehaviour
     void SpawnBoat()
     {
         newBoat = Instantiate(boatPrefab, transform);
-        newBoat.transform.position = new Vector3(-30, waterPlane.transform.position.y, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
+        newBoat.transform.position = new Vector3(150, waterPlane.transform.position.y, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
         newBoat.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
     void SpawnBoat2()
     {
         newBoat = Instantiate(boatPrefab, transform);
-        newBoat.transform.position = new Vector3(30, waterPlane.transform.position.y - 0.5f, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
+        newBoat.transform.position = new Vector3(-150, waterPlane.transform.position.y - 0.5f, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
         newBoat.transform.rotation = Quaternion.Euler(0, 270, 0);
     }
 }

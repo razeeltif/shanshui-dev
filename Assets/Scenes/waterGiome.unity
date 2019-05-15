@@ -1142,7 +1142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &241021951
 GameObject:
@@ -1427,7 +1427,7 @@ Transform:
   - {fileID: 715236500}
   - {fileID: 620442172}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &277448660
 PrefabInstance:
@@ -1860,7 +1860,7 @@ PrefabInstance:
     - target: {fileID: 3362131094505310212, guid: 999f035f199700b418ce7ee37bbf0b15,
         type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3362131094505310212, guid: 999f035f199700b418ce7ee37bbf0b15,
         type: 3}
@@ -1882,6 +1882,11 @@ PrefabInstance:
       propertyPath: waterPlane
       value: 
       objectReference: {fileID: 1470676263}
+    - target: {fileID: 3362131093891887012, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 76.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999f035f199700b418ce7ee37bbf0b15, type: 3}
 --- !u!1001 &379178162
@@ -1986,7 +1991,6 @@ MonoBehaviour:
   bobber: {fileID: 1264899976}
   bendyRod: {fileID: 381335891}
   tipFishrod: {fileID: 750608943}
-  inWater: 0
 --- !u!1 &381382945
 GameObject:
   m_ObjectHideFlags: 0
@@ -3700,7 +3704,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &737683617
 PrefabInstance:
@@ -5291,7 +5295,7 @@ PrefabInstance:
     - target: {fileID: 3589936601008142268, guid: 5bb26235126f2564e9f80fc8d580fe5c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3589936601008142268, guid: 5bb26235126f2564e9f80fc8d580fe5c,
         type: 3}
@@ -5358,6 +5362,12 @@ PrefabInstance:
       propertyPath: playerPosition
       value: 
       objectReference: {fileID: 1934810029}
+    - target: {fileID: 3589936601008142241, guid: 5bb26235126f2564e9f80fc8d580fe5c,
+        type: 3}
+      propertyPath: fishModelPrefab
+      value: 
+      objectReference: {fileID: 1848295821653441765, guid: 3118a9e4d2c94c449817061a0ebbcb1d,
+        type: 3}
     - target: {fileID: 3589936601008142269, guid: 5bb26235126f2564e9f80fc8d580fe5c,
         type: 3}
       propertyPath: TimeBeforeShoeFish
@@ -5391,6 +5401,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FishRod
+      objectReference: {fileID: 0}
+    - target: {fileID: 498908477752600024, guid: 15bc1e0900c1f1445a228ce51718a2f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 498908477319230438, guid: 15bc1e0900c1f1445a228ce51718a2f3,
         type: 3}
@@ -5430,7 +5445,7 @@ PrefabInstance:
     - target: {fileID: 498908477319230438, guid: 15bc1e0900c1f1445a228ce51718a2f3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 498908477319230438, guid: 15bc1e0900c1f1445a228ce51718a2f3,
         type: 3}
@@ -5465,11 +5480,6 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 2081112978, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 498908477752600024, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-        type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
