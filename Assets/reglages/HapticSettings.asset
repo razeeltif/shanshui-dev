@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20be416096dd5544ac20d21c5f62da0, type: 3}
   m_Name: HapticSettings
   m_EditorClassIdentifier: 
-  durationSeconds: 0.05
-  frequency: 50
-  amplitude: 0.5
+  grabDurationSeconds: 0.05
+  grabFrequency: 50
+  grabAmplitude: 0.5
+  bobberInWaterDurationSeconds: 0.05
+  bobberInWaterFrequency: 50
+  bobberInWaterAmplitude: 0.5
+  bobberOutWaterDurationSeconds: 0.05
+  bobberOutWaterFrequency: 50
+  bobberOutWaterAmplitude: 0.5
+  vibrationWHenMovingDurationSeconds: 0.01
+  vibrationWHenMovingFrequency: 200
+  minimumSpeedToVibrate: 1
+  maximumSpeedToFullVibration: 150

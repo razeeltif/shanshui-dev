@@ -84,7 +84,7 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     public Valve.VR.InteractionSystem.Hand getHoldingHand()
     {
-        return canneAPeche.GetComponent<CanneAPeche>().firstHandHoldingThis;
+        return GameManager.instance.firstHandHoldingThis;
     }
 
 
