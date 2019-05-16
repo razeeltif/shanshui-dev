@@ -10,7 +10,7 @@ public class PoissonFishing : MonoBehaviour
 
     public static PoissonFishing instance;
 
-    FishingManagement fishingManagement;
+    public FishingManagement fishingManagement;
     HapticDistance hapticDistance;
     [HideInInspector]
     public RepresentationPositionFishing poseFishing;
