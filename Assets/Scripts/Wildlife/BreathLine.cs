@@ -5,7 +5,7 @@ using UnityEngine;
 public class BreathLine : MonoBehaviour
 {
     Bobber bobber;
-    [SerializeField] GameObject waterPlane;
+    GameObject waterPlane;
 
     [SerializeField] GameObject breathLinePref;
     GameObject breathLineInst;
@@ -22,6 +22,7 @@ public class BreathLine : MonoBehaviour
 
     void Start()
     {
+        waterPlane = GameManager.instance.GetComponent<FishingManagement>().waterPlane.gameObject;
         bobber = GetComponent<Bobber>();
     }
 
@@ -33,7 +34,7 @@ public class BreathLine : MonoBehaviour
             breathLineInst.transform.position = new Vector3(transform.position.x, waterPlane.transform.position.y, transform.position.z);
             circleSRenderer = breathLineInst.GetComponent<SpriteRenderer>();
             currColor = circleSRenderer.color;
-            currColor.a = 0f;
+            currColor.a = 1f;
             circleSRenderer.color = currColor;
             lineSpawned = true;
             breathingIn = true;
