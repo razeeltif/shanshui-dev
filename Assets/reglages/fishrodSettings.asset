@@ -19,6 +19,8 @@ MonoBehaviour:
   angularDrag: 0.5
   totalSegments: 20
   lengthNormalState: 3
+  maximumLength: 15
+  pullbackForce: 10
   lengthWhenCatchAFish: 1
   width: 0.01
   rigidity: 6
@@ -34,6 +36,7 @@ MonoBehaviour:
   wave: 0.05
   forceFish: 1000
   BouncyCenterOffset: {x: 0, y: 0.05, z: 0}
-  HookMass: 1
-  HookDrag: 20
-  HookAngularDrag: 1
+  BobberMass: 1
+  BoobberDrag: 1
+  BobberAngularDrag: 1
+  distanceBeforeShowingSign: 0.5

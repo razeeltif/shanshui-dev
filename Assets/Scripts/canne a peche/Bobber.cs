@@ -15,6 +15,7 @@ public class Bobber : MonoBehaviour, IUseSettings
 
     private bool inWater = false;
 
+    public Appat actualAppat;
 
     private void OnEnable()
     {
@@ -31,6 +32,11 @@ public class Bobber : MonoBehaviour, IUseSettings
     void Update()
     {
         WaterSimulationOnBobber();
+
+        if(actualAppat != null)
+        {
+            actualizeAppatPosition();
+        }
     }
 
     private void WaterSimulationOnBobber()
@@ -46,7 +52,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         }
         else
         {
-            GetComponent<Rigidbody>().drag = settings.HookDrag;
+            GetComponent<Rigidbody>().drag = settings.BoobberDrag;
         }
     }
 
@@ -105,14 +111,39 @@ public class Bobber : MonoBehaviour, IUseSettings
 
     public void OnModifySettings()
     {
-        GetComponent<Rigidbody>().mass = settings.HookMass;
-        GetComponent<Rigidbody>().drag = settings.HookDrag;
-        GetComponent<Rigidbody>().angularDrag = settings.HookAngularDrag;
+        GetComponent<Rigidbody>().mass = settings.BobberMass;
+        GetComponent<Rigidbody>().drag = settings.BoobberDrag;
+        GetComponent<Rigidbody>().angularDrag = settings.BobberAngularDrag;
 
         if (this.gameObject.GetComponent<SpringJoint>())
         {
             this.gameObject.GetComponent<SpringJoint>().spring = settings.forceFish;
         }
+    }
+
+    public void attachAppat(Appat appat)
+    {
+        if(actualAppat != null)
+        {
+            detachAppat();
+        }
+
+        actualAppat = appat;
+        actualAppat.transform.position = GetComponentInChildren<AppatSign>().transform.position;
+
+        GetComponentInChildren<AppatSign>().GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    public void detachAppat()
+    {
+        actualAppat.releaseAppat();
+        actualAppat = null;
+    }
+
+    private void actualizeAppatPosition()
+    {
+        actualAppat.transform.position = GetComponentInChildren<AppatSign>().transform.position;
+        actualAppat.transform.rotation = GetComponentInChildren<AppatSign>().transform.rotation;
     }
 
     public bool isInWater()

@@ -7,9 +7,10 @@ using Valve.VR;
 [RequireComponent(typeof(RepresentationPositionFishing))]
 public class PoissonFishing : MonoBehaviour
 {
-
+    [HideInInspector]
     public static PoissonFishing instance;
 
+    [HideInInspector]
     public FishingManagement fishingManagement;
     HapticDistance hapticDistance;
     [HideInInspector]
@@ -66,13 +67,17 @@ public class PoissonFishing : MonoBehaviour
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
 
         fishingManagement = GetComponent<FishingManagement>();
         poseFishing = GetComponent<RepresentationPositionFishing>();

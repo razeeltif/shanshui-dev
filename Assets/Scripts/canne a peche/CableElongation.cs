@@ -61,9 +61,9 @@ public class CableElongation : MonoBehaviour, IUseSettings
     // Update is called once per frame
     void Update()
     {
-
         if (getDistanceBerge(bobber.position.z) < 0)
         {
+            bendyRod.GetComponent<SpringJoint>().maxDistance = settings.lengthNormalState;
             actualState = State.outWater;
         }
 
