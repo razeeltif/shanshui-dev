@@ -11,7 +11,7 @@ public class RespawnFishRod : MonoBehaviour
 
     public GameObject monitoredObject;
 
-
+    private float scale = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,4 +41,5 @@ public class RespawnFishRod : MonoBehaviour
 
 
     }
+    
 }

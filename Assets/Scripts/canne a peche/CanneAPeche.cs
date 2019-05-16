@@ -136,6 +136,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             {
                 setFirstHand(GameManager.instance.secondHandHoldingThis);
             }
+            GameManager.instance.secondHandHoldingThis = null;
             isDualWield = false;
         }
 
@@ -168,7 +169,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         {
             //amplitude = Mathf.Clamp01(speed / difference);
             float amplitude = (speed - hapticSettings.minimumSpeedToVibrate) / difference;
-            Haptic.vibrationWHenMoving(GameManager.instance.firstHandHoldingThis, amplitude);
+            Haptic.vibrationWHenMoving(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis, amplitude);
         }
 
 
