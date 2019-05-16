@@ -5221,24 +5221,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1091038451}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1102922693 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 498908477319230437, guid: 15bc1e0900c1f1445a228ce51718a2f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1264899975}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1102922694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102922693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b4a77c926bf0148bb6ca9f698ccecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1126540320 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 27fe389736c6443b5929c94be4fb2548,
@@ -5938,6 +5920,11 @@ PrefabInstance:
       propertyPath: waterPlane
       value: 
       objectReference: {fileID: 1470676267}
+    - target: {fileID: 7530313280271911876, guid: 15bc1e0900c1f1445a228ce51718a2f3,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
 --- !u!4 &1264899976 stripped
