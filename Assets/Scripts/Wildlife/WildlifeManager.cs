@@ -28,9 +28,9 @@ public class WildlifeManager : MonoBehaviour
     void Start()
     {
         anim = fishPrefab.GetComponent<Animator>();
-        chanceJumpFish = 500;
-        chanceJumpBird = 2000;
-        chanceSpawnBoat = 500;
+        chanceJumpFish = 15000;
+        chanceJumpBird = 12000;
+        chanceSpawnBoat = 20000;
     }
 
     // Update is called once per frame
@@ -68,7 +68,7 @@ public class WildlifeManager : MonoBehaviour
     void SpawnBirdFlock()
     {
         newBirdFlock = Instantiate(birdPrefab, transform);
-        newBirdFlock.transform.position = new Vector3(Random.Range(spawnerBird.transform.position.x - 60, spawnerFish.transform.position.x + 60), Random.Range(spawnerBird.transform.position.y - 50, spawnerBird.transform.position.y + 50), spawnerBird.transform.position.z);
+        newBirdFlock.transform.position = new Vector3(Random.Range(spawnerBird.transform.position.x - 100, spawnerFish.transform.position.x + 100), Random.Range(spawnerBird.transform.position.y - 50, spawnerBird.transform.position.y + 50), spawnerBird.transform.position.z);
         newBirdFlock.transform.rotation = Quaternion.Euler(0, -90, 0);
     }
 
