@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class RespawnFishRod : MonoBehaviour
 {
+    public GameSettings settings;
 
     public GameObject prefab;
-    //public Vector3 initialPosition;
-    public float limits;
 
     public GameObject monitoredObject;
 
@@ -23,7 +22,7 @@ public class RespawnFishRod : MonoBehaviour
     void Update()
     {
 
-        if(monitoredObject.transform.position.y < limits)
+        if(monitoredObject.transform.position.y < settings.YLimitsBeforeRespawn)
         {
             respawn();
         }

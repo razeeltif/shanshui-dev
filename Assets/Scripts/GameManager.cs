@@ -9,12 +9,9 @@ using Valve.VR.InteractionSystem;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager instance;
+    public GameSettings settings;
 
-    // in seconds
-    public float TimeBeforeShoeFish = 5f;
-    public float RandomOnTimeBeforeShoeFish = 1f;
-    public float TimerBeforeRelease = 5f;
+    public static GameManager instance;
 
     private UTimer FishTimer;
     private UTimer UnfishTimer;
@@ -63,10 +60,8 @@ public class GameManager : MonoBehaviour
     // the bobber comes into the water
     void OnInWater()
     {
-        // we check the variables before putting them in the timer
-        checkVariable();
 
-        float time = TimeBeforeShoeFish + Random.Range(-RandomOnTimeBeforeShoeFish, RandomOnTimeBeforeShoeFish);
+        float time = settings.timeBeforeShoeFish + Random.Range(-settings.RandomOnTimeBeforeShoe, settings.RandomOnTimeBeforeShoe);
         FishTimer.start(time);
 
 
@@ -88,25 +83,6 @@ public class GameManager : MonoBehaviour
     public void ReleaseFish()
     {
         EventManager.TriggerEvent(EventsName.ReleaseFish);
-    }
-
-    private void checkVariable()
-    {
-
-        if(TimeBeforeShoeFish < 0)
-        {
-            Debug.LogError("Time Before Shoe Fish in " + this.name + " must be positive");
-        }
-
-        if(RandomOnTimeBeforeShoeFish < 0)
-        {
-            Debug.LogError("Time Before Shoe Fish Randomness in " + this.name + " must be positive");
-        }
-
-        if(TimeBeforeShoeFish - RandomOnTimeBeforeShoeFish < 0)
-        {
-            Debug.LogError("Time Before Shoe Fish Randomness in " + this.name + " must be smaller or egual to Time Before Shoe Fish");
-        }
     }
 
 }
