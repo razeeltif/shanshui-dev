@@ -11,6 +11,8 @@ public class AkEventPlayableInspector : UnityEditor.Editor
 	private UnityEditor.SerializedProperty akEvent;
 	private UnityEditor.SerializedProperty emitterObjectRef;
 	private AkEventPlayable m_AkEventPlayable;
+	private UnityEditor.SerializedProperty[] m_guidProperty;
+	private UnityEditor.SerializedProperty[] m_IDProperty;
 
 	private UnityEditor.SerializedProperty overrideTrackEmitterObject;
 	private UnityEditor.SerializedProperty retriggerEvent;
@@ -23,85 +25,73 @@ public class AkEventPlayableInspector : UnityEditor.Editor
 		emitterObjectRef = serializedObject.FindProperty("emitterObjectRef");
 		retriggerEvent = serializedObject.FindProperty("retriggerEvent");
 
-		AkWwiseXMLWatcher.Instance.XMLUpdated += updateClipMaxDuration;
-
-		if (m_AkEventPlayable != null)
-		{
-			m_AkEventPlayable.EditorValidated += updateClipMaxDuration;
-
-			updateClipMaxDuration();
-		}
-	}
-
-	public void OnDisable()
-	{
-		AkWwiseXMLWatcher.Instance.XMLUpdated -= updateClipMaxDuration;
-
-		if (m_AkEventPlayable != null)
-		{
-			m_AkEventPlayable.EditorValidated -= updateClipMaxDuration;
-		}
+		m_IDProperty = new[] { akEvent.FindPropertyRelative("ID") };
+		m_guidProperty = new[] { akEvent.FindPropertyRelative("valueGuid.Array") };
 	}
 
 	public override void OnInspectorGUI()
 	{
+		if (m_AkEventPlayable != null && m_AkEventPlayable.OwningClip != null)
+			m_AkEventPlayable.OwningClip.displayName = name;
 		serializedObject.Update();
 
 		UnityEngine.GUILayout.Space(UnityEditor.EditorGUIUtility.standardVerticalSpacing);
 
 		using (new UnityEditor.EditorGUILayout.VerticalScope("box"))
 		{
-			UnityEditor.EditorGUILayout.PropertyField(overrideTrackEmitterObject, new UnityEngine.GUIContent("Override Track Object: "));
-
+			UnityEditor.EditorGUILayout.PropertyField(overrideTrackEmitterObject,
+				new UnityEngine.GUIContent("Override Track Object: "));
 			if (overrideTrackEmitterObject.boolValue)
-			{
 				UnityEditor.EditorGUILayout.PropertyField(emitterObjectRef, new UnityEngine.GUIContent("Emitter Object Ref: "));
-			}
-
 			UnityEditor.EditorGUILayout.PropertyField(retriggerEvent, new UnityEngine.GUIContent("Retrigger Event: "));
-
 			UnityEditor.EditorGUILayout.PropertyField(akEvent, new UnityEngine.GUIContent("Event: "));
 		}
 
 		if (m_AkEventPlayable != null && m_AkEventPlayable.OwningClip != null)
 		{
-			m_AkEventPlayable.OwningClip.displayName = m_AkEventPlayable.akEvent.Name;
+			var componentName = GetEventName(m_AkEventPlayable.akEvent.valueGuid);
+			m_AkEventPlayable.OwningClip.displayName = componentName;
 		}
 
 		serializedObject.ApplyModifiedProperties();
-	}
 
-	private void updateClipMaxDuration()
-	{
-		if (m_AkEventPlayable != null)
+		if (!m_AkEventPlayable.akEvent.IsValid())
 		{
-			var newMinMaxDuration = getMinMaxDuration(m_AkEventPlayable.akEvent);
-
-			if (newMinMaxDuration != UnityEngine.Vector2.zero)
+			new AkWwiseComponentPicker.PickerCreator
 			{
-				m_AkEventPlayable.EventDurationMin = newMinMaxDuration.x;
-				m_AkEventPlayable.EventDurationMax = newMinMaxDuration.y;
-
-				if (m_AkEventPlayable.OwningClip != null)
-				{
-					m_AkEventPlayable.OwningClip.duration = m_AkEventPlayable.EventDurationMax;
-				}
-			}
+				objectType = AkWwiseProjectData.WwiseObjectType.EVENT,
+				guidProperty = m_guidProperty,
+				idProperty = m_IDProperty,
+				pickerPosition = AkUtilities.GetLastRectAbsolute(UnityEngine.GUILayoutUtility.GetLastRect()),
+				serializedObject = akEvent.serializedObject
+			};
 		}
 	}
 
-	private UnityEngine.Vector2 getMinMaxDuration(AK.Wwise.Event akEvent)
+	bool EqualGuids(byte[] first, byte[] second)
 	{
-		UnityEngine.Vector2 result = UnityEngine.Vector2.zero;
+		if (first.Length != second.Length)
+			return false;
 
-		var eventInfo = AkWwiseProjectInfo.GetData().GetEventInfo(akEvent.Id);
-		if (eventInfo != null)
+		for (var i = 0; i < first.Length; ++i)
+			if (first[i] != second[i])
+				return false;
+
+		return true;
+	}
+
+	public string GetEventName(byte[] in_guid)
+	{
+		var list = AkWwiseProjectInfo.GetData().EventWwu;
+
+		for (var i = 0; i < list.Count; i++)
 		{
-			result.x = eventInfo.minDuration;
-			result.y = eventInfo.maxDuration;
+			var element = list[i].List.Find(x => EqualGuids(x.Guid, in_guid));
+			if (element != null)
+				return element.Name;
 		}
 
-		return result;
+		return string.Empty;
 	}
 }
 

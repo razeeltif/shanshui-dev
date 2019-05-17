@@ -30,15 +30,21 @@ public class RespawnFishRod : MonoBehaviour
 
     void respawn()
     {
-        Debug.Log("RESPAWN");
         EventManager.TriggerEvent(EventsName.ReleaseFish);
         GameObject obj = Instantiate(prefab);
         Destroy(monitoredObject.gameObject.transform.parent.gameObject);
         monitoredObject = obj.GetComponentInChildren<Rigidbody>().gameObject;
+
+        obj.GetComponentInChildren<Rigidbody>().isKinematic = true;
+        obj.GetComponentInChildren<Collider>().enabled = false;
+        obj.GetComponent<Animator>().enabled = true;
+        obj.GetComponent<Animator>().Play("growFishrod", -1, 0f);
+
+        obj.GetComponentInChildren<Bobber>().GetComponent<Rigidbody>().isKinematic = true;
+        obj.GetComponentInChildren<Bobber>().GetComponent<Collider>().enabled = false;
+
         PoissonFishing.instance.bobber = obj.GetComponentInChildren<Bobber>().transform;
         PoissonFishing.instance.poseFishing.canneAPeche = obj.GetComponentInChildren<Rigidbody>().transform;
-
-
     }
-    
+
 }

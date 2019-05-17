@@ -51,11 +51,11 @@ public class FishRodSettings : ScriptableObject
     public float forceFish = 20;
 
 
-    [Header("Hook Settings")]
+    [Header("Bobber Settings")]
     public Vector3 BouncyCenterOffset;
-    public float HookMass = 1;
-    public float HookDrag = 1;
-    public float HookAngularDrag = 1;
+    public float BobberMass = 1;
+    public float BoobberDrag = 1;
+    public float BobberAngularDrag = 1;
 
 
     public void AddGameObjectListening(IUseSettings g)
@@ -93,9 +93,9 @@ public class FishRodSettings : ScriptableObject
         if (bounceDamp < 0) bounceDamp = 0;
         if (wave < 0) wave = 0;
 
-        if (HookMass < 0) HookMass = 0;
-        if (HookDrag < 0) HookDrag = 0;
-        if (HookAngularDrag < 0) HookAngularDrag = 0;
+        if (BobberMass < 0) BobberMass = 0;
+        if (BoobberDrag < 0) BoobberDrag = 0;
+        if (BobberAngularDrag < 0) BobberAngularDrag = 0;
 
         callAllIUSingSettings();
 

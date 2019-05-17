@@ -1,0 +1,3 @@
+[submodule "dependencies/shanshui_wwise"]
+	path = dependencies/shanshui_wwise
+	url = https://gitlab.com/deboutlesmorts/shanshui_wwise.git

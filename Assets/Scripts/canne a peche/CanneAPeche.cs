@@ -171,9 +171,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             float amplitude = (speed - hapticSettings.minimumSpeedToVibrate) / difference;
             Haptic.vibrationWHenMoving(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis, amplitude);
         }
-
-
-        Debug.Log(speed);
+        
     }
 
     private void OnHookFish()

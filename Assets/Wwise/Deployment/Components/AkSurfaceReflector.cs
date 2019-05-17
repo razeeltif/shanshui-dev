@@ -70,7 +70,7 @@ public class AkSurfaceReflector : UnityEngine.MonoBehaviour
 			using (var surfaceArray = new AkAcousticSurfaceArray(1))
 			{
 				var surface = surfaceArray[0];
-				surface.textureID = acousticTexture.Id;
+				surface.textureID = (uint)acousticTexture.ID;
 				surface.reflectorChannelMask = unchecked((uint)-1);
 				surface.strName = meshFilter.gameObject.name;
 

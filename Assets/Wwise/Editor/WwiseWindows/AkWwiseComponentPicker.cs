@@ -11,9 +11,10 @@ public class AkWwiseComponentPicker : UnityEditor.EditorWindow
 
 	private readonly AkWwiseTreeView m_treeView = new AkWwiseTreeView();
 	private bool m_close;
-	private UnityEditor.SerializedProperty m_WwiseObjectReference;
+	private UnityEditor.SerializedProperty[] m_selectedItemGuid;
+	private UnityEditor.SerializedProperty[] m_selectedItemID;
 	private UnityEditor.SerializedObject m_serializedObject;
-	private WwiseObjectType m_type;
+	private AkWwiseProjectData.WwiseObjectType m_type;
 
 	/// <summary>
 	///  The window to repaint after closing the picker
@@ -79,15 +80,19 @@ public class AkWwiseComponentPicker : UnityEditor.EditorWindow
 		m_serializedObject.Update();
 
 		var obj = in_item.DataContext as AkWwiseTreeView.AkTreeInfo;
-		var reference = WwiseObjectReference.FindOrCreateWwiseObject(m_type, in_item.Header, obj.Guid);
-		var groupReference = reference as WwiseGroupValueObjectReference;
-		if (groupReference)
+		//we set the items guid
+		AkUtilities.SetByteArrayProperty(m_selectedItemGuid[0], obj.Guid);
+		if (m_selectedItemID != null)
+			m_selectedItemID[0].intValue = obj.ID;
+
+		//When its a State or a Switch, we set the group's guid
+		if (m_selectedItemGuid.Length == 2)
 		{
 			obj = in_item.Parent.DataContext as AkWwiseTreeView.AkTreeInfo;
-			groupReference.SetupGroupObjectReference(in_item.Parent.Header, obj.Guid);
+			AkUtilities.SetByteArrayProperty(m_selectedItemGuid[1], obj.Guid);
+			if (m_selectedItemID != null)
+				m_selectedItemID[1].intValue = obj.ID;
 		}
-
-		m_WwiseObjectReference.objectReferenceValue = reference;
 
 		m_serializedObject.ApplyModifiedProperties();
 	}
@@ -95,14 +100,30 @@ public class AkWwiseComponentPicker : UnityEditor.EditorWindow
 	private void ResetGuid()
 	{
 		m_serializedObject.Update();
-		m_WwiseObjectReference.objectReferenceValue = null;
+
+		var emptyArray = new byte[16];
+
+		//we set the items guid
+		AkUtilities.SetByteArrayProperty(m_selectedItemGuid[0], emptyArray);
+		if (m_selectedItemID != null)
+			m_selectedItemID[0].intValue = 0;
+
+		//When its a State or a Switch, we set the group's guid
+		if (m_selectedItemGuid.Length == 2)
+		{
+			AkUtilities.SetByteArrayProperty(m_selectedItemGuid[1], emptyArray);
+			if (m_selectedItemID != null)
+				m_selectedItemID[1].intValue = 0;
+		}
+
 		m_serializedObject.ApplyModifiedProperties();
 	}
 
 	public class PickerCreator
 	{
-		public UnityEditor.SerializedProperty wwiseObjectReference;
-		public WwiseObjectType objectType;
+		public UnityEditor.SerializedProperty[] guidProperty;
+		public UnityEditor.SerializedProperty[] idProperty;
+		public AkWwiseProjectData.WwiseObjectType objectType;
 		public UnityEngine.Rect pickerPosition;
 		public UnityEditor.SerializedObject serializedObject;
 
@@ -130,7 +151,8 @@ public class AkWwiseComponentPicker : UnityEditor.EditorWindow
 				new UnityEngine.Vector2(pickerPosition.width >= 250 ? pickerPosition.width : 250,
 					UnityEngine.Screen.currentResolution.height / 2));
 
-			s_componentPicker.m_WwiseObjectReference = wwiseObjectReference;
+			s_componentPicker.m_selectedItemGuid = guidProperty;
+			s_componentPicker.m_selectedItemID = idProperty;
 			s_componentPicker.m_serializedObject = serializedObject;
 			s_componentPicker.m_type = objectType;
 
@@ -141,63 +163,56 @@ public class AkWwiseComponentPicker : UnityEditor.EditorWindow
 
 			s_componentPicker.m_treeView.AssignDefaults();
 			s_componentPicker.m_treeView.SetRootItem(
-				System.IO.Path.GetFileNameWithoutExtension(WwiseSetupWizard.Settings.WwiseProjectPath), WwiseObjectType.Project);
+				System.IO.Path.GetFileNameWithoutExtension(WwiseSetupWizard.Settings.WwiseProjectPath),
+				AkWwiseProjectData.WwiseObjectType.PROJECT);
 
-			//Populate the tree with the correct type
-			switch (objectType)
+			//Populate the tree with the correct type 
+			if (objectType == AkWwiseProjectData.WwiseObjectType.EVENT)
 			{
-				case WwiseObjectType.AuxBus:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Auxiliary Busses",
-						AkWwiseProjectInfo.GetData().AuxBusWwu);
-					break;
-
-				case WwiseObjectType.Event:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Events",
-						AkWwiseProjectInfo.GetData().EventWwu);
-					break;
-
-				case WwiseObjectType.Soundbank:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Banks",
-						AkWwiseProjectInfo.GetData().BankWwu);
-					break;
-
-				case WwiseObjectType.State:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "States",
-						AkWwiseProjectInfo.GetData().StateWwu);
-					break;
-
-				case WwiseObjectType.Switch:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Switches",
-						AkWwiseProjectInfo.GetData().SwitchWwu);
-					break;
-
-				case WwiseObjectType.GameParameter:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Game Parameters",
-						AkWwiseProjectInfo.GetData().RtpcWwu);
-					break;
-
-				case WwiseObjectType.Trigger:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Triggers",
-						AkWwiseProjectInfo.GetData().TriggerWwu);
-					break;
-
-				case WwiseObjectType.AcousticTexture:
-					s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Virtual Acoustics",
-						AkWwiseProjectInfo.GetData().AcousticTextureWwu);
-					break;
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Events",
+					AkWwiseProjectInfo.GetData().EventWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.SWITCH)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Switches",
+					AkWwiseProjectInfo.GetData().SwitchWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.STATE)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "States",
+					AkWwiseProjectInfo.GetData().StateWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.SOUNDBANK)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Banks",
+					AkWwiseProjectInfo.GetData().BankWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.AUXBUS)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Auxiliary Busses",
+					AkWwiseProjectInfo.GetData().AuxBusWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.GAMEPARAMETER)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Game Parameters",
+					AkWwiseProjectInfo.GetData().RtpcWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.TRIGGER)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Triggers",
+					AkWwiseProjectInfo.GetData().TriggerWwu);
+			}
+			else if (objectType == AkWwiseProjectData.WwiseObjectType.ACOUSTICTEXTURE)
+			{
+				s_componentPicker.m_treeView.PopulateItem(s_componentPicker.m_treeView.RootItem, "Virtual Acoustics",
+					AkWwiseProjectInfo.GetData().AcousticTextureWwu);
 			}
 
 			AK.Wwise.TreeView.TreeViewItem item = null;
 
-			var reference = wwiseObjectReference.objectReferenceValue as WwiseObjectReference;
-			if (reference)
-				item = s_componentPicker.m_treeView.GetItemByGuid(reference.Guid);
-			else
-			{
-				item = s_componentPicker.m_treeView.GetItemByType(objectType);
-				if (item != null)
-					item = item.Parent;
-			}
+			var byteArray = AkUtilities.GetByteArrayProperty(guidProperty[0]);
+			if (byteArray != null)
+				item = s_componentPicker.m_treeView.GetItemByGuid(new System.Guid(byteArray));
 
 			if (item != null)
 			{
