@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14797bb36a1bf1a4382426ffdc0a6136, type: 3}
   m_Name: gameSettings
   m_EditorClassIdentifier: 
-  YLimitsBeforeRespawn: 2
+  timeBeforeShoeFish: 100
+  RandomOnTimeBeforeShoe: 1
+  TimeBeforeRelease: 30
+  YLimitsBeforeRespawn: -2
