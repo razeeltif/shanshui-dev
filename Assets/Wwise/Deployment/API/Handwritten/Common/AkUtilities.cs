@@ -83,57 +83,12 @@ public class WwiseSettings
 
 public partial class AkUtilities
 {
-	/// <summary>
-	/// These values represent the maximum value of the "Unity Integration Version" number in the Version.txt file that will migrated.
-	/// For example, in Wwise v2018.1.6, "Unity Integration Version" is 17 which means that all migrations up until this version are required.
-	/// </summary>
-	public enum MigrationStep
+	public static bool IsMigrating = false;
+
+	public static bool IsWwiseProjectAvailable
 	{
-		AkGameObjListenerMask_v2016_1_0 = 9,
-		AkGameObjPositionOffsetData_v2016_2_0 = 10,
-		AkAudioListener_v2017_1_0 = 14,
-		InitializationSettings_v2018_1_0 = 15,
-		WwiseTypes_v2018_1_6 = 16,
-		/// <summary>
-		/// The value that is currently in the Version.txt file.
-		/// </summary>
-		Current
-	}
-
-	public static bool IsMigrationRequired(MigrationStep step)
-	{
-		return migrationStartIndex <= (int)step;
-	}
-
-	public static bool IsMigrating
-	{
-		get { return migrationStartIndex < MigrationStopIndex; }
-	}
-
-	public static void BeginMigration(int startIndex)
-	{
-		if (startIndex < MigrationStopIndex)
-			migrationStartIndex = startIndex;
-	}
-
-	public static void EndMigration()
-	{
-		migrationStartIndex = MigrationStopIndex;
-	}
-
-	public static int MigrationStartIndex { get { return migrationStartIndex; } }
-	public const int MigrationStopIndex = (int)MigrationStep.Current;
-
-	private static int migrationStartIndex = MigrationStopIndex;
-
-	public static bool IsWwiseProjectAvailable { set; get; }
-
-	private const string DragAndDropId = "AkDragDropId";
-
-	public static WwiseObjectReference DragAndDropObjectReference
-	{
-		set { UnityEditor.DragAndDrop.SetGenericData(DragAndDropId, value); }
-		get { return UnityEditor.DragAndDrop.GetGenericData(DragAndDropId) as WwiseObjectReference; }
+		set;
+		get;
 	}
 
 	private static readonly System.Collections.Generic.Dictionary<string, string> s_ProjectBankPaths =
@@ -253,17 +208,11 @@ public partial class AkUtilities
 					  (success ? "successful" : (warning ? "has warning(s)" : "error")) + ":\n" + output;
 
 		if (success)
-		{
 			UnityEngine.Debug.Log(message);
-		}
 		else if (warning)
-		{
 			UnityEngine.Debug.LogWarning(message);
-		}
 		else
-		{
 			UnityEngine.Debug.LogError(message);
-		}
 
 		UnityEditor.AssetDatabase.Refresh();
 	}
@@ -635,59 +584,33 @@ public partial class AkUtilities
 
 	public static void AddAkAudioListenerToMainCamera(bool logWarning = false)
 	{
-		UnityEngine.Camera camera = UnityEngine.Camera.main;
-
-		// Workaround for some versions of Unity not setting properly the MainCamera tag
-		// on the first scene of a new project
-		if (camera == null)
-		{
-			var cameraArray = UnityEngine.Object.FindObjectsOfType<UnityEngine.Camera>();
-			if (cameraArray.Length > 0)
-			{
-				foreach (var entry in cameraArray)
-				{
-					if (entry.name == "Main Camera")
-					{
-						camera = entry;
-						break;
-					}
-				}
-			}
-
-			if (camera == null)
-			{
-				return;
-			}
-		}
-
-		if (camera.GetComponentInChildren<AkAudioListener>())
-		{
+		if (!UnityEngine.Camera.main)
 			return;
-		}
 
-		var oldListener = camera.gameObject.GetComponent<UnityEngine.AudioListener>();
-		if (oldListener != null)
-		{
-			UnityEditor.Undo.DestroyObjectImmediate(oldListener);
-		}
+		if (UnityEngine.Camera.main.GetComponentInChildren<AkAudioListener>())
+			return;
 
-		var akAudioListener = UnityEditor.Undo.AddComponent<AkAudioListener>(camera.gameObject);
+		var akAudioListener = UnityEditor.Undo.AddComponent<AkAudioListener>(UnityEngine.Camera.main.gameObject);
 		if (!akAudioListener)
-		{
 			return;
-		}
 
 		var akGameObj = akAudioListener.GetComponentInChildren<AkGameObj>();
 		if (akGameObj)
-		{
 			akGameObj.isEnvironmentAware = false;
-		}
 
 		if (logWarning)
-		{
 			UnityEngine.Debug.LogWarning(
 				"Automatically added AkAudioListener to Main Camera. Go to \"Edit > Wwise Settings...\" to disable this functionality.");
-		}
+	}
+
+	public static void RemoveUnityAudioListenerFromMainCamera()
+	{
+		if (!UnityEngine.Camera.main)
+			return;
+
+		var listener = UnityEngine.Camera.main.gameObject.GetComponent<UnityEngine.AudioListener>();
+		if (listener)
+			UnityEditor.Undo.DestroyObjectImmediate(listener);
 	}
 
 	#region Tooltip Workaround

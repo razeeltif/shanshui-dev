@@ -44,10 +44,9 @@ public partial class AkBuildPreprocessor
 			case UnityEditor.BuildTarget.PS4:
 				return "PS4";
 
-#if !UNITY_2018_3_OR_NEWER
-            case UnityEditor.BuildTarget.PSP2:
+			case UnityEditor.BuildTarget.PSP2:
 				return "Vita";
-#endif
+
 			case UnityEditor.BuildTarget.StandaloneWindows:
 			case UnityEditor.BuildTarget.StandaloneWindows64:
 			case UnityEditor.BuildTarget.WSAPlayer:

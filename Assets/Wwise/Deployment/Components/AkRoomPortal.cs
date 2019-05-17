@@ -4,13 +4,14 @@
 [UnityEngine.DisallowMultipleComponent]
 /// @brief An AkRoomPortal can connect two AkRoom components together.
 /// @details 
-public class AkRoomPortal : AkTriggerHandler
+public class AkRoomPortal : AkUnityEventHandler
 {
 	/// AkRoomPortals can only connect a maximum of 2 rooms.
 	public const int MAX_ROOMS_PER_PORTAL = 2;
 
-	private AkVector extent;
-	private AkTransform portalTransform;
+	private readonly AkVector extent = new AkVector();
+
+	private readonly AkTransform portalTransform = new AkTransform();
 
 	private ulong backRoomID = AkRoom.INVALID_ROOM_ID;
 
@@ -22,21 +23,20 @@ public class AkRoomPortal : AkTriggerHandler
 	/// The second room is on the positive side of the portal.
 	public AkRoom[] rooms = new AkRoom[MAX_ROOMS_PER_PORTAL];
 
-	public bool IsValid { get { return frontRoomID != backRoomID; } }
-
 	/// Access the portal's ID
-	public ulong GetID() { return (ulong)GetInstanceID(); }
+	public ulong GetID()
+	{
+		return (ulong) GetInstanceID();
+	}
 
 	protected override void Awake()
 	{
 		var collider = GetComponent<UnityEngine.BoxCollider>();
 		collider.isTrigger = true;
 
-		portalTransform = new AkTransform();
 		portalTransform.Set(collider.bounds.center.x, collider.bounds.center.y, collider.bounds.center.z, transform.forward.x,
 			transform.forward.y, transform.forward.z, transform.up.x, transform.up.y, transform.up.z);
 
-		extent = new AkVector();
 		extent.X = collider.size.x * transform.localScale.x / 2;
 		extent.Y = collider.size.y * transform.localScale.y / 2;
 		extent.Z = collider.size.z * transform.localScale.z / 2;

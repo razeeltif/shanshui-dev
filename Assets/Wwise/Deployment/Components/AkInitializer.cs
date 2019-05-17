@@ -140,9 +140,9 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 
 			initializationSettings.CallbackManagerInitializationSettings.BufferSize = akInitializer.callbackManagerBufferSize * 1024;
 
-			initializationSettings.UserSettings.m_SpatialAudioSettings.m_PoolSize = (uint)akInitializer.spatialAudioPoolSize * 1024;
-			initializationSettings.UserSettings.m_SpatialAudioSettings.m_MaxSoundPropagationDepth = akInitializer.maxSoundPropagationDepth;
-			initializationSettings.UserSettings.m_SpatialAudioSettings.m_DiffractionFlags = (AkCommonUserSettings.SpatialAudioSettings.DiffractionFlags)akInitializer.diffractionFlags;
+			initializationSettings.AkSpatialAudioInitSettings.uPoolSize = (uint)akInitializer.spatialAudioPoolSize * 1024;
+			initializationSettings.AkSpatialAudioInitSettings.uMaxSoundPropagationDepth = akInitializer.maxSoundPropagationDepth;
+			initializationSettings.AkSpatialAudioInitSettings.uDiffractionFlags = (uint)akInitializer.diffractionFlags;
 
 			initializationSettings.CallbackManagerInitializationSettings.IsLoggingEnabled = akInitializer.engineLogging;
 

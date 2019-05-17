@@ -288,6 +288,7 @@ public class AkWwiseSettingsWindow : UnityEditor.EditorWindow
 					{
 						if (WwiseSetupWizard.Settings.CreateWwiseListener)
 						{
+							AkUtilities.RemoveUnityAudioListenerFromMainCamera();
 							AkUtilities.AddAkAudioListenerToMainCamera();
 						}
 					}
