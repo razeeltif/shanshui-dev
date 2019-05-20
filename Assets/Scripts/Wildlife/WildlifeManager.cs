@@ -13,7 +13,7 @@ public class WildlifeManager : MonoBehaviour
 
     [SerializeField] GameObject fishPrefab;
     [SerializeField] GameObject spawnerFish;
-    [SerializeField] GameObject birdPrefab;
+    [SerializeField] GameObject[] birdPrefab;
     [SerializeField] GameObject spawnerBird;
     [SerializeField] GameObject boatPrefab;
     [SerializeField] GameObject spawnerBoat;
@@ -29,7 +29,7 @@ public class WildlifeManager : MonoBehaviour
     {
         anim = fishPrefab.GetComponent<Animator>();
         chanceJumpFish = 15000;
-        chanceJumpBird = 12000;
+        chanceJumpBird = 7000;
         chanceSpawnBoat = 20000;
     }
 
@@ -44,10 +44,12 @@ public class WildlifeManager : MonoBehaviour
         {
             SpawnFish();
         }
-        if (tirageBird <= 1)
-        {
-            SpawnBirdFlock();
-        }
+
+        if (tirageBird <= 0.25f) SpawnBirdFlock(0);
+        if (tirageBird <= 0.50f && tirageBird > 0.25f) SpawnBirdFlock(1);
+        if (tirageBird <= 0.75f && tirageBird > 0.50f) SpawnBirdFlock(2);
+        if (tirageBird <= 1 && tirageBird >= 0.75f) SpawnBirdFlock(3);
+
         if (tirageBoat <= 0.5f)
         {
             SpawnBoat();
@@ -65,9 +67,9 @@ public class WildlifeManager : MonoBehaviour
         newFish.transform.position = new Vector3(Random.Range(spawnerFish.transform.position.x - 15, spawnerFish.transform.position.x + 15) , waterPlane.transform.position.y -0.5f, Random.Range(spawnerFish.transform.position.z - 10, spawnerFish.transform.position.z + 10));
     }
 
-    void SpawnBirdFlock()
+    void SpawnBirdFlock(int birdtospawn)
     {
-        newBirdFlock = Instantiate(birdPrefab, transform);
+        newBirdFlock = Instantiate(birdPrefab[birdtospawn], transform);
         newBirdFlock.transform.position = new Vector3(Random.Range(spawnerBird.transform.position.x - 100, spawnerFish.transform.position.x + 100), Random.Range(spawnerBird.transform.position.y - 50, spawnerBird.transform.position.y + 50), spawnerBird.transform.position.z);
         newBirdFlock.transform.rotation = Quaternion.Euler(0, -90, 0);
     }
