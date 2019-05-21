@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     private float TMax = 0;
     private float Tact = 0;
 
+    public float minimumFishingTime;
+
 
     [HideInInspector]
     public Hand firstHandHoldingThis;
@@ -88,7 +90,18 @@ public class GameManager : MonoBehaviour
             // the timer has been paused, we release it
             if(FishTimer.getCooldown() > 0)
             {
-                float tempsActuel = TMax - (FishTimer.getCooldown() / )
+                float tempsAttendu = FishTimer.getCooldown();
+                float tempsActuel = TMax - (FishTimer.getCooldown() / tempsAttendu) * TMax;
+
+                if(tempsActuel > Tact)
+                {
+                    Tact = tempsActuel;
+                }
+
+                if(Tact <= minimumFishingTime)
+                {
+                    Tact += minimumFishingTime;
+                }
 
 
 

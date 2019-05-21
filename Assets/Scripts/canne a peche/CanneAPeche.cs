@@ -29,6 +29,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     private bool isGrabbed = false;
 
+    public float cableLengthOffset = 1f;
+
     Interactable inter;
 
     UTimer bobberTimer;
@@ -191,14 +193,14 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     private void OnReleaseFish()
     {
         isCatching = false;
-        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState- cableLengthOffset;
         setBendySpringJointNormalState();
     }
 
     private void OnCatchFish()
     {
         isCatching = false;
-        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState- cableLengthOffset;
         setBendySpringJointNormalState();
     }
 
@@ -252,7 +254,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     private void setCableComponentValues()
     {
         tipRod.GetComponent<CableComponent>().totalSegments = settings.totalSegments;
-        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState - cableLengthOffset;
         tipRod.GetComponent<CableComponent>().cableWidth = settings.width;
         tipRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
         tipRod.GetComponent<CableComponent>().cableStartOffset = new Vector3(0, 0, 0);
@@ -288,6 +290,6 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
 
         tipRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
-        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState;
+        tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState - cableLengthOffset;
     }
 }
