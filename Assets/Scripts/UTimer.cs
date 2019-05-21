@@ -44,27 +44,52 @@ public class UTimer {
 
 	public void start(bool deb = false){
 		this.debug = deb;
-		if(instanceCoroutine != null) mono.StopCoroutine(instanceCoroutine);
+		if(instanceCoroutine != null)
+            mono.StopCoroutine(instanceCoroutine);
 		cooldown = 0;
 		finished = false;
 		hasBeenLaunched = true;
 		if(debug)
-			Debug.Log("Restarting");
+			Debug.Log("Start");
 		instanceCoroutine = mono.StartCoroutine(LaunchCooldown());
 	}
 
 	public void start(float time, bool deb = false){
 		this.debug = deb;
-		if(instanceCoroutine != null) mono.StopCoroutine(instanceCoroutine);
+		if(instanceCoroutine != null)
+            mono.StopCoroutine(instanceCoroutine);
 		cooldown = 0;
 		finished = false;
 		this.time = time;
 		if(debug)
-			Debug.Log("Restarting");
+			Debug.Log("Start");
 		instanceCoroutine = mono.StartCoroutine(LaunchCooldown());
 	}
 
-	public void restart(){
+    public void pause(bool deb = false)
+    {
+        this.debug = deb;
+        if (instanceCoroutine != null)
+            mono.StopCoroutine(instanceCoroutine);
+        finished = false;
+        hasBeenLaunched = false;
+        if (debug)
+            Debug.Log("coroutine " + instanceCoroutine.ToString() + " paused.");
+    }
+
+    public void continu(bool deb = false)
+    {
+        this.debug = deb;
+        if (instanceCoroutine != null)
+            mono.StopCoroutine(instanceCoroutine);
+        finished = false;
+        hasBeenLaunched = true;
+        if (debug)
+            Debug.Log("Continue");
+        instanceCoroutine = mono.StartCoroutine(LaunchCooldown());
+    }
+
+    public void restart(){
 		Stop();
 		start();
 	}
@@ -85,5 +110,15 @@ public class UTimer {
         callbackFunction();
 
     } 
+
+    public float getCooldown()
+    {
+        return cooldown;
+    }
+
+    public void setCooldown(float cooldown)
+    {
+        this.cooldown = cooldown;
+    }
 
 }

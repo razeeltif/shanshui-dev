@@ -7,5 +7,6 @@ public enum EventsName {
     OutWater,
     HookFish,
     CatchFish,
-    ReleaseFish
+    ReleaseFish,
+    ChangeAppat
 };

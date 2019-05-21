@@ -11,9 +11,14 @@ public class Appat : MonoBehaviour
     [HideInInspector]
     public BoiteAppat boiteAppat;
 
-    public bool isAttached = false;
+    public GameObject[] typesPoisson;
+    public float minimumWaitingTime;
+    public float maximumWaitingTime;
 
-    public bool canBeAttached = false;
+    [HideInInspector]
+    public bool isAttached = false;
+    [HideInInspector]
+    public bool canBeAttached = false; 
 
     private void OnEnable()
     {
@@ -29,6 +34,21 @@ public class Appat : MonoBehaviour
         GetComponent<Interactable>().onDetachedFromHand -= Release;
     }
 
+    private void Awake()
+    {
+        if(typesPoisson.Length <= 0)
+        {
+            Debug.LogError(name + " : Types Poisson not initialized");
+        }
+        if(minimumWaitingTime == 0)
+        {
+            Debug.LogError(name + " : minimumWaitingTime not initialized");
+        }
+        if (maximumWaitingTime == 0)
+        {
+            Debug.LogError(name + " : maximumWaitingTime not initialized");
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -90,13 +110,21 @@ public class Appat : MonoBehaviour
 
     void attachAppatToBobber()
     {
-        isAttached = true;
         PoissonFishing.instance.bobber.GetComponent<Bobber>().attachAppat(this);
     }
 
     public void releaseAppat()
     {
+        isAttached = false;
+        canBeAttached = false;
         GetComponent<Rigidbody>().isKinematic = false;
+        EventManager.TriggerEvent(EventsName.ChangeAppat);
+    }
+
+    public int getRandomFishIndex()
+    {
+        int returnVal = Random.Range(0, typesPoisson.Length);
+        return returnVal;
     }
 
     private void OnTriggerEnter(Collider other)

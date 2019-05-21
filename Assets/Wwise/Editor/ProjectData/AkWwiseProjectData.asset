@@ -12,14 +12,524 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ab4ae6e0935d3b43abe81c289f9ff8c, type: 3}
   m_Name: AkWwiseProjectData
   m_EditorClassIdentifier: 
-  AcousticTextureWwu: []
-  AuxBusWwu: []
-  BankWwu: []
-  EventWwu: []
-  RtpcWwu: []
-  StateWwu: []
-  SwitchWwu: []
-  TriggerWwu: []
-  ExpandedItems: []
   autoPopulateEnabled: 1
   CurrentPluginConfig: 
+  m_lastPopulateTimePart2: 0
+  m_lastPopulateTimePsrt1: 0
+  AcousticTextureWwu:
+  - Guid: '{55910C6C-F95C-48ED-8D6D-3A454CBA76D2}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016759647
+    ParentPhysicalPath: 
+    PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    List: []
+  - Guid: '{463D666B-3CA8-4FA5-8B4A-5FEF12B883F6}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016769618
+    ParentPhysicalPath: 
+    PhysicalPath: Virtual Acoustics\Factory Reflect Acoustic Textures.wwu
+    List:
+    - Guid: f2532d2fccda8e408b8898b1b52a26d6
+      ID: -126323319
+      Name: Acoustic_Banner
+      Path: Factory Reflect Acoustic Textures\Textures\Acoustic_Banner
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Acoustic_Banner
+        ObjectType: 15
+    - Guid: 32c20a8be202de4ebeacfdd1a900e3ed
+      ID: 1873957695
+      Name: Anechoic
+      Path: Factory Reflect Acoustic Textures\Textures\Anechoic
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Anechoic
+        ObjectType: 15
+    - Guid: a9a586b004f2534ca838bdb18b18f6d6
+      ID: 504532776
+      Name: Brick
+      Path: Factory Reflect Acoustic Textures\Textures\Brick
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Brick
+        ObjectType: 15
+    - Guid: 8975223456dc604296c4b9f4b669092b
+      ID: -1882360988
+      Name: Carpet
+      Path: Factory Reflect Acoustic Textures\Textures\Carpet
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Carpet
+        ObjectType: 15
+    - Guid: 001cf85c9628e04aaf7c3080bdaba682
+      ID: 841620460
+      Name: Concrete
+      Path: Factory Reflect Acoustic Textures\Textures\Concrete
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Concrete
+        ObjectType: 15
+    - Guid: 19c9d2305f92434189063dbb3c4ae5e2
+      ID: -1099468548
+      Name: Cork_Tiles
+      Path: Factory Reflect Acoustic Textures\Textures\Cork_Tiles
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Cork_Tiles
+        ObjectType: 15
+    - Guid: 339ee6f8975c6849b508a1535f2d66e8
+      ID: -1366806192
+      Name: Curtains
+      Path: Factory Reflect Acoustic Textures\Textures\Curtains
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Curtains
+        ObjectType: 15
+    - Guid: f4e3a4680b4c8746a8b8a84db93dbc8f
+      ID: -624659732
+      Name: Drywall
+      Path: Factory Reflect Acoustic Textures\Textures\Drywall
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Drywall
+        ObjectType: 15
+    - Guid: 32d581836edbed4ea7a3bc7b0a0b8ba8
+      ID: 1970351858
+      Name: Fabric
+      Path: Factory Reflect Acoustic Textures\Textures\Fabric
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Fabric
+        ObjectType: 15
+    - Guid: 313793c51a00b44a98dd9b033a8c8eab
+      ID: 513139656
+      Name: Mountain
+      Path: Factory Reflect Acoustic Textures\Textures\Mountain
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Mountain
+        ObjectType: 15
+    - Guid: c4da82a82a13b747ba9db9907ba29cc0
+      ID: -1657378743
+      Name: Tile
+      Path: Factory Reflect Acoustic Textures\Textures\Tile
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Tile
+        ObjectType: 15
+    - Guid: 96bcff1fe76f9e48ba6c7c14a71391ae
+      ID: 2058049674
+      Name: Wood
+      Path: Factory Reflect Acoustic Textures\Textures\Wood
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood
+        ObjectType: 15
+    - Guid: e5d1857ba2c1634e9a13cec54b641adc
+      ID: -32444547
+      Name: Wood_Bright
+      Path: Factory Reflect Acoustic Textures\Textures\Wood_Bright
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood_Bright
+        ObjectType: 15
+    - Guid: 8e474652dac50c4ea0dec98d1479529a
+      ID: 1755085759
+      Name: Wood_Deep
+      Path: Factory Reflect Acoustic Textures\Textures\Wood_Deep
+      PathAndIcons:
+      - ElementName: Factory Reflect Acoustic Textures
+        ObjectType: 12
+      - ElementName: Textures
+        ObjectType: 4
+      - ElementName: Wood_Deep
+        ObjectType: 15
+  AuxBusWwu:
+  - Guid: '{662CE33F-D02A-4219-A40D-196CF2A1B635}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933308900
+    ParentPhysicalPath: 
+    PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    List: []
+  BankWwu:
+  - Guid: '{8F0AB70A-EC1A-4633-8DD8-16435978ADE1}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016410598
+    ParentPhysicalPath: 
+    PhysicalPath: SoundBanks\Default Work Unit.wwu
+    List: []
+  - Guid: '{8F05E447-F1D0-49EF-976A-D56548CD1F3F}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016490389
+    ParentPhysicalPath: 
+    PhysicalPath: SoundBanks\ShanShui_Test_Musique.wwu
+    List:
+    - Guid: 3a3e7ea1147096498fd3014ca437fb2d
+      ID: 265264807
+      Name: ShanShui_AMB
+      Path: ShanShui_Test_Musique\ShanShui_AMB
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Musique
+        ObjectType: 12
+      - ElementName: ShanShui_AMB
+        ObjectType: 7
+    - Guid: 6805e8701467c54fa086fbf6f178b267
+      ID: -85851130
+      Name: ShanShui_Music
+      Path: ShanShui_Test_Musique\ShanShui_Music
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Musique
+        ObjectType: 12
+      - ElementName: ShanShui_Music
+        ObjectType: 7
+    - Guid: def0c54fe7e59846b4d556d23793a482
+      ID: 619860590
+      Name: ShanShui_SFX
+      Path: ShanShui_Test_Musique\ShanShui_SFX
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Musique
+        ObjectType: 12
+      - ElementName: ShanShui_SFX
+        ObjectType: 7
+  EventWwu:
+  - Guid: '{4510FF65-B4AE-4E32-99AD-A7BB8743AE13}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933009727
+    ParentPhysicalPath: 
+    PhysicalPath: Events\Default Work Unit.wwu
+    List: []
+  - Guid: '{4CED0D3C-D3B8-4B7C-A147-0806F774CECF}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933029669
+    ParentPhysicalPath: 
+    PhysicalPath: Events\ShanShui_SFX.wwu
+    List:
+    - Guid: 075885a4c913294bacad4a1c3197d66c
+      ID: -1440909374
+      Name: Play_bouchon_water
+      Path: ShanShui_SFX\Play_bouchon_water
+      PathAndIcons:
+      - ElementName: ShanShui_SFX
+        ObjectType: 12
+      - ElementName: Play_bouchon_water
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 56190d0db7f8f84cab522f2abd0c7d26
+      ID: -1407748207
+      Name: Play_Fish_ring
+      Path: ShanShui_SFX\Play_Fish_ring
+      PathAndIcons:
+      - ElementName: ShanShui_SFX
+        ObjectType: 12
+      - ElementName: Play_Fish_ring
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 75d00a093481b342bf471fb0a0c58481
+      ID: -2014363638
+      Name: Play_fish_water02
+      Path: ShanShui_SFX\Play_fish_water02
+      PathAndIcons:
+      - ElementName: ShanShui_SFX
+        ObjectType: 12
+      - ElementName: Play_fish_water02
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+  - Guid: '{50F65B5B-BAF8-449E-B6BF-955973C02E80}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933019700
+    ParentPhysicalPath: 
+    PhysicalPath: Events\ShanShui_Test_Music.wwu
+    List:
+    - Guid: e8d2e4b8b0c3e74fa4b86117d95510ed
+      ID: -1335434006
+      Name: Play_Amb
+      Path: ShanShui_Test_Music\Play_Amb
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Music
+        ObjectType: 12
+      - ElementName: Play_Amb
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 16e11adb9098b648af34a25cbc9b9f2f
+      ID: 384966147
+      Name: Play_Drones
+      Path: ShanShui_Test_Music\Play_Drones
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Music
+        ObjectType: 12
+      - ElementName: Play_Drones
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 3febaa666d4e974da8582c4003b449b5
+      ID: -1846493825
+      Name: Play_Loops
+      Path: ShanShui_Test_Music\Play_Loops
+      PathAndIcons:
+      - ElementName: ShanShui_Test_Music
+        ObjectType: 12
+      - ElementName: Play_Loops
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+  ExpandedItems:
+  - /M1_SHANSHUI
+  - /M1_SHANSHUI/Events
+  - /M1_SHANSHUI/Events/ShanShui_Test_Music
+  RtpcWwu:
+  - Guid: '{80F216E5-24C2-4A20-BE30-22DAF1F248F4}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933039640
+    ParentPhysicalPath: 
+    PhysicalPath: Game Parameters\Default Work Unit.wwu
+    List: []
+  - Guid: '{D7135222-D1DB-42D0-ADC0-930743567776}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933039640
+    ParentPhysicalPath: 
+    PhysicalPath: Game Parameters\Factory Motion.wwu
+    List:
+    - Guid: e37e38283ac11643b9c3db5c521624af
+      ID: 1524500807
+      Name: Playback_Rate
+      Path: Factory Motion\Playback_Rate
+      PathAndIcons:
+      - ElementName: Factory Motion
+        ObjectType: 12
+      - ElementName: Playback_Rate
+        ObjectType: 13
+    - Guid: 05aa129177f5fd449f4e4424158129e6
+      ID: 796049864
+      Name: RPM
+      Path: Factory Motion\RPM
+      PathAndIcons:
+      - ElementName: Factory Motion
+        ObjectType: 12
+      - ElementName: RPM
+        ObjectType: 13
+  - Guid: '{3B167755-FB42-458B-98BF-96F557AFB3B9}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933039640
+    ParentPhysicalPath: 
+    PhysicalPath: Game Parameters\Factory SoundSeed Air Game Syncs.wwu
+    List:
+    - Guid: 59062ef746431c4ea1b1dab46a05101e
+      ID: 1351367891
+      Name: SS_Air_Fear
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Fear
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Fear
+        ObjectType: 13
+    - Guid: 37fe2d2f9e4f944d83d853cca39781ad
+      ID: -1292209176
+      Name: SS_Air_Freefall
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Freefall
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Freefall
+        ObjectType: 13
+    - Guid: dc79aea23acaba4696529986c322a87b
+      ID: 1029930033
+      Name: SS_Air_Fury
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Fury
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Fury
+        ObjectType: 13
+    - Guid: 45b4e209a3c47f44b3ca818a1d925ef7
+      ID: -1646418679
+      Name: SS_Air_Month
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Month
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Month
+        ObjectType: 13
+    - Guid: 1a81b7e32f7b0f49b44f5fe51b468041
+      ID: -447042342
+      Name: SS_Air_Presence
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Presence
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Presence
+        ObjectType: 13
+    - Guid: ab9048a3d5b92645a64d5290c43ef2dc
+      ID: 822163944
+      Name: SS_Air_RPM
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_RPM
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_RPM
+        ObjectType: 13
+    - Guid: efeb291393a12e47a38c64668b494879
+      ID: -1220270574
+      Name: SS_Air_Size
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Size
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Size
+        ObjectType: 13
+    - Guid: db8c3fe9d1063747acaf7cd44bbed783
+      ID: -579304704
+      Name: SS_Air_Storm
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Storm
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Storm
+        ObjectType: 13
+    - Guid: 2ca76f537e8c8b4cae03ef34fdadc314
+      ID: -1091570167
+      Name: SS_Air_TimeOfDay
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_TimeOfDay
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_TimeOfDay
+        ObjectType: 13
+    - Guid: 197ba8edaa73a0409f192073606db710
+      ID: -134719478
+      Name: SS_Air_Turbulence
+      Path: Factory SoundSeed Air Game Syncs\SS_Air_Turbulence
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Air Game Syncs
+        ObjectType: 12
+      - ElementName: SS_Air_Turbulence
+        ObjectType: 13
+  - Guid: '{0BCBBD97-7751-4A77-85BB-6AC940F8CC3F}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 1933049616
+    ParentPhysicalPath: 
+    PhysicalPath: Game Parameters\Factory SoundSeed Grain.wwu
+    List:
+    - Guid: 9ef2b363f3048748ba1a4d7694644b24
+      ID: -1579749301
+      Name: Density_FA_SSGrain
+      Path: Factory SoundSeed Grain\Density_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: Density_FA_SSGrain
+        ObjectType: 13
+    - Guid: 22e6413f6c163245bef71dc9ff7eab94
+      ID: -1813238424
+      Name: Immersion_FA_SSGrain
+      Path: Factory SoundSeed Grain\Immersion_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: Immersion_FA_SSGrain
+        ObjectType: 13
+    - Guid: 44af796282c00846981e9a63d1ee7555
+      ID: -1977557536
+      Name: Instrument_FA_SSGrain
+      Path: Factory SoundSeed Grain\Instrument_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: Instrument_FA_SSGrain
+        ObjectType: 13
+    - Guid: b4abf1053873bc42a378b1e2b12ee3cb
+      ID: 1791284502
+      Name: Proximity_FA_SSGrain
+      Path: Factory SoundSeed Grain\Proximity_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: Proximity_FA_SSGrain
+        ObjectType: 13
+    - Guid: 5be692c0c4e5554c8a68576e98bbff39
+      ID: 1656280998
+      Name: RPM_FA_SSGrain
+      Path: Factory SoundSeed Grain\RPM_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: RPM_FA_SSGrain
+        ObjectType: 13
+    - Guid: 71509071790afe429cd6c631171dc3a4
+      ID: -1866133902
+      Name: Simulation_FA_SSGrain
+      Path: Factory SoundSeed Grain\Simulation_FA_SSGrain
+      PathAndIcons:
+      - ElementName: Factory SoundSeed Grain
+        ObjectType: 12
+      - ElementName: Simulation_FA_SSGrain
+        ObjectType: 13
+  StateWwu:
+  - Guid: '{7EBCC51C-42CF-441C-815B-D86E7780FE73}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016610049
+    ParentPhysicalPath: 
+    PhysicalPath: States\Default Work Unit.wwu
+    List: []
+  SwitchWwu:
+  - Guid: '{B74BE684-C43A-44DA-A656-4DF0848C3DB2}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016669900
+    ParentPhysicalPath: 
+    PhysicalPath: Switches\Default Work Unit.wwu
+    List: []
+  TriggerWwu:
+  - Guid: '{8FCA9EBF-1960-4441-8381-53343C71EE46}'
+    m_lastTimePart2: -1999185217
+    m_lastTimePsrt1: 2016709782
+    ParentPhysicalPath: 
+    PhysicalPath: Triggers\Default Work Unit.wwu
+    List: []

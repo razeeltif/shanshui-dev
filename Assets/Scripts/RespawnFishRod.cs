@@ -31,6 +31,11 @@ public class RespawnFishRod : MonoBehaviour
     void respawn()
     {
         EventManager.TriggerEvent(EventsName.ReleaseFish);
+        EventManager.TriggerEvent(EventsName.OutWater);
+
+        if (PoissonFishing.instance.bobber.GetComponent<Bobber>().actualAppat != null)
+            PoissonFishing.instance.bobber.GetComponent<Bobber>().detachAppat();
+
         GameObject obj = Instantiate(prefab);
         Destroy(monitoredObject.gameObject.transform.parent.gameObject);
         monitoredObject = obj.GetComponentInChildren<Rigidbody>().gameObject;

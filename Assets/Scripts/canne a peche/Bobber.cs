@@ -129,6 +129,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         }
 
         actualAppat = appat;
+        actualAppat.isAttached = true;
         actualAppat.transform.position = GetComponentInChildren<AppatSign>().transform.position;
 
         GetComponentInChildren<AppatSign>().GetComponent<MeshRenderer>().enabled = false;

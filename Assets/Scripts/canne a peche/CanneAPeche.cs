@@ -31,6 +31,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     Interactable inter;
 
+    UTimer bobberTimer;
+
     private void OnEnable()
     {
         settings.AddGameObjectListening(this);
@@ -63,6 +65,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     // Start is called before the first frame update
     void Start()
     {
+        bobberTimer = UTimer.Initialize(0.1f, this, setBobberKinematicOnFalse);
+
         bendyRod.GetComponent<Renderer>().enabled = false;
         setCableComponentValues();
         setBendySpringJointNormalState();
@@ -111,12 +115,15 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         }
         else
         {
+            PoissonFishing.instance.bobber.GetComponent<Rigidbody>().isKinematic = true;
+            bobberTimer.start(0.1f);
 
             setFirstHand(hand);
 
             isGrabbed = true;
 
             this.GetComponent<Rigidbody>().isKinematic = true;
+            this.bendyRod.GetComponent<Rigidbody>().isKinematic = false;
             this.GetComponent<Collider>().isTrigger = true;
 
             setBendyPhysic();
@@ -260,6 +267,11 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     private void setFirstHand(Hand hand)
     {
         GameManager.instance.firstHandHoldingThis = hand;
+    }
+
+    private void setBobberKinematicOnFalse()
+    {
+        PoissonFishing.instance.bobber.GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void OnModifySettings()

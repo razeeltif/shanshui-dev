@@ -17,14 +17,13 @@ public class PoissonFishing : MonoBehaviour
     public RepresentationPositionFishing poseFishing;
     
     public Transform bobber;
-    [SerializeField]
-    private Transform playerPosition;
 
+    public Transform playerPosition;
+
+    private int indexOfFishHooked;
 #pragma warning disable 0649
     [SerializeField]
     GameObject fishInWaterPrefab;
-    [SerializeField]
-    GameObject fishModelPrefab;
 #pragma warning restore 0649
 
     // variables for fish comportement
@@ -132,6 +131,14 @@ public class PoissonFishing : MonoBehaviour
             releaseFish();
         }
 
+        // initialyze fishManagement values based on infos in appat.fish
+        Appat appat = bobber.GetComponent<Bobber>().actualAppat;
+        indexOfFishHooked = appat.getRandomFishIndex();
+        fishingManagement.difficulty = appat.typesPoisson[indexOfFishHooked].GetComponent<Poisson>().difficulty;
+        tractionSpeedMultiplicator = appat.typesPoisson[indexOfFishHooked].GetComponent<Poisson>().tractionForce;
+
+
+
         // generate new fish points
         fishingManagement.generateFishPoints(playerPosition.position, bobber.position);
 
@@ -156,7 +163,7 @@ public class PoissonFishing : MonoBehaviour
 
     private void OnCatchFish()
     {
-        bobber.GetComponent<Bobber>().attachFishToBobber(fishModelPrefab);
+        bobber.GetComponent<Bobber>().attachFishToBobber(bobber.GetComponent<Bobber>().actualAppat.typesPoisson[indexOfFishHooked]);
         Destroy(fishInWater);
         onCatch = false;
         hapticDistance.enabled = false;
@@ -271,12 +278,17 @@ public class PoissonFishing : MonoBehaviour
             float tractionSpeed = (initialDistanceBetweenBobberAndBerge / fishingManagement.difficulty) * (tractionSpeedMultiplicator/100);
 
             fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, tractionSpeed);
+
+            hapticDistance.enabled = false;
+            Haptic.InPose(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
         }
         else
         {
             // the fish try to return to its ititial position
             Vector3 targetPosition = fishingManagement.fishPoint[currentStep].point;
             targetPosition = new Vector3(targetPosition.x, targetPosition.y - fishDepth, targetPosition.z);
+
+            hapticDistance.enabled = true;
 
             if (Vector3.Distance(fishInWater.transform.position, targetPosition) > 0.1f)
                 fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);

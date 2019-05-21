@@ -76,6 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba8f606b4144b347bb079219f0714b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 4
+  tractionForce: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1001 &906998471980655569
 PrefabInstance:
   m_ObjectHideFlags: 0

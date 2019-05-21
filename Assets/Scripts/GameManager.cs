@@ -3,36 +3,50 @@ using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
 public class GameManager : MonoBehaviour
 {
 
-    public GameSettings settings;
-
     public static GameManager instance;
 
     private UTimer FishTimer;
     private UTimer UnfishTimer;
+
+
+
+    private float TMax = 0;
+    private float Tact = 0;
+
 
     [HideInInspector]
     public Hand firstHandHoldingThis;
     [HideInInspector]
     public Hand secondHandHoldingThis;
 
+    public Text text;
+
+    
 
 
     private void OnEnable()
     {
         EventManager.StartListening(EventsName.InWater, OnInWater);
         EventManager.StartListening(EventsName.OutWater, OnOutWater);
+        EventManager.StartListening(EventsName.ReleaseFish, ResetTimer);
+        EventManager.StartListening(EventsName.CatchFish, ResetTimer);
+        EventManager.StartListening(EventsName.ChangeAppat, ResetTimer);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening(EventsName.InWater, OnInWater);
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
+        EventManager.StopListening(EventsName.ReleaseFish, ResetTimer);
+        EventManager.StopListening(EventsName.CatchFish, ResetTimer);
+        EventManager.StopListening(EventsName.ChangeAppat, ResetTimer);
     }
 
 
@@ -52,6 +66,12 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (FishTimer != null)
+        {
+            text.text = FishTimer.getCooldown().ToString();
+        }
+
     }
 
 
@@ -61,8 +81,31 @@ public class GameManager : MonoBehaviour
     void OnInWater()
     {
 
-        float time = settings.timeBeforeShoeFish + Random.Range(-settings.RandomOnTimeBeforeShoe, settings.RandomOnTimeBeforeShoe);
-        FishTimer.start(time);
+        // we launch the timer only if there is an hook attached to the bobber
+        Appat actualAppat = PoissonFishing.instance.bobber.GetComponent<Bobber>().actualAppat;
+        if (actualAppat != null)
+        {
+            // the timer has been paused, we release it
+            if(FishTimer.getCooldown() > 0)
+            {
+                float tempsActuel = TMax - (FishTimer.getCooldown() / )
+
+
+
+
+                FishTimer.continu();
+            }
+            // the timer has not been launched, so we launch it
+            else
+            {
+                TMax = Random.Range(actualAppat.minimumWaitingTime, actualAppat.maximumWaitingTime);
+                Tact = TMax;
+                FishTimer.start(TMax);
+            }
+
+
+        }
+
 
 
     }
@@ -70,7 +113,7 @@ public class GameManager : MonoBehaviour
     // the bobber exit the water
     void OnOutWater()
     {
-        FishTimer.Stop();
+        FishTimer.pause();
     }
 
 
@@ -83,6 +126,11 @@ public class GameManager : MonoBehaviour
     public void ReleaseFish()
     {
         EventManager.TriggerEvent(EventsName.ReleaseFish);
+    }
+
+    public void ResetTimer()
+    {
+        FishTimer.Stop();
     }
 
 }

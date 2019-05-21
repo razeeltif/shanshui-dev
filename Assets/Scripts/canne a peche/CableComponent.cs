@@ -59,6 +59,7 @@ public class CableComponent : MonoBehaviour
 	 */
 	void InitCableParticles()
 	{
+
 		// Calculate segments to use
 		if (totalSegments > 0)
 			segments = totalSegments;

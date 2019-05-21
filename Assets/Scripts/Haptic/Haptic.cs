@@ -10,6 +10,10 @@ public static class Haptic
     static public float grabFrequency = 50;
     static public float grabAmplitude = 0.5f;
 
+    static public float inPosebDurationSeconds = 0.05f;
+    static public float inPoseFrequency = 2000;
+    static public float inPoseAmplitude = 1f;
+
     static public float bobberInWaterDurationSeconds = 0.05f;
     static public float bobberInWaterFrequency = 50;
     static public float bobberInWaterAmplitude = 0.5f;
@@ -29,6 +33,15 @@ public static class Haptic
         if(secondHand != null)
         {
             secondHand.hapticAction.Execute(0, vibrationWHenMovingDurationSeconds, vibrationWHenMovingFrequency, amplitude, secondHand.handType);
+        }
+    }
+
+    public static void InPose(Hand firstHand, Hand secondHand)
+    {
+        firstHand.hapticAction.Execute(0, inPosebDurationSeconds, inPoseFrequency, inPoseAmplitude, firstHand.handType);
+        if (secondHand != null)
+        {
+            secondHand.hapticAction.Execute(0, inPosebDurationSeconds, inPoseFrequency, inPoseAmplitude, secondHand.handType);
         }
     }
 

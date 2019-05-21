@@ -17,12 +17,12 @@ MonoBehaviour:
   mass: 6
   drag: 10
   angularDrag: 0.5
-  totalSegments: 20
+  totalSegments: 2
   lengthNormalState: 3
   maximumLength: 15
   pullbackForce: 10
   lengthWhenCatchAFish: 1
-  width: 0.01
+  width: 0.005
   rigidity: 6
   SpringNormalState: 500
   DamperNormalState: 300
@@ -39,4 +39,3 @@ MonoBehaviour:
   BobberMass: 1
   BoobberDrag: 1
   BobberAngularDrag: 1
-  distanceBeforeShowingSign: 0.5

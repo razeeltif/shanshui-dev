@@ -4,8 +4,14 @@ using UnityEngine;
 using Valve.VR;
 
 
-public class Poisson : GrablableObject
+public class Poisson : MonoBehaviour
 {
+
+    public int difficulty;
+    public float tractionForce;
+    public Color color;
+
+
 
 
     // Start is called before the first frame update
@@ -20,7 +26,7 @@ public class Poisson : GrablableObject
         
     }
 
-    public override void Grab(SteamVR_Behaviour_Pose pose)
+    public void Grab(SteamVR_Behaviour_Pose pose)
     {
         if(transform.parent != null)
         {
@@ -33,7 +39,7 @@ public class Poisson : GrablableObject
         fx.connectedBody = this.GetComponent<Rigidbody>();
     }
 
-    public override void Release(SteamVR_Behaviour_Pose pose)
+    public void Release(SteamVR_Behaviour_Pose pose)
     {
         pose.GetComponent<FixedJoint>().connectedBody = null;
         Destroy(pose.GetComponent<FixedJoint>());
