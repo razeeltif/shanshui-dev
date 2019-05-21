@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
 
 
-                FishTimer.continu();
+                FishTimer.start(Tact);
             }
             // the timer has not been launched, so we launch it
             else
