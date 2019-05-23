@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 50632884641405538}
   - component: {fileID: 3291771669569602041}
   - component: {fileID: 4916315277960227471}
-  - component: {fileID: 5374141976541754053}
+  - component: {fileID: 5911874740060468200}
+  - component: {fileID: 4070985311956514040}
   m_Layer: 0
   m_Name: PoissonPlaceHolder2
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 906998471980792145}
+  - {fileID: 3739819367116847397}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -45,9 +47,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848295821653441765}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 15
+  m_Drag: 3
+  m_AngularDrag: 2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -62,7 +64,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1848295821653441765}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.17
   m_Height: 1.5
   m_Direction: 2
@@ -79,9 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba8f606b4144b347bb079219f0714b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 4
+  difficulty: 1
   tractionForce: 1
   color: {r: 0, g: 0, b: 0, a: 0}
+  attachPoint: {fileID: 3739819367116847397}
 --- !u!114 &3291771669569602041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +151,7 @@ MonoBehaviour:
   velocityAverageFrames: 5
   angularVelocityAverageFrames: 11
   estimateOnAwake: 0
---- !u!114 &5374141976541754053
+--- !u!114 &5911874740060468200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,16 +160,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1848295821653441765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffefbea063cab884ca33e5a449e5c22c, type: 3}
+  m_Script: {fileID: 11500000, guid: c49b6b5419a050c41838a8226dd19377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attachmentFlags: 44
   attachmentOffset: {fileID: 0}
-  catchingSpeedThreshold: -1
+  catchingSpeedThreshold: 0
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
   scaleReleaseVelocity: 1.1
-  restoreOriginalParent: 0
+  restoreOriginalParent: 1
   onPickUp:
     m_PersistentCalls:
       m_Calls: []
@@ -178,6 +181,49 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   interactable: {fileID: 0}
+--- !u!65 &4070985311956514040
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848295821653441765}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.24, y: 0.25, z: 1.32}
+  m_Center: {x: 0, y: -0.05, z: 0.15}
+--- !u!1 &1909525123083689407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3739819367116847397}
+  m_Layer: 0
+  m_Name: attachPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3739819367116847397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909525123083689407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1123, z: 0.786}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1848295821653441766}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &906998471980655569
 PrefabInstance:
   m_ObjectHideFlags: 0

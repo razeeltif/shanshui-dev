@@ -17,6 +17,14 @@ public class Bobber : MonoBehaviour, IUseSettings
 
     public Appat actualAppat;
 
+    // la fonction IsTriggerEnter est appelé 2x pour une raison inconnue
+    // une méthode (dégueu) de contourner ça est de ne compter qu'un appel sur 2
+    private int onInWaterFix = 0;
+
+    // la fonction IsTriggerEnter est appelé 2x pour une raison inconnue
+    // une méthode (dégueu) de contourner ça est de ne compter qu'un appel sur 2
+    private int onOutWaterFix = 0;
+
     private void OnEnable()
     {
         settings.AddGameObjectListening(this);
@@ -37,6 +45,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         {
             actualizeAppatPosition();
         }
+
     }
 
     private void WaterSimulationOnBobber()
@@ -61,9 +70,20 @@ public class Bobber : MonoBehaviour, IUseSettings
     {
         if(other.tag == "water")
         {
-            inWater = true;
-            Haptic.bobberInWater(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
-            EventManager.TriggerEvent(EventsName.InWater);
+            if(onInWaterFix == 0)
+            {
+                inWater = true;
+                Haptic.bobberInWater(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
+                EventManager.TriggerEvent(EventsName.InWater);
+                AkSoundEngine.PostEvent("Play_Bouchon_Water", gameObject);
+
+
+                onInWaterFix++;
+            }
+            else
+            {
+                onInWaterFix = 0;
+            }
         }
     }
 
@@ -71,9 +91,18 @@ public class Bobber : MonoBehaviour, IUseSettings
     {
         if(other.tag == "water")
         {
-            inWater = false;
-            Haptic.bobberOutWater(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
-            EventManager.TriggerEvent(EventsName.OutWater);
+            if(onOutWaterFix == 0)
+            {
+                inWater = false;
+                Haptic.bobberOutWater(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
+                EventManager.TriggerEvent(EventsName.OutWater);
+
+                onOutWaterFix++;
+            }
+            else
+            {
+                onOutWaterFix = 0;
+            }
         }
     }
 
@@ -100,12 +129,28 @@ public class Bobber : MonoBehaviour, IUseSettings
         detachFish();
 
         catchedFish = Instantiate(fish);
+        catchedFish.transform.rotation = this.transform.rotation;
+        catchedFish.transform.Rotate(-90, 0, 0);
 
-        catchedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -0.4f, 0));
+        //float distance = Vector3.Distance(catchedFish.transform.position, catchedFish.GetComponent<Poisson>().attachPoint.position);
+        //catchedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -distance, 0));
+        catchedFish.transform.position = GetComponentInChildren<AppatSign>().transform.position;
+        Vector3 pos = GetComponentInChildren<AppatSign>().transform.position - catchedFish.GetComponent<Poisson>().attachPoint.position;
+        catchedFish.transform.position = GetComponentInChildren<AppatSign>().transform.position + pos;
+        //catchedFish.transform.position = transform.position + transform.TransformDirection(catchedFish.GetComponent<Poisson>().attachPoint.position - catchedFish.transform.position);
+
 
         catchedFish.AddComponent<FixedJoint>();
         catchedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
-        catchedFish.GetComponent<FixedJoint>().breakForce = 500;
+        //catchedFish.GetComponent<FixedJoint>().connectedAnchor = catchedFish.GetComponent<Poisson>().attachPoint.localPosition;
+        catchedFish.GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
+        catchedFish.GetComponent<FixedJoint>().breakTorque = Mathf.Infinity;
+        /*this.gameObject.AddComponent<FixedJoint>();
+
+        this.gameObject.GetComponent<FixedJoint>().connectedBody = catchedFish.GetComponent<Rigidbody>();
+        //catchedFish.GetComponent<Poisson>().attachPoint.position
+        this.gameObject.GetComponent<FixedJoint>().anchor = catchedFish.transform.position - catchedFish.GetComponent<Poisson>().attachPoint.position;
+        this.gameObject.GetComponent<FixedJoint>().breakForce = Mathf.Infinity;*/
 
     }
 

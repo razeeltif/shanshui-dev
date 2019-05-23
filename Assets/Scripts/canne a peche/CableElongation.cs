@@ -10,7 +10,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
     private const float PLANE_DEFAULT_LENGTH = 5;
 
     [SerializeField]
-    FishRodSettings settings;
+    FishRodSettings fishrodSettings;
 
     [SerializeField]
     Transform waterPlane;
@@ -30,7 +30,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
 
     private void OnEnable()
     {
-        settings.AddGameObjectListening(this);
+        fishrodSettings.AddGameObjectListening(this);
         EventManager.StartListening(EventsName.InWater, OnInWater);
         EventManager.StartListening(EventsName.OutWater, OnOutWater);
 
@@ -38,7 +38,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
 
     private void OnDisable()
     {
-        settings.RemoveGameObjectListening(this);
+        fishrodSettings.RemoveGameObjectListening(this);
         EventManager.StopListening(EventsName.InWater, OnInWater);
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
 
@@ -55,7 +55,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
     void Start()
     {
         waterPlane = GameManager.instance.GetComponent<FishingManagement>().waterPlane;
-        bendyRod.GetComponent<SpringJoint>().maxDistance = settings.lengthNormalState;
+        bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.lengthNormalState;
     }
 
     // Update is called once per frame
@@ -63,8 +63,13 @@ public class CableElongation : MonoBehaviour, IUseSettings
     {
         if (getDistanceBerge(bobber.position.z) < 0)
         {
-            bendyRod.GetComponent<SpringJoint>().maxDistance = settings.lengthNormalState;
+            bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.lengthNormalState;
             actualState = State.outWater;
+        }
+
+        if(bendyRod.GetComponent<SpringJoint>().maxDistance == fishrodSettings.maximumLength)
+        {
+            Haptic.launchLine(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
         }
 
         switch (actualState)
@@ -75,7 +80,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
                 // le bobber est au dessus de l'eau ?
                 if (getDistanceBerge(bobber.position.z) > 0)
                 {
-                    bendyRod.GetComponent<SpringJoint>().maxDistance = settings.maximumLength;
+                    bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.maximumLength;
                     actualState = State.lance;
                 }
                 break;
@@ -84,9 +89,9 @@ public class CableElongation : MonoBehaviour, IUseSettings
             case State.lance:
 
                 // la canne a peche effectue un mouvement de retrait ?
-                if (bendyRod.GetComponent<Rigidbody>().velocity.z < -settings.pullbackForce)
+                if (bendyRod.GetComponent<Rigidbody>().velocity.z < -fishrodSettings.pullbackForce)
                 {
-                    bendyRod.GetComponent<SpringJoint>().maxDistance = settings.lengthNormalState;
+                    bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.lengthNormalState;
                 }
                 break;
 
@@ -94,7 +99,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
             case State.inWater:
 
                 float distance = Vector3.Distance(bobber.transform.position, tipFishrod.transform.position);
-                if (distance > settings.lengthNormalState && bendyRod.GetComponent<SpringJoint>().maxDistance > distance)
+                if (distance > fishrodSettings.lengthNormalState && bendyRod.GetComponent<SpringJoint>().maxDistance > distance)
                 {
                     bendyRod.GetComponent<SpringJoint>().maxDistance = distance;
                 }

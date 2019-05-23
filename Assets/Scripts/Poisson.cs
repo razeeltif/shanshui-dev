@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
-
+using Valve.VR.InteractionSystem;
 
 public class Poisson : MonoBehaviour
 {
@@ -11,8 +11,22 @@ public class Poisson : MonoBehaviour
     public float tractionForce;
     public Color color;
 
+    public Transform attachPoint;
 
 
+    private void OnEnable()
+    {
+        // abonnement aux events de Interactable pour la détection du grab et du release
+        GetComponent<Interactable>().onAttachedToHand += Grab;
+        GetComponent<Interactable>().onDetachedFromHand += Release;
+    }
+
+    private void OnDisable()
+    {
+        // de-abonnement aux events de Interactable pour la détection du grab et du release
+        GetComponent<Interactable>().onAttachedToHand -= Grab;
+        GetComponent<Interactable>().onDetachedFromHand -= Release;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -26,25 +40,20 @@ public class Poisson : MonoBehaviour
         
     }
 
-    public void Grab(SteamVR_Behaviour_Pose pose)
+    public void Grab(Hand hand)
     {
-        if(transform.parent != null)
-        {
-            transform.parent.DetachChildren();
 
-        }
-        FixedJoint fx = pose.gameObject.AddComponent<FixedJoint>();
-        fx.breakForce = 20000;
-        fx.breakTorque = 20000;
-        fx.connectedBody = this.GetComponent<Rigidbody>();
+        Destroy(GetComponent<FixedJoint>());
+
     }
 
-    public void Release(SteamVR_Behaviour_Pose pose)
+    public void Release(Hand hand)
     {
-        pose.GetComponent<FixedJoint>().connectedBody = null;
-        Destroy(pose.GetComponent<FixedJoint>());
-
-        GetComponent<Rigidbody>().velocity = pose.GetVelocity();
-        GetComponent<Rigidbody>().angularVelocity = pose.GetAngularVelocity();
     }
+
+    public Vector3 getPositionAttachPoisson()
+    {
+        return this.transform.position - attachPoint.position;
+    }
+
 }

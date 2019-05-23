@@ -15,6 +15,9 @@ MonoBehaviour:
   grabDurationSeconds: 0.05
   grabFrequency: 50
   grabAmplitude: 0.5
+  inPosebDurationSeconds: 0.05
+  inPoseFrequency: 2000
+  inPoseAmplitude: 1
   bobberInWaterDurationSeconds: 0.05
   bobberInWaterFrequency: 50
   bobberInWaterAmplitude: 0.5
@@ -25,3 +28,6 @@ MonoBehaviour:
   vibrationWHenMovingFrequency: 200
   minimumSpeedToVibrate: 7
   maximumSpeedToFullVibration: 150
+  launchLineDurationSeconds: 0.01
+  launchLineFrequency: 500
+  launchLineAmplitude: 0.1

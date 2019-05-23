@@ -25,6 +25,10 @@ public static class Haptic
     static public float vibrationWHenMovingDurationSeconds = 0.01f;
     static public float vibrationWHenMovingFrequency = 200;
 
+    static public float launchLineDurationSeconds = 0.05f;
+    static public float launchLineFrequency = 50;
+    static public float launchLineAmplitude = 0.5f;
+
 
 
     public static void vibrationWHenMoving(Hand firstHand, Hand secondHand, float amplitude)
@@ -65,6 +69,15 @@ public static class Haptic
         if (secondHand != null)
         {
             secondHand.hapticAction.Execute(0, bobberOutWaterDurationSeconds, bobberOutWaterFrequency, bobberOutWaterAmplitude, secondHand.handType);
+        }
+    }
+
+    public static void launchLine(Hand firstHand, Hand secondHand)
+    {
+        firstHand.hapticAction.Execute(0, launchLineDurationSeconds, launchLineFrequency, launchLineAmplitude, firstHand.handType);
+        if (secondHand != null)
+        {
+            secondHand.hapticAction.Execute(0, launchLineDurationSeconds, launchLineFrequency, launchLineAmplitude, secondHand.handType);
         }
     }
 

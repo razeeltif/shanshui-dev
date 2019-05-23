@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
     private float TMax = 0;
     private float Tact = 0;
 
-    public float minimumFishingTime;
+    public float minimumFishingTime = 10;
+
+
 
 
     [HideInInspector]
@@ -29,9 +31,6 @@ public class GameManager : MonoBehaviour
     public Hand secondHandHoldingThis;
 
     public Text text;
-
-    
-
 
     private void OnEnable()
     {
@@ -62,6 +61,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         FishTimer = UTimer.Initialize(0, this, StartShoeFish);
+  
         //UnfishTimer = UTimer.Initialize(0, this, ReleaseFish);
     }
 
@@ -87,39 +87,36 @@ public class GameManager : MonoBehaviour
         Appat actualAppat = PoissonFishing.instance.bobber.GetComponent<Bobber>().actualAppat;
         if (actualAppat != null)
         {
+            // the timer has not been launched, so we launch it
+            if(FishTimer.getCooldown() == 0)
+            {
+
+                TMax = Random.Range(actualAppat.minimumWaitingTime, actualAppat.maximumWaitingTime);
+                Tact = TMax;
+                FishTimer.start(TMax);
+
+            }
             // the timer has been paused, we release it
-            if(FishTimer.getCooldown() > 0)
+            else
             {
                 float tempsAttendu = FishTimer.getCooldown();
-                float tempsActuel = TMax - (FishTimer.getCooldown() / tempsAttendu) * TMax;
+                float tempsActuel = TMax - (tempsAttendu / Tact) * TMax;
 
-                if(tempsActuel > Tact)
+                if (tempsActuel < Tact)
                 {
                     Tact = tempsActuel;
                 }
 
-                if(Tact <= minimumFishingTime)
+                if (Tact <= minimumFishingTime)
                 {
                     Tact += minimumFishingTime;
                 }
 
-
-
-
                 FishTimer.start(Tact);
-            }
-            // the timer has not been launched, so we launch it
-            else
-            {
-                TMax = Random.Range(actualAppat.minimumWaitingTime, actualAppat.maximumWaitingTime);
-                Tact = TMax;
-                FishTimer.start(TMax);
             }
 
 
         }
-
-
 
     }
 

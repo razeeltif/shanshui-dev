@@ -31,9 +31,26 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     public float cableLengthOffset = 1f;
 
+    // fix dégueu
+    // stocker la secondHand lors du grab de la canne,
+    // et l'attribuer à au GameManager uniquement dans l'Update
+    // car sinon il l'attribu dans le grab, puis passe dans l'Update
+    // avec toujours la touche trigger en mode GrabStarting
+    // et donc passe dans le release
+    private Hand tempHand = null;
+
     Interactable inter;
 
     UTimer bobberTimer;
+
+    [Tooltip("The flags used to attach this object to the hand.")]
+    public Hand.AttachmentFlags attachmentFlags = Hand.AttachmentFlags.ParentToHand | Hand.AttachmentFlags.DetachFromOtherHand | Hand.AttachmentFlags.TurnOnKinematic;
+
+    [Tooltip("The local point which acts as a positional and rotational offset to use while held")]
+    public Transform attachmentOffset;
+
+
+
 
     private void OnEnable()
     {
@@ -42,9 +59,6 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
 
-        // abonnement aux events de Interactable pour la détection du grab et du release
-        GetComponent<Interactable>().onAttachedToHand += Grab;
-        GetComponent<Interactable>().onDetachedFromHand += Release;
     }
 
     private void OnDisable()
@@ -54,9 +68,6 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
 
-        // de-abonnement aux events de Interactable pour la détection du grab et du release
-        GetComponent<Interactable>().onAttachedToHand -= Grab;
-        GetComponent<Interactable>().onDetachedFromHand -= Release;
     }
 
     void Awake()
@@ -88,32 +99,77 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             if (isDualWield)
             {
                 // on récupère le vecteur de direction entre la premiere main et la seconde
-                Vector3 heading = GameManager.instance.secondHandHoldingThis.transform.position - GameManager.instance.firstHandHoldingThis.transform.position;
+                Vector3 handPosition;
+                if(tempHand != null)
+                {
+                    handPosition = tempHand.transform.position;
+                }
+                else
+                {
+                    handPosition = GameManager.instance.secondHandHoldingThis.transform.position;
+                }
+                Vector3 heading = handPosition - GameManager.instance.firstHandHoldingThis.transform.position;
                 Vector3 direction = heading.normalized;
                 // on fait en sorte que la canne pointe vers le vecteur de direction
                 this.transform.up = -direction;
 
                 this.transform.position = GameManager.instance.firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
+
+
+                // detach fishrod from hand
+                Hand hand = null;
+                if (GameManager.instance.firstHandHoldingThis.GetGrabStarting() == GrabTypes.Pinch ||
+                    GameManager.instance.firstHandHoldingThis.GetGrabStarting() == GrabTypes.Grip)
+                    hand = GameManager.instance.firstHandHoldingThis;
+
+                if (GameManager.instance.secondHandHoldingThis != null &&
+                    (GameManager.instance.secondHandHoldingThis.GetGrabStarting() == GrabTypes.Pinch ||
+                     GameManager.instance.secondHandHoldingThis.GetGrabStarting() == GrabTypes.Grip))
+                    hand = GameManager.instance.secondHandHoldingThis;
+
+                if(hand != null)
+                {
+                    Release(hand, hand.GetGrabStarting());
+                }
+
+                if(tempHand != null)
+                {
+                    GameManager.instance.secondHandHoldingThis = tempHand;
+                    tempHand = null;
+                }
             }
             else
             {
                 this.transform.rotation = GameManager.instance.firstHandHoldingThis.transform.rotation;
                 this.transform.Rotate(new Vector3(-90, 0, 0));
                 this.transform.position = GameManager.instance.firstHandHoldingThis.transform.position - this.transform.up * settings.handPosition;
+
+                // detach fishrod from hand
+                if (GameManager.instance.firstHandHoldingThis.GetGrabStarting() == GrabTypes.Pinch ||
+                    GameManager.instance.firstHandHoldingThis.GetGrabStarting() == GrabTypes.Grip)
+                    Release(GameManager.instance.firstHandHoldingThis, GameManager.instance.firstHandHoldingThis.GetGrabStarting());
             }
 
         }
     }
 
-    public void Grab(Hand hand)
+    public void Grab(Hand hand, GrabTypes startingGrabType)
     {
 
         Haptic.GrabObject(hand);
 
         if (isGrabbed)
         {
-            GameManager.instance.secondHandHoldingThis = hand;
-            isDualWield = true;
+
+            // switch to dualWield
+            if (GameManager.instance.firstHandHoldingThis != null && hand != GameManager.instance.firstHandHoldingThis
+                && hand != GameManager.instance.secondHandHoldingThis)
+            {
+                //GameManager.instance.secondHandHoldingThis = hand;
+                tempHand = hand;
+                GetComponentInChildren<Interacta>().StartDualWield(tempHand);
+                isDualWield = true;
+            }
         }
         else
         {
@@ -121,8 +177,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             bobberTimer.start(0.1f);
 
             setFirstHand(hand);
-
-            isGrabbed = true;
+            hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
+            hand.HideGrabHint();
 
             this.GetComponent<Rigidbody>().isKinematic = true;
             this.bendyRod.GetComponent<Rigidbody>().isKinematic = false;
@@ -134,7 +190,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     }
 
-    public void Release(Hand hand)
+    public void Release(Hand hand, GrabTypes startingGrabType)
     {
 
         // si on tient la canne à peche à 2 mains, on passe son maintient à 1 main
@@ -144,6 +200,12 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             if(hand == GameManager.instance.firstHandHoldingThis)
             {
                 setFirstHand(GameManager.instance.secondHandHoldingThis);
+                hand.DetachObject(gameObject, false);
+                GameManager.instance.secondHandHoldingThis.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
+            }
+            else
+            {
+                GetComponentInChildren<Interacta>().StopDualWield(hand);
             }
             GameManager.instance.secondHandHoldingThis = null;
             isDualWield = false;
@@ -161,6 +223,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             //this.GetComponent<Collider>().isTrigger = false;
             this.GetComponent<Rigidbody>().velocity = GameManager.instance.firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetVelocity();
             this.GetComponent<Rigidbody>().angularVelocity = GameManager.instance.firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
+            hand.DetachObject(gameObject, false);
             GameManager.instance.firstHandHoldingThis = null;
         }
         
@@ -221,6 +284,55 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
     }
 
+    protected virtual void OnHandHoverBegin(Hand hand)
+    {
+        bool showHint = false;
+
+        // "Catch" the throwable by holding down the interaction button instead of pressing it.
+        // Only do this if the throwable is moving faster than the prescribed threshold speed,
+        // and if it isn't attached to another hand
+       /* if (!attached && catchingSpeedThreshold != -1)
+        {
+            float catchingThreshold = catchingSpeedThreshold * SteamVR_Utils.GetLossyScale(Player.instance.trackingOriginTransform);
+
+            GrabTypes bestGrabType = hand.GetBestGrabbingType();
+
+            if (bestGrabType != GrabTypes.None)
+            {
+                if (rigidbody.velocity.magnitude >= catchingThreshold)
+                {
+                    hand.AttachObject(gameObject, bestGrabType, attachmentFlags);
+                    showHint = false;
+                }
+            }
+        }*/
+
+        if (showHint)
+        {
+            hand.ShowGrabHint();
+        }
+    }
+
+
+    //-------------------------------------------------
+    protected virtual void OnHandHoverEnd(Hand hand)
+    {
+        hand.HideGrabHint();
+    }
+
+
+    //-------------------------------------------------
+    protected virtual void HandHoverUpdate(Hand hand)
+    {
+        GrabTypes startingGrabType = hand.GetGrabStarting();
+
+        if (startingGrabType != GrabTypes.None)
+        {
+            Grab(hand, startingGrabType);
+        }
+    }
+
+
     private void setBendyPhysic()
     {
         bendyRod.GetComponent<Rigidbody>().mass = settings.mass;
@@ -274,6 +386,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     private void setBobberKinematicOnFalse()
     {
         PoissonFishing.instance.bobber.GetComponent<Rigidbody>().isKinematic = false;
+        isGrabbed = true;
     }
 
     public void OnModifySettings()

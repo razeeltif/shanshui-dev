@@ -29,6 +29,17 @@ public class RiverAmbiant : MonoBehaviour
         setLeftRightPosition();
     }
 
+    private void setLeftRightPosition()
+    {
+        leftChild = GetComponentsInChildren<Transform>()[1];
+        rightChild = GetComponentsInChildren<Transform>()[2];
+
+        leftChild.position = new Vector3(this.transform.position.x - distance, this.transform.position.y, this.transform.position.z);
+        rightChild.position = new Vector3(this.transform.position.x + distance, this.transform.position.y, this.transform.position.z);
+
+    }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -37,16 +48,6 @@ public class RiverAmbiant : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(rightChild.position, 0.2f);
-
-    }
-
-    private void setLeftRightPosition()
-    {
-        leftChild = GetComponentsInChildren<Transform>()[1];
-        rightChild = GetComponentsInChildren<Transform>()[2];
-
-        leftChild.position = new Vector3(this.transform.position.x - distance, this.transform.position.y, this.transform.position.z);
-        rightChild.position = new Vector3(this.transform.position.x + distance, this.transform.position.y, this.transform.position.z);
 
     }
 }
