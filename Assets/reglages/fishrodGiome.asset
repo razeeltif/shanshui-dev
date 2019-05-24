@@ -36,6 +36,6 @@ MonoBehaviour:
   wave: 0.05
   forceFish: 1000
   BouncyCenterOffset: {x: 0, y: 0.05, z: 0}
-  BobberMass: 1
-  BoobberDrag: 1
+  BobberMass: 2
+  BoobberDrag: 2.4
   BobberAngularDrag: 1
