@@ -132,25 +132,19 @@ public class Bobber : MonoBehaviour, IUseSettings
         catchedFish.transform.rotation = this.transform.rotation;
         catchedFish.transform.Rotate(-90, 0, 0);
 
-        //float distance = Vector3.Distance(catchedFish.transform.position, catchedFish.GetComponent<Poisson>().attachPoint.position);
-        //catchedFish.transform.position = transform.position + transform.TransformDirection(new Vector3(0, -distance, 0));
         catchedFish.transform.position = GetComponentInChildren<AppatSign>().transform.position;
         Vector3 pos = GetComponentInChildren<AppatSign>().transform.position - catchedFish.GetComponent<Poisson>().attachPoint.position;
         catchedFish.transform.position = GetComponentInChildren<AppatSign>().transform.position + pos;
-        //catchedFish.transform.position = transform.position + transform.TransformDirection(catchedFish.GetComponent<Poisson>().attachPoint.position - catchedFish.transform.position);
 
 
         catchedFish.AddComponent<FixedJoint>();
         catchedFish.GetComponent<FixedJoint>().connectedBody = this.GetComponent<Rigidbody>();
-        //catchedFish.GetComponent<FixedJoint>().connectedAnchor = catchedFish.GetComponent<Poisson>().attachPoint.localPosition;
         catchedFish.GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
         catchedFish.GetComponent<FixedJoint>().breakTorque = Mathf.Infinity;
-        /*this.gameObject.AddComponent<FixedJoint>();
 
-        this.gameObject.GetComponent<FixedJoint>().connectedBody = catchedFish.GetComponent<Rigidbody>();
-        //catchedFish.GetComponent<Poisson>().attachPoint.position
-        this.gameObject.GetComponent<FixedJoint>().anchor = catchedFish.transform.position - catchedFish.GetComponent<Poisson>().attachPoint.position;
-        this.gameObject.GetComponent<FixedJoint>().breakForce = Mathf.Infinity;*/
+
+        catchedFish.GetComponent<Rigidbody>().AddForce(0, 0, 500);
+
 
     }
 

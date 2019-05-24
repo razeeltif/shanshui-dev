@@ -301,6 +301,7 @@ public class PoissonFishing : MonoBehaviour
         spwanNewPose(fishingManagement.fishPoint[currentStep].direction);
         fishGoToThePointCoroutine = TravelToNextPoint(fishingManagement.fishPoint[currentStep].point);
         StartCoroutine(fishGoToThePointCoroutine);
+        EventManager.TriggerEvent(EventsName.ChangePose);
     }
 
 

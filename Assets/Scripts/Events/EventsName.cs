@@ -8,5 +8,6 @@ public enum EventsName {
     HookFish,
     CatchFish,
     ReleaseFish,
-    ChangeAppat
+    ChangeAppat,
+    ChangePose
 };
