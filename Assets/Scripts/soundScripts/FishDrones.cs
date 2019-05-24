@@ -5,17 +5,21 @@ using UnityEngine;
 public class FishDrones : MonoBehaviour
 {
 
+    int nbFishCatched = 0;
+
     private void OnEnable()
     {
-        EventManager.StartListening(EventsName.OutWater, OnInWater);
+        EventManager.StartListening(EventsName.InWater, OnInWater);
         EventManager.StartListening(EventsName.InWater, OnOutWater);
+        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
 
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventsName.OutWater, OnInWater);
-        EventManager.StopListening(EventsName.InWater, OnOutWater);
+        EventManager.StopListening(EventsName.InWater, OnInWater);
+        EventManager.StopListening(EventsName.OutWater, OnOutWater);
+        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
 
     }
     // Start is called before the first frame update
@@ -39,5 +43,36 @@ public class FishDrones : MonoBehaviour
     {
         AkSoundEngine.PostEvent("Play_drone_fishing", Camera.main.gameObject);
     }
+
+    void OnCatchFish()
+    { 
+        nbFishCatched++;
+
+        switch (nbFishCatched) {
+            case 1:
+                AkSoundEngine.PostEvent("Play_drone_01", Camera.main.gameObject);
+                break;
+
+            case 2:
+                AkSoundEngine.PostEvent("Play_drone_02", Camera.main.gameObject);
+                break;
+
+            case 3:
+                AkSoundEngine.PostEvent("Play_drone_03", Camera.main.gameObject);
+                break;
+
+            case 4:
+                AkSoundEngine.PostEvent("Play_drone_04", Camera.main.gameObject);
+                break;
+
+            case 5:
+                AkSoundEngine.PostEvent("Play_drone_05", Camera.main.gameObject);
+                break;
+
+
+        }
+    }
+
+
 
 }

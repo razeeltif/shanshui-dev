@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5911874740060468200}
   - component: {fileID: 4070985311956514040}
   m_Layer: 0
-  m_Name: PoissonPlaceHolder2
+  m_Name: PoissonPlaceHolder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1848295821653441765}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 3.116, z: -0.026}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 906998471980792145}
   - {fileID: 3739819367116847397}
@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba8f606b4144b347bb079219f0714b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 3
-  tractionForce: 0.5
+  difficulty: 2
+  tractionForce: 0.8
   color: {r: 0, g: 0, b: 0, a: 0}
   attachPoint: {fileID: 3739819367116847397}
 --- !u!114 &3291771669569602041

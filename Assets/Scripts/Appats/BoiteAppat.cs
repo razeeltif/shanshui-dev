@@ -67,12 +67,9 @@ public class BoiteAppat : MonoBehaviour
             {
                 listeInTheBox[i] = true;
                 appat.GetComponent<Rigidbody>().isKinematic = true;
-                appat.transform.parent = this.transform;
+                //appat.transform.parent = this.transform;
                 appat.transform.position = listePositionInitialAppats[i].position;
 
-                // todo : URespawnAnimation
-                /*Vector3 initialScale = appat.transform.localScale;
-                appat.transform.localScale = Vector3.zero;*/
             }
         }
     }
