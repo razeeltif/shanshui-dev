@@ -65,7 +65,7 @@ MonoBehaviour:
     needsReinit: 1
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 1390904482}
-  hoverSphereRadius: 0.075
+  hoverSphereRadius: 0.06
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -73,7 +73,7 @@ MonoBehaviour:
   useControllerHoverComponent: 1
   controllerHoverComponent: tip
   controllerHoverRadius: 0.15
-  useFingerJointHover: 1
+  useFingerJointHover: 0
   fingerJointHover: 10
   fingerJointHoverRadius: 0.05
   objectAttachmentPoint: {fileID: 238749197}
@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 587627104}
   - component: {fileID: 1934810032}
   - component: {fileID: 1934810033}
+  - component: {fileID: 466561289}
   m_Layer: 0
   m_Name: VRCamera
   m_TagString: MainCamera
@@ -379,6 +380,29 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
+--- !u!114 &466561289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587627102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d711d2a54fce9c48b9c910240d2958c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  eventID: -770802810
+  m_callbackData: {fileID: 0}
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  valueGuid: 9fb2ba265c25e944a864bb688470c694
 --- !u!1 &759326240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,7 +1284,7 @@ MonoBehaviour:
     needsReinit: 1
   useHoverSphere: 1
   hoverSphereTransform: {fileID: 825688542}
-  hoverSphereRadius: 0.075
+  hoverSphereRadius: 0.06
   hoverLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1268,7 +1292,7 @@ MonoBehaviour:
   useControllerHoverComponent: 1
   controllerHoverComponent: tip
   controllerHoverRadius: 0.15
-  useFingerJointHover: 1
+  useFingerJointHover: 0
   fingerJointHover: 10
   fingerJointHoverRadius: 0.05
   objectAttachmentPoint: {fileID: 2006545902}

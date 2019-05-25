@@ -10,8 +10,9 @@ public class FishDrones : MonoBehaviour
     private void OnEnable()
     {
         EventManager.StartListening(EventsName.InWater, OnInWater);
-        EventManager.StartListening(EventsName.InWater, OnOutWater);
+        EventManager.StartListening(EventsName.OutWater, OnOutWater);
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StartListening(EventsName.HookFish, OnHookFish);
 
     }
 
@@ -20,6 +21,7 @@ public class FishDrones : MonoBehaviour
         EventManager.StopListening(EventsName.InWater, OnInWater);
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StopListening(EventsName.HookFish, OnHookFish);
 
     }
     // Start is called before the first frame update
@@ -36,16 +38,19 @@ public class FishDrones : MonoBehaviour
 
     void OnInWater()
     {
-        AkSoundEngine.PostEvent("Stop_drone_fishing", Camera.main.gameObject);
+        AkSoundEngine.PostEvent("Play_drone_fishing", Camera.main.gameObject);
     }
 
     void OnOutWater()
     {
-        AkSoundEngine.PostEvent("Play_drone_fishing", Camera.main.gameObject);
+        AkSoundEngine.PostEvent("Stop_drone_fishing", Camera.main.gameObject);
     }
 
     void OnCatchFish()
-    { 
+    {
+
+        AkSoundEngine.PostEvent("Play_fishing_reward", Camera.main.gameObject);
+
         nbFishCatched++;
 
         switch (nbFishCatched) {
@@ -71,6 +76,11 @@ public class FishDrones : MonoBehaviour
 
 
         }
+    }
+
+    void OnHookFish()
+    {
+        AkSoundEngine.PostEvent("Play_fish_catch", Camera.main.gameObject);
     }
 
 

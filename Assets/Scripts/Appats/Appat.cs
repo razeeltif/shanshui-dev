@@ -129,7 +129,7 @@ public class Appat : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "bobber")
+        if(other.tag == "appatPosition")
         {
             canBeAttached = true;
         }
@@ -137,7 +137,7 @@ public class Appat : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "bobber")
+        if (other.tag == "appatPosition")
         {
             canBeAttached = false;
         }

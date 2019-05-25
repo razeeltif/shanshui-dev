@@ -180,7 +180,9 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
             hand.HideGrabHint();
 
-            this.GetComponent<Rigidbody>().isKinematic = true;
+          //  StartCoroutine(BobberDragLinear());
+
+            //this.GetComponent<Rigidbody>().isKinematic = true;
             this.bendyRod.GetComponent<Rigidbody>().isKinematic = false;
             this.GetComponent<Collider>().isTrigger = true;
 
@@ -405,4 +407,23 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         tipRod.GetComponent<CableComponent>().verletIterations = settings.rigidity;
         tipRod.GetComponent<CableComponent>().cableLength = settings.lengthNormalState - cableLengthOffset;
     }
+
+  /*  public IEnumerator BobberDragLinear()
+    {
+        float initialBobberDrag = PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag;
+        float actualDrag = 75f;
+        float i = 0;
+
+        PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = actualDrag;
+
+        while (i < 1)
+        {
+            Debug.Log(Mathf.Lerp(actualDrag, initialBobberDrag, i));
+            PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = Mathf.Lerp(actualDrag, initialBobberDrag, i);
+            i += 0.01f;
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = initialBobberDrag;
+    }*/
 }

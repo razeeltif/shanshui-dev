@@ -7,6 +7,8 @@ using Valve.VR.InteractionSystem;
 public class Poisson : MonoBehaviour
 {
 
+    GameSettings settings;
+
     public int difficulty;
     public float tractionForce;
     public Color color;
@@ -37,7 +39,9 @@ public class Poisson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(this.transform.position.y < settings.YLimitsBeforeRespawn){
+            Destroy(gameObject);
+        }
     }
 
     public void Grab(Hand hand)
