@@ -5558,7 +5558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 200eac1d32ea0e74aaa20fa04392a2ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishrodSettings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
+  fishrodSettings: {fileID: 11400000, guid: f5cf3d7f12a6b7649bb433ded2c27525, type: 2}
   waterPlane: {fileID: 0}
   bobber: {fileID: 7530313280271911877}
   bendyRod: {fileID: 498908477091836311}
@@ -5925,7 +5925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8076cc0af7920143acf72b32561bfed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
+  settings: {fileID: 11400000, guid: f5cf3d7f12a6b7649bb433ded2c27525, type: 2}
   hapticSettings: {fileID: 11400000, guid: 97cbc03445a7930439a8985abea71ca0, type: 2}
   bendyRod: {fileID: 498908477091836311}
   tipRod: {fileID: 5641763992707982067}
@@ -6083,7 +6083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 041f9889836b12b4980f7d308738e00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 0f0619b2096f62a479629cc7d78255b8, type: 2}
+  settings: {fileID: 11400000, guid: f5cf3d7f12a6b7649bb433ded2c27525, type: 2}
   actualAppat: {fileID: 0}
 --- !u!114 &1645130685
 MonoBehaviour:
