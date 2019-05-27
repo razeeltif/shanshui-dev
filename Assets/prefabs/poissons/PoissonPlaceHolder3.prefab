@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4916315277960227471}
   - component: {fileID: 5911874740060468200}
   - component: {fileID: 4070985311956514040}
+  - component: {fileID: 676748743332562310}
   m_Layer: 0
   m_Name: PoissonPlaceHolder3
   m_TagString: Untagged
@@ -194,6 +195,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.24, y: 0.25, z: 1.32}
   m_Center: {x: 0, y: -0.05, z: 0.15}
+--- !u!114 &676748743332562310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848295821653441765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3541309e50e8d40bb8ddd846203a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1909525123083689407
 GameObject:
   m_ObjectHideFlags: 0

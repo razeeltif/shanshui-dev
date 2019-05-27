@@ -6,7 +6,6 @@ public class gestionAnimation : MonoBehaviour
 {
     void DeactivateAnimator()
     {
-        GetComponentInChildren<Rigidbody>().isKinematic = false;
         GetComponentInChildren<Collider>().enabled = true;
         GetComponent<Animator>().enabled = false;
 

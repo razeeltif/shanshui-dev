@@ -273,6 +273,13 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void OnAttachedToHand(Hand hand)
         {
+
+            GameObject obj = GameObject.Find("Highlighter");
+            if(obj != null)
+            {
+                Destroy(obj);
+            }
+
             if (activateActionSetOnAttach != null)
                 activateActionSetOnAttach.Activate(hand.handType);
 
@@ -291,6 +298,12 @@ namespace Valve.VR.InteractionSystem
 
         protected virtual void OnDetachedFromHand(Hand hand)
         {
+
+            GameObject obj = GameObject.Find("Highlighter");
+            if (obj != null)
+            {
+                Destroy(obj);
+            }
             if (activateActionSetOnAttach != null)
             {
                 if (hand.otherHand == null || hand.otherHand.currentAttachedObjectInfo.HasValue == false ||

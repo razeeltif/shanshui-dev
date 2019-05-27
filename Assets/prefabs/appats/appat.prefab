@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8859459137512257288}
   - component: {fileID: 8859459137512257299}
   - component: {fileID: 291912792}
+  - component: {fileID: 5845551002111947025}
   m_Layer: 0
   m_Name: appat
   m_TagString: appat
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1eb379a1107b645af8a9d48fd4f2f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettings: {fileID: 11400000, guid: 31bf4f99167d1ca44a1c74e50c607820, type: 2}
+  gameSettings: {fileID: 0}
   boiteAppat: {fileID: 0}
   typesPoisson: []
   minimumWaitingTime: 0
@@ -247,3 +248,15 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   interactable: {fileID: 0}
+--- !u!114 &5845551002111947025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859459137512257289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3541309e50e8d40bb8ddd846203a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
