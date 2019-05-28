@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FishDrones : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
 
     int nbFishCatched = 0;
@@ -13,6 +13,7 @@ public class FishDrones : MonoBehaviour
         EventManager.StartListening(EventsName.OutWater, OnOutWater);
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.HookFish, OnHookFish);
+        EventManager.StartListening(EventsName.ChangePose, OnChangePose);
 
     }
 
@@ -22,6 +23,7 @@ public class FishDrones : MonoBehaviour
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.HookFish, OnHookFish);
+        EventManager.StopListening(EventsName.ChangePose, OnChangePose);
 
     }
     // Start is called before the first frame update
@@ -34,6 +36,11 @@ public class FishDrones : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnChangePose()
+    {
+        AkSoundEngine.PostEvent("Play_fishing_feedbacks", Camera.main.gameObject);
     }
 
     void OnInWater()

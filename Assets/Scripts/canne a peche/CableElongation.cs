@@ -24,7 +24,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
     [SerializeField]
     Transform tipFishrod;
 
-    public enum State { lance, inWater, outWater };
+    public enum State { lance, inWater, outWater, catchFish };
 
     State actualState;
 
@@ -33,6 +33,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
         fishrodSettings.AddGameObjectListening(this);
         EventManager.StartListening(EventsName.InWater, OnInWater);
         EventManager.StartListening(EventsName.OutWater, OnOutWater);
+        EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
 
     }
 
@@ -41,6 +42,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
         fishrodSettings.RemoveGameObjectListening(this);
         EventManager.StopListening(EventsName.InWater, OnInWater);
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
+        EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
 
     }
 
@@ -105,7 +107,10 @@ public class CableElongation : MonoBehaviour, IUseSettings
                 }
                 break;
 
+            case State.catchFish:
 
+                bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.lengthNormalState;
+                break;
 
         }
 
@@ -129,6 +134,11 @@ public class CableElongation : MonoBehaviour, IUseSettings
     void OnOutWater()
     {
         actualState = State.outWater;
+    }
+
+    void OnCatchFish()
+    {
+        actualState = State.catchFish;
     }
 
     public void OnModifySettings()

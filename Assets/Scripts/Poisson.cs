@@ -21,6 +21,8 @@ public class Poisson : MonoBehaviour
         // abonnement aux events de Interactable pour la détection du grab et du release
         GetComponent<Interactable>().onAttachedToHand += Grab;
         GetComponent<Interactable>().onDetachedFromHand += Release;
+
+        EventManager.StartListening(EventsName.InWater, OnInWater);
     }
 
     private void OnDisable()
@@ -28,6 +30,8 @@ public class Poisson : MonoBehaviour
         // de-abonnement aux events de Interactable pour la détection du grab et du release
         GetComponent<Interactable>().onAttachedToHand -= Grab;
         GetComponent<Interactable>().onDetachedFromHand -= Release;
+
+        EventManager.StopListening(EventsName.InWater, OnInWater);
     }
 
     // Start is called before the first frame update
@@ -58,6 +62,14 @@ public class Poisson : MonoBehaviour
     public Vector3 getPositionAttachPoisson()
     {
         return this.transform.position - attachPoint.position;
+    }
+
+    public void OnInWater()
+    {
+        if(GetComponent<FixedJoint>() != null)
+        {
+
+        }
     }
 
 }

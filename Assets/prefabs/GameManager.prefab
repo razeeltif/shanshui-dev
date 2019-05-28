@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3589936601008142241}
   - component: {fileID: 1868016203}
   - component: {fileID: 461063156}
+  - component: {fileID: 1161917986}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853c76c42333a53409ca4a6257e83cd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumFishingTime: 10
+  minimumFishingTime: 2
   firstHandHoldingThis: {fileID: 0}
   secondHandHoldingThis: {fileID: 0}
   text: {fileID: 0}
@@ -92,7 +93,7 @@ MonoBehaviour:
   distance: 0
   angleX: 83.68
   angleY: 38.77
-  tolerance: 0.3
+  tolerance: 0.4
   PosePosition: {x: -8.44, y: 0, z: 0}
 --- !u!114 &3589936601008142240
 MonoBehaviour:
@@ -169,3 +170,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndicatorPrefab: {fileID: 5361887408248601972, guid: af2ff1a4434d36f438e6a67913f2b067,
     type: 3}
+--- !u!114 &1161917986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3589936601008142271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5991df43e1e46174da572d59e11f6b34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ridePrefab: {fileID: 1701893780440177531, guid: 5c6b23b362281b74897ff087a6f8a1d3,
+    type: 3}
+  smallRidePrefab: {fileID: 1701893780440177531, guid: 2bd1e23b4564254479c048e0134c872d,
+    type: 3}
+  waterPlane: {fileID: 0}
+  rideSpawnFrequency: 1.2
+  distanceBetweenTwoSpawn: 0.7
