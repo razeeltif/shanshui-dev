@@ -17,6 +17,8 @@ public class WildlifeManager : MonoBehaviour
     [SerializeField] GameObject spawnerBird;
     [SerializeField] GameObject boatPrefab;
     [SerializeField] GameObject spawnerBoat;
+    [SerializeField] GameObject turtlePrefab;
+    [SerializeField] GameObject spawnerTurtle;
     [SerializeField] GameObject waterPlane;
     GameObject newFish;
     GameObject newBirdFlock;
@@ -30,7 +32,7 @@ public class WildlifeManager : MonoBehaviour
         anim = fishPrefab.GetComponent<Animator>();
         chanceJumpFish = 15000;
         chanceJumpBird = 7000;
-        chanceSpawnBoat = 20000;
+        chanceSpawnBoat = 25000;
     }
 
     // Update is called once per frame
@@ -77,7 +79,7 @@ public class WildlifeManager : MonoBehaviour
     void SpawnBoat()
     {
         newBoat = Instantiate(boatPrefab, transform);
-        newBoat.transform.position = new Vector3(150, waterPlane.transform.position.y, Random.Range(spawnerBoat.transform.position.z - 40, spawnerBoat.transform.position.z + 40));
+        newBoat.transform.position = new Vector3(150, waterPlane.transform.position.y, Random.Range(spawnerBoat.transform.position.z - 30, spawnerBoat.transform.position.z + 30));
         newBoat.transform.rotation = Quaternion.Euler(0, 90, 0);
     }
 
