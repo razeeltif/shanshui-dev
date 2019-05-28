@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba8f606b4144b347bb079219f0714b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: ce08cedbce67a63458fabe4dc2d363cf, type: 2}
   difficulty: 2
   tractionForce: 0.8
   color: {r: 0, g: 0, b: 0, a: 0}
@@ -276,14 +277,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.003
       objectReference: {fileID: 0}
-    - target: {fileID: 3300000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: 80599f02428b61e47910b13b89b74f63, type: 3}
     - target: {fileID: 2300000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8ccf97dafecfe884a8cab42c0d669aac, type: 2}
+    - target: {fileID: 3300000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 80599f02428b61e47910b13b89b74f63, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
 --- !u!4 &906998471980792145 stripped

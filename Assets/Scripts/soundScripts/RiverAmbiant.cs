@@ -42,12 +42,18 @@ public class RiverAmbiant : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(leftChild.position, 0.2f);
 
+        if (leftChild != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(leftChild.position, 0.2f);
+        }
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(rightChild.position, 0.2f);
+        if(rightChild != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(rightChild.position, 0.2f);
+        }
 
     }
 }

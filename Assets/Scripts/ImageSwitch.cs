@@ -50,14 +50,15 @@ public class ImageSwitch : MonoBehaviour
             }
             else
             {
-                if(currentImageIndex < images.Length - 1)
+                if(currentImageIndex < images.Length)
                 {
-                    currentImageIndex++;
                     sRenderer.sprite = images[currentImageIndex];
                     chrono = 0;
+                    currentImageIndex++;
                 }
                 else
                 {
+                    SceneSwitcher.instance.LoadMainScene();
                     this.enabled = false;
                 }
             }
