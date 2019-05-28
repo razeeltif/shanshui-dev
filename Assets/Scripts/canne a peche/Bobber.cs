@@ -142,8 +142,8 @@ public class Bobber : MonoBehaviour, IUseSettings
         catchedFish.GetComponent<FixedJoint>().breakForce = Mathf.Infinity;
         catchedFish.GetComponent<FixedJoint>().breakTorque = Mathf.Infinity;
 
-
-        catchedFish.GetComponent<Rigidbody>().AddForce(0, 0, 500);
+        // on fait bondir gentillement le poisson hors de l'eau lors de sa capture
+         catchedFish.GetComponent<Rigidbody>().AddForce(Vector3.up * 5000);
 
 
     }
