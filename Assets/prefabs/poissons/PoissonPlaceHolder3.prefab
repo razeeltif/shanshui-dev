@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba8f606b4144b347bb079219f0714b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 11400000, guid: ce08cedbce67a63458fabe4dc2d363cf, type: 2}
   difficulty: 2
   tractionForce: 0.8
   color: {r: 0, g: 0, b: 0, a: 0}

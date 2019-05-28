@@ -7,7 +7,7 @@ using Valve.VR.InteractionSystem;
 public class Poisson : MonoBehaviour
 {
 
-    GameSettings settings;
+    public GameSettings settings;
 
     public int difficulty;
     public float tractionForce;
