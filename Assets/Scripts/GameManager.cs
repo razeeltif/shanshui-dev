@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         if (FishTimer != null)
         {
-            text.text = FishTimer.getCooldown().ToString();
+            //text.text = FishTimer.getCooldown().ToString();
         }
 
     }

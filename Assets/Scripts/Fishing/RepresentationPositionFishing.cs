@@ -72,7 +72,7 @@ public class RepresentationPositionFishing : MonoBehaviour
     {
         Vector3 vecDist = getHandPosition() - PosePosition;
         float dist = vecDist.magnitude;
-        debugText.text = dist.ToString();
+        //debugText.text = dist.ToString();
         return dist;
     }
 
