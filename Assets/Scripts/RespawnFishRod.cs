@@ -22,7 +22,7 @@ public class RespawnFishRod : MonoBehaviour
     void Update()
     {
 
-        if(monitoredObject.transform.position.y < settings.YLimitsBeforeRespawn)
+        if(monitoredObject.transform.position.y < settings.YFishrodLimitsBeforeRespawn)
         {
             respawn();
         }
