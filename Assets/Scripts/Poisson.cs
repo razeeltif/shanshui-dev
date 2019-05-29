@@ -68,7 +68,7 @@ public class Poisson : MonoBehaviour
     {
         if(GetComponent<FixedJoint>() != null)
         {
-
+            Destroy(GetComponent<FixedJoint>());
         }
     }
 

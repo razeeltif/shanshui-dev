@@ -14,7 +14,9 @@ public class GameSettings : ScriptableObject
     public float TimeBeforeRelease = 30f;
 
 
-    public float YLimitsBeforeRespawn = -2f;
+    public float YLimitsBeforeRespawn = -4f;
+
+    public float YFishrodLimitsBeforeRespawn = -2f;
 
 
     public void AddGameObjectListening(IUseSettings g)

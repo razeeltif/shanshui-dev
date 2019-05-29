@@ -9,6 +9,8 @@ public class PoseIndicatorScript : MonoBehaviour
 
     private GameObject actualPoseIndicator;
 
+    private bool aFishHasBeenCatched = false;
+
     private void OnEnable()
     {
         EventManager.StartListening(EventsName.HookFish, OnHookFish);
@@ -33,13 +35,15 @@ public class PoseIndicatorScript : MonoBehaviour
 
     void OnHookFish()
     {
-        actualPoseIndicator = Instantiate(poseIndicatorPrefab);
+        if(!aFishHasBeenCatched)
+            actualPoseIndicator = Instantiate(poseIndicatorPrefab);
 
     }
 
     void OnCatchFish()
     {
         Destroy(actualPoseIndicator);
+        aFishHasBeenCatched = true;
     }
 
     void OnReleaseFish()
