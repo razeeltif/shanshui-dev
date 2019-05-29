@@ -58,6 +58,7 @@ public class Bobber : MonoBehaviour, IUseSettings
             upLift = -Physics.gravity * (forceFactor - GetComponent<Rigidbody>().velocity.y * settings.bounceDamp);
             GetComponent<Rigidbody>().AddForceAtPosition(upLift, actionPoint);
             GetComponent<Rigidbody>().drag = settings.viscosity;
+            //GetComponent<Rigidbody>().angularDrag = 2;
         }
         else
         {
@@ -143,7 +144,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         catchedFish.GetComponent<FixedJoint>().breakTorque = Mathf.Infinity;
 
         // on fait bondir gentillement le poisson hors de l'eau lors de sa capture
-         catchedFish.GetComponent<Rigidbody>().AddForce(Vector3.up * 5000);
+        // catchedFish.GetComponent<Rigidbody>().AddForce(Vector3.up * 5000);
 
 
     }

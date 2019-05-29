@@ -20,6 +20,8 @@ public class PoissonFishing : MonoBehaviour
 
     public Transform playerPosition;
 
+    public float minimumDistanceFromBerge = 20;
+
     private int indexOfFishHooked;
 #pragma warning disable 0649
     [SerializeField]
@@ -140,7 +142,14 @@ public class PoissonFishing : MonoBehaviour
 
 
         // generate new fish points
-        fishingManagement.generateFishPoints(playerPosition.position, bobber.position);
+        Vector3 initialBobberPosition = bobber.position;
+        // if bobber to close to the berge, we put the bobber farther
+        Debug.Log(fishingManagement.getDistanceBerge(bobber.position.z));
+        if(fishingManagement.getDistanceBerge(bobber.position.z) < minimumDistanceFromBerge)
+        {
+            initialBobberPosition = new Vector3(bobber.position.x, bobber.position.y, minimumDistanceFromBerge);
+        }
+        fishingManagement.generateFishPoints(playerPosition.position, initialBobberPosition);
 
         // initialyze the fish position
         Vector3 initialPosition = new Vector3(bobber.position.x, bobber.position.y - fishDepth, bobber.position.z);
@@ -149,7 +158,7 @@ public class PoissonFishing : MonoBehaviour
         // get distance between the bobber and the berge
         Vector3 fishInWater2D = new Vector3(fishInWater.transform.position.x, fishingManagement.waterPlane.position.y, fishInWater.transform.position.z);
         Vector3 player2D = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
-        initialDistanceBetweenBobberAndBerge = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, player2D);
+        initialDistanceBetweenBobberAndBerge = fishingManagement.getDistanceOnProjectionDirection(initialBobberPosition, player2D);
 
         // init the first pose
         initCurrentStep();
@@ -219,7 +228,7 @@ public class PoissonFishing : MonoBehaviour
 
     private IEnumerator TravelToNextPoint(Vector3 targetPosition)
     {
-
+        onCatch = false;
         targetPosition = new Vector3(targetPosition.x, targetPosition.y - fishDepth, targetPosition.z);
 
         while (Vector3.Distance(fishInWater.transform.position, targetPosition) >0.1f)

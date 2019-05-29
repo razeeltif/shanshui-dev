@@ -15,6 +15,8 @@ public class Poisson : MonoBehaviour
 
     public Transform attachPoint;
 
+    private bool hasBeenOnBerge = false;
+
 
     private void OnEnable()
     {
@@ -37,12 +39,19 @@ public class Poisson : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Vector3 force = new Vector3(0, 250, 0) * GetComponent<Rigidbody>().mass;
+        GetComponent<Rigidbody>().AddForce(force);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if(PoissonFishing.instance.fishingManagement.getDistanceBerge(this.transform.position.z) < 0)
+        {
+            hasBeenOnBerge = true;
+        }
+
         if(this.transform.position.y < settings.YLimitsBeforeRespawn){
             Destroy(gameObject);
         }
@@ -66,7 +75,7 @@ public class Poisson : MonoBehaviour
 
     public void OnInWater()
     {
-        if(GetComponent<FixedJoint>() != null)
+        if(GetComponent<FixedJoint>() != null && hasBeenOnBerge)
         {
             Destroy(GetComponent<FixedJoint>());
         }
