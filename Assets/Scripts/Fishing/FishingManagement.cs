@@ -75,20 +75,37 @@ public class FishingManagement : MonoBehaviour
             float distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
             Vector3 point = bobber2D + posStep + left * distance;
 
-            // si le point généré est dans la berge, on en regénere un autre
-            while (getDistanceBerge(point.z) < minimalDistanceFromBerge)
+            // on veut qu'il n'y ai pas de pose consécutive dans la même zone
+            // si l'élément précédent n'est pas dans la même zone
+            bool sameZone = false;
+            int direction = -1;
+
+            do
             {
-                distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
-                point = bobber2D + posStep + left * distance;
+                // si le point généré est dans la berge, on en regénere un autre
+                while (getDistanceBerge(point.z) < minimalDistanceFromBerge)
+                {
+                    distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
+                    point = bobber2D + posStep + left * distance;
+                }
+
+                float coef = ((initialLength - coefReduction * i) * 2) / 3;
+
+                // récupération de la zone de la position de la main
+                if (distance < -coef / 2) direction = 0; // droite
+                else if (distance < coef / 2) direction = 1; // milieu
+                else direction = 2; // gauche
+
+                // si se n'est pas le premier élément && si la pose précédente est dnas la même zone que celle-ci, on la regénère
+                if ( i > 0 && direction == fishPoint[i - 1].direction)
+                {
+                    sameZone = true;
+                }
             }
+            while (sameZone);
+            
+            
 
-            float coef = ((initialLength - coefReduction * i) * 2) / 3;
-
-            // récupération de la zone de la position de la main
-            int direction;
-            if (distance < -coef / 2) direction = 0; // droite
-            else if (distance < coef / 2) direction = 1; // milieu
-            else direction = 2; // gauche
 
             // stockage du point dans le tableau pour une ultilisation ultérieure
             fishPoint[i] = new DotDirection(point, direction);
@@ -96,7 +113,7 @@ public class FishingManagement : MonoBehaviour
         }
     }
 
-    private float getDistanceBerge(float Zpos)
+    public float getDistanceBerge(float Zpos)
     {
         float valZ = PLANE_DEFAULT_LENGTH * waterPlane.localScale.z;
         return Zpos - waterPlane.position.z + valZ;

@@ -21,7 +21,7 @@ MonoBehaviour:
   lengthNormalState: 3.2
   maximumLength: 30
   pullbackForce: 10
-  lengthWhenCatchAFish: 1
+  lengthWhenCatchAFish: 3
   width: 0.01
   rigidity: 6
   SpringNormalState: 500

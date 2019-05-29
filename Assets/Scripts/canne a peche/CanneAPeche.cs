@@ -174,7 +174,7 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
         else
         {
             PoissonFishing.instance.bobber.GetComponent<Rigidbody>().isKinematic = true;
-            bobberTimer.start(0.1f);
+            bobberTimer.start(0.01f);
 
             setFirstHand(hand);
             hand.AttachObject(gameObject, startingGrabType, attachmentFlags, attachmentOffset);
@@ -411,17 +411,16 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     public IEnumerator BobberDragLinear()
     {
         float initialBobberDrag = PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag;
-        float actualDrag = 75f;
+        float actualDrag = 10f;
         float i = 0;
 
         PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = actualDrag;
 
-        while (i < 1)
+        while (i <= 1)
         {
-            Debug.Log(Mathf.Lerp(actualDrag, initialBobberDrag, i));
             PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = Mathf.Lerp(actualDrag, initialBobberDrag, i);
-            i += 0.01f;
             yield return new WaitForSeconds(0.01f);
+            i += 0.01f;
         }
 
         PoissonFishing.instance.bobber.GetComponent<Rigidbody>().drag = initialBobberDrag;
