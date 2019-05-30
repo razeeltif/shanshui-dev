@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ParticleFishHooked : MonoBehaviour
 {
-    public GameObject particlePrefab;
+    public GameObject particleFishHookedPrefab;
+    public GameObject particleFishCatchedPrefab;
 
     public Transform waterLevel;
 
@@ -34,7 +35,7 @@ public class ParticleFishHooked : MonoBehaviour
         if (fishHooked)
         {
             actualParticle.transform.position = new Vector3(PoissonFishing.instance.bobber.transform.position.x,
-                                                            particlePrefab.transform.position.y,
+                                                            particleFishHookedPrefab.transform.position.y,
                                                             PoissonFishing.instance.bobber.transform.position.z);
         }
     }
@@ -42,9 +43,9 @@ public class ParticleFishHooked : MonoBehaviour
     private void OnHookFish()
     {
         fishHooked = true;
-        actualParticle = Instantiate(particlePrefab);
+        actualParticle = Instantiate(particleFishHookedPrefab);
         actualParticle.transform.position = new Vector3(PoissonFishing.instance.bobber.transform.position.x,
-                                                        particlePrefab.transform.position.y,
+                                                        particleFishHookedPrefab.transform.position.y,
                                                         PoissonFishing.instance.bobber.transform.position.z);
 
     }
@@ -53,6 +54,10 @@ public class ParticleFishHooked : MonoBehaviour
     {
         fishHooked = false;
         Destroy(actualParticle);
+        GameObject fishCatched = Instantiate(particleFishCatchedPrefab);
+        fishCatched.transform.position = new Vector3(PoissonFishing.instance.bobber.transform.position.x,
+                                                            fishCatched.transform.position.y,
+                                                            PoissonFishing.instance.bobber.transform.position.z);
     }
 
     private void OnReleaseFish()

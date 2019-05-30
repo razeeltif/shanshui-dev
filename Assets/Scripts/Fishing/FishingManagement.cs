@@ -77,11 +77,13 @@ public class FishingManagement : MonoBehaviour
 
             // on veut qu'il n'y ai pas de pose consécutive dans la même zone
             // si l'élément précédent n'est pas dans la même zone
-            bool sameZone = false;
-            int direction = -1;
+            bool sameZone;
+            int direction;
 
             do
             {
+                sameZone = false;
+
                 // si le point généré est dans la berge, on en regénere un autre
                 while (getDistanceBerge(point.z) < minimalDistanceFromBerge)
                 {
@@ -104,9 +106,6 @@ public class FishingManagement : MonoBehaviour
             }
             while (sameZone);
             
-            
-
-
             // stockage du point dans le tableau pour une ultilisation ultérieure
             fishPoint[i] = new DotDirection(point, direction);
 

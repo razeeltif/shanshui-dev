@@ -87,6 +87,7 @@ MonoBehaviour:
   tractionForce: 0.5
   color: {r: 0, g: 0, b: 0, a: 0}
   attachPoint: {fileID: 3739819367116847397}
+  splash: {fileID: 2466926211816888478, guid: bd3f247c07402984b97b96aea3be3117, type: 3}
 --- !u!114 &3291771669569602041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +171,7 @@ MonoBehaviour:
   catchingSpeedThreshold: 0
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 1.1
+  scaleReleaseVelocity: 2
   restoreOriginalParent: 1
   onPickUp:
     m_PersistentCalls:

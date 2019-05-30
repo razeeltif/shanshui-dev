@@ -27,6 +27,6 @@ public class splashInWater : MonoBehaviour
     private void spawn(Collider other)
     {
         GameObject obj = Instantiate(splashPrefab);
-        obj.transform.position = new Vector3(other.transform.position.x, this.transform.position.y - 0.02f, other.transform.position.z);
+        obj.transform.position = new Vector3(other.transform.position.x, this.transform.position.y - 0.04f, other.transform.position.z);
     }
 }

@@ -13,7 +13,6 @@ public class PoseIndicatorScript : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening(EventsName.HookFish, OnHookFish);
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StartListening(EventsName.ChangePose, OnChangePose);
@@ -21,7 +20,6 @@ public class PoseIndicatorScript : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.StopListening(EventsName.HookFish, OnHookFish);
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StopListening(EventsName.ChangePose, OnChangePose);
@@ -33,26 +31,24 @@ public class PoseIndicatorScript : MonoBehaviour
             actualPoseIndicator.transform.position = PoissonFishing.instance.poseFishing.PosePosition;
     }
 
-    void OnHookFish()
-    {
-        if(!aFishHasBeenCatched)
-            actualPoseIndicator = Instantiate(poseIndicatorPrefab);
-
-    }
-
     void OnCatchFish()
     {
         Destroy(actualPoseIndicator);
-        aFishHasBeenCatched = true;
+        actualPoseIndicator = null;
     }
 
     void OnReleaseFish()
     {
         Destroy(actualPoseIndicator);
+        actualPoseIndicator = null;
     }
 
     void OnChangePose()
     {
+        if(actualPoseIndicator == null)
+        {
+            actualPoseIndicator = Instantiate(poseIndicatorPrefab);
+        }
         //actualPoseIndicator.transform.position = PoissonFishing.instance.poseFishing.PosePosition;
     }
 }
