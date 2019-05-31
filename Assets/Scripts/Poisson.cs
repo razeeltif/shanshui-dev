@@ -15,6 +15,8 @@ public class Poisson : MonoBehaviour
 
     public Transform attachPoint;
 
+    public GameObject splash;
+
     private bool hasBeenOnBerge = false;
 
 
@@ -75,9 +77,21 @@ public class Poisson : MonoBehaviour
 
     public void OnInWater()
     {
+        // on détache le poisson dès qu'il touche l'eau mais qui soit encore attaché au bobber
         if(GetComponent<FixedJoint>() != null && hasBeenOnBerge)
         {
             Destroy(GetComponent<FixedJoint>());
+        }
+    }
+
+    public void OnTriggerEnter(Collider collider)
+    {
+        if(collider.tag == "water")
+        {
+            GameObject spla = Instantiate(splash);
+            //spla.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
+            spla.transform.position = new Vector3(this.transform.position.x, PoissonFishing.instance.fishingManagement.waterPlane.transform.position.y, this.transform.position.z);
+            spla.GetComponent<ColorPanel>().UpdateColor(ColorManager.Colors.Green, 5);
         }
     }
 

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2466926211685865987}
+  - component: {fileID: 1524598466185773507}
   - component: {fileID: 2466926211685865984}
   - component: {fileID: 2466926211685865999}
   - component: {fileID: 2466926211685865998}
@@ -34,7 +35,7 @@ Transform:
   m_Father: {fileID: 2466926211816888479}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2466926211685865984
+--- !u!114 &1524598466185773507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +44,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 2466926211685865986}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6068b39316287d4e944491093c3a45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseColor: {r: 1, g: 0, b: 0, a: 0}
+  speed: 0.5
+  speedInv: 1
+--- !u!114 &2466926211685865984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2466926211685865986}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d20168311dc3a8c43af945736b8456d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseColor: {r: 1, g: 1, b: 1, a: 0}
-  speed: 1
-  speedInv: 10
+  baseColor: {r: 1, g: 0, b: 0, a: 1}
+  speed: 0.4
+  speedInv: 0.1
 --- !u!33 &2466926211685865999
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -103,7 +119,7 @@ MeshCollider:
   m_GameObject: {fileID: 2466926211685865986}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
