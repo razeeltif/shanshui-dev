@@ -31,6 +31,7 @@ public class ColorPanel : MonoBehaviour
     void Start()
     {  
        GetComponent<Renderer>().material.color = baseColor;
+        actualColor = baseColor;
        blue = red = green = 0;
        globalAlpha = 0;
     }
@@ -57,7 +58,7 @@ public class ColorPanel : MonoBehaviour
 
         GetComponent<Renderer>().material.SetFloat("_CutOut", 1-globalAlpha);
         
-        actualColor = new Color(red, green, blue);
+        //actualColor = new Color(red, green, blue);
 
         GetComponent<Renderer>().material.SetColor("_Color",actualColor);
     }
