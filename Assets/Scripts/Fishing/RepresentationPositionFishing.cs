@@ -207,7 +207,7 @@ public class RepresentationPositionFishing : MonoBehaviour
         if (middleZoneAngle > maxAngleX) middleZoneAngle = maxAngleX;
         if (middleZoneAngle < 0) middleZoneAngle = 0;
 
-        updatePosePosition();
+        //updatePosePosition();
 
     }
 

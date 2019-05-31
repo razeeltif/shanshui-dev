@@ -9,6 +9,8 @@ public class CableElongation : MonoBehaviour, IUseSettings
 
     private const float PLANE_DEFAULT_LENGTH = 5;
 
+    public float distanceBeginElongation = 2;
+
     [SerializeField]
     FishRodSettings fishrodSettings;
 
@@ -63,7 +65,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
     // Update is called once per frame
     void Update()
     {
-        if (getDistanceBerge(bobber.position.z) < 0)
+        if (getDistanceBerge(bobber.position.z) < distanceBeginElongation)
         {
             bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.lengthNormalState;
             actualState = State.outWater;
@@ -80,7 +82,7 @@ public class CableElongation : MonoBehaviour, IUseSettings
             case State.outWater:
 
                 // le bobber est au dessus de l'eau ?
-                if (getDistanceBerge(bobber.position.z) > 0)
+                if (getDistanceBerge(bobber.position.z) >= distanceBeginElongation)
                 {
                     bendyRod.GetComponent<SpringJoint>().maxDistance = fishrodSettings.maximumLength;
                     actualState = State.lance;

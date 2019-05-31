@@ -91,7 +91,7 @@ public class Poisson : MonoBehaviour
             GameObject spla = Instantiate(splash);
             //spla.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
             spla.transform.position = new Vector3(this.transform.position.x, PoissonFishing.instance.fishingManagement.waterPlane.transform.position.y, this.transform.position.z);
-            spla.GetComponent<ColorPanel>().UpdateColor(ColorManager.Colors.Green, 5);
+            spla.GetComponentInChildren<ColorPanel>().UpdateColor(ColorManager.Colors.Blue, 5);
         }
     }
 

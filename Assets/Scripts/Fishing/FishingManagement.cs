@@ -71,27 +71,32 @@ public class FishingManagement : MonoBehaviour
             fishDifficultyLines[i, 0] = startLine;
             fishDifficultyLines[i, 1] = endLine;
 
-            // génération d'un point
-            float distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
-            Vector3 point = bobber2D + posStep + left * distance;
+
 
             // on veut qu'il n'y ai pas de pose consécutive dans la même zone
             // si l'élément précédent n'est pas dans la même zone
             bool sameZone;
             int direction;
+            float distance;
+            Vector3 point;
 
             do
             {
                 sameZone = false;
+                
+                /*distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
+                point = bobber2D + posStep + left * distance;*/
 
-                // si le point généré est dans la berge, on en regénere un autre
-                while (getDistanceBerge(point.z) < minimalDistanceFromBerge)
+                
+                do
                 {
+                    // génération d'un point
                     distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
                     point = bobber2D + posStep + left * distance;
-                }
+                // si le point généré est dans la berge, on en regénere un autre
+                } while (getDistanceBerge(point.z) < minimalDistanceFromBerge) ;
 
-                float coef = ((initialLength - coefReduction * i) * 2) / 3;
+                    float coef = ((initialLength - coefReduction * i) * 2) / 3;
 
                 // récupération de la zone de la position de la main
                 if (distance < -coef / 2) direction = 0; // droite

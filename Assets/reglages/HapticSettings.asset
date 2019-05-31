@@ -26,8 +26,8 @@ MonoBehaviour:
   bobberOutWaterAmplitude: 0.5
   vibrationWHenMovingDurationSeconds: 0.01
   vibrationWHenMovingFrequency: 200
-  minimumSpeedToVibrate: 7
+  minimumSpeedToVibrate: 5
   maximumSpeedToFullVibration: 150
-  launchLineDurationSeconds: 0.01
-  launchLineFrequency: 500
+  launchLineDurationSeconds: 0.1
+  launchLineFrequency: 450
   launchLineAmplitude: 0.1
