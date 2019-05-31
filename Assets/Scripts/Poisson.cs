@@ -12,12 +12,19 @@ public class Poisson : MonoBehaviour
     public int difficulty;
     public float tractionForce;
     public Color color;
+    public Color color2;
 
     public Transform attachPoint;
 
     public GameObject splash;
 
     private bool hasBeenOnBerge = false;
+
+    public float forceAuBoutDuFil = 150;
+
+    private UTimer fishEscapingTimer;
+
+    private float moveFrequence = 0.05f;
 
 
     private void OnEnable()
@@ -41,8 +48,10 @@ public class Poisson : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        fishEscapingTimer = UTimer.Initialize(moveFrequence, this, moveEscapingFish);
         Vector3 force = new Vector3(0, 250, 0) * GetComponent<Rigidbody>().mass;
         GetComponent<Rigidbody>().AddForce(force);
+        fishEscapingTimer.start();
     }
 
     // Update is called once per frame
@@ -63,11 +72,12 @@ public class Poisson : MonoBehaviour
     {
 
         Destroy(GetComponent<FixedJoint>());
-
+        fishEscapingTimer.Stop();
     }
 
     public void Release(Hand hand)
     {
+        fishEscapingTimer.start();
     }
 
     public Vector3 getPositionAttachPoisson()
@@ -86,13 +96,30 @@ public class Poisson : MonoBehaviour
 
     public void OnTriggerEnter(Collider collider)
     {
-        if(collider.tag == "water")
+        if(collider.tag == "water" && hasBeenOnBerge)
         {
-            GameObject spla = Instantiate(splash);
-            //spla.GetComponentInChildren<Renderer>().material.SetColor("_Color", color);
-            spla.transform.position = new Vector3(this.transform.position.x, PoissonFishing.instance.fishingManagement.waterPlane.transform.position.y, this.transform.position.z);
-            spla.GetComponentInChildren<ColorPanel>().UpdateColor(ColorManager.Colors.Blue, 5);
+            ColorManager.CM.CreateSplash(color, color2, this.transform.position);
         }
+    }
+
+
+    private Vector3 getAngleFishEscaping()
+    {
+        // generate new angleX
+        float angleX = Random.Range(-180, 180);
+        float angleY = Random.Range(-180, 180);
+        Vector3 posX = Quaternion.AngleAxis(angleX, Vector3.up) * Vector3.forward;
+        posX = posX + Quaternion.AngleAxis(angleY, Vector3.right) * Vector3.forward;
+        return posX;
+    }
+
+    private void moveEscapingFish()
+    {
+        Vector3 angle = getAngleFishEscaping();
+        GetComponent<Rigidbody>().AddForce(angle * forceAuBoutDuFil);
+        GetComponent<Rigidbody>().AddTorque(angle * forceAuBoutDuFil / 50);
+        fishEscapingTimer.restart();
+
     }
 
 }

@@ -1299,7 +1299,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 12f3ec25b09ad6048965dd21033bd1e3, type: 3}
   - {fileID: 21300000, guid: e0638c79bb6a9da4e9ee044aefd18db0, type: 3}
   - {fileID: 21300000, guid: 9832eeaaa35d3fd45a159bf754635f13, type: 3}
-  chronoMax: 100
+  chronoMax: 200
 --- !u!222 &1828304798
 CanvasRenderer:
   m_ObjectHideFlags: 0

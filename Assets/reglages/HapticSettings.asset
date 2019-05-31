@@ -30,4 +30,4 @@ MonoBehaviour:
   maximumSpeedToFullVibration: 150
   launchLineDurationSeconds: 0.1
   launchLineFrequency: 450
-  launchLineAmplitude: 0.1
+  launchLineAmplitude: 0.2

@@ -55,7 +55,8 @@ public class SceneSwitcher : MonoBehaviour
 
     public void LoadEndScene()
     {
-
+        Debug.Log("END SCENE");
+        StartCoroutine(FadeIn("credit"));
     }
 
     private IEnumerator FadeIn(string nextScene)
