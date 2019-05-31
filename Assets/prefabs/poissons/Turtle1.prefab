@@ -48,7 +48,7 @@ Rigidbody:
   m_GameObject: {fileID: 1848295821653441765}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0.9
   m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   catchingSpeedThreshold: 0
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 2
+  scaleReleaseVelocity: 1.6
   restoreOriginalParent: 1
   onPickUp:
     m_PersistentCalls:

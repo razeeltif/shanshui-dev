@@ -47,7 +47,7 @@ Rigidbody:
   m_GameObject: {fileID: 1848295821653441765}
   serializedVersion: 2
   m_Mass: 2
-  m_Drag: 1
+  m_Drag: 0.9
   m_AngularDrag: 0.5
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: ce08cedbce67a63458fabe4dc2d363cf, type: 2}
-  difficulty: 2
+  difficulty: 5
   tractionForce: 0.8
   color: {r: 0, g: 0, b: 0, a: 0}
   attachPoint: {fileID: 3739819367116847397}
@@ -155,7 +155,7 @@ MonoBehaviour:
   catchingSpeedThreshold: 0
   releaseVelocityStyle: 1
   releaseVelocityTimeOffset: -0.011
-  scaleReleaseVelocity: 2
+  scaleReleaseVelocity: 1.8
   restoreOriginalParent: 1
   onPickUp:
     m_PersistentCalls:
@@ -179,8 +179,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.05, z: 1}
-  m_Center: {x: 0, y: -0.05, z: 0.15}
+  m_Size: {x: 2, y: 0.1, z: 1.5}
+  m_Center: {x: 0, y: -0.05, z: 0.5}
 --- !u!1 &1909525123083689407
 GameObject:
   m_ObjectHideFlags: 0
