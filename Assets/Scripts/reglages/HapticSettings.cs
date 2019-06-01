@@ -35,7 +35,7 @@ public class HapticSettings : ScriptableObject
 
     [Header("when line is launched")]
     public float launchLineDurationSeconds = 0.05f;
-    public float launchLineFrequency = 50;
+    public float launchLineFrequency = 450;
     public float launchLineAmplitude = 0.5f;
 
 
@@ -60,9 +60,9 @@ public class HapticSettings : ScriptableObject
         Haptic.vibrationWHenMovingDurationSeconds = vibrationWHenMovingDurationSeconds;
         Haptic.vibrationWHenMovingFrequency       = vibrationWHenMovingFrequency;
 
-        Haptic.launchLineDurationSeconds = launchLineDurationSeconds;
+        /*Haptic.launchLineDurationSeconds = launchLineDurationSeconds;
         Haptic.launchLineFrequency       = launchLineFrequency;
-        Haptic.launchLineAmplitude       = launchLineAmplitude;
+        Haptic.launchLineAmplitude       = launchLineAmplitude;*/
 
     }
 

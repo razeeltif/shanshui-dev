@@ -237,6 +237,7 @@ public class PoissonFishing : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
         onCatch = true;
+        EventManager.TriggerEvent(EventsName.SpawnPoseIndicator);
 
     }
 

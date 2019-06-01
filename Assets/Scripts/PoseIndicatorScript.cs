@@ -21,6 +21,7 @@ public class PoseIndicatorScript : MonoBehaviour
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StartListening(EventsName.ChangePose, OnChangePose);
+        EventManager.StartListening(EventsName.SpawnPoseIndicator, OnSpawnPoseIndicator);
     }
 
     private void OnDisable()
@@ -28,6 +29,7 @@ public class PoseIndicatorScript : MonoBehaviour
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
         EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StopListening(EventsName.ChangePose, OnChangePose);
+        EventManager.StopListening(EventsName.SpawnPoseIndicator, OnSpawnPoseIndicator);
     }
 
     private void Update()
@@ -49,6 +51,12 @@ public class PoseIndicatorScript : MonoBehaviour
     }
 
     void OnChangePose()
+    {
+        Destroy(actualPoseIndicator);
+        actualPoseIndicator = null;
+    }
+
+    void OnSpawnPoseIndicator()
     {
 
             switch(poseCounter){

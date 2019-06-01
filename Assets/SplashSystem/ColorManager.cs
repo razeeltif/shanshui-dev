@@ -7,6 +7,8 @@ public class ColorManager : MonoBehaviour
     public List<ColorPanel> panels = new List<ColorPanel>();
     public GameObject waterPrefab;
 
+    public GameObject[] splashPrefabs;
+
     public enum Colors {
         None = 0,
         Red = 1,
@@ -28,6 +30,22 @@ public class ColorManager : MonoBehaviour
         {
             Destroy(this);            
         }
+    }
+
+
+    public void CreateSplash(Color color1, Color color2, Vector3 pos)
+    {
+        int index = Random.Range(0, splashPrefabs.Length);
+        GameObject spla = Instantiate(splashPrefabs[index]);
+        spla.transform.position = new Vector3(pos.x, PoissonFishing.instance.fishingManagement.waterPlane.transform.position.y, pos.z);
+        spla.transform.Rotate(Vector3.up * Random.Range(-180,180), Space.Self);
+        spla.GetComponentInChildren<ColorPanel>().baseColor = color1;
+        
+        int index2 = Random.Range(0, splashPrefabs.Length);
+        GameObject spla2 = Instantiate(splashPrefabs[index]);
+        spla2.transform.position = new Vector3(pos.x, PoissonFishing.instance.fishingManagement.waterPlane.transform.position.y, pos.z);
+        spla2.transform.Rotate(Vector3.up * Random.Range(-180, 180), Space.Self);
+        spla2.GetComponentInChildren<ColorPanel>().baseColor = color2;
     }
 
     void Update()

@@ -27,6 +27,12 @@ public class ColorPanel : MonoBehaviour
     private float timeStartedGreenColorDiff;
     private float timeToCompleteGreen = 1;
 
+    private float colorFactor = 3.5f;
+
+    float redValue;
+    float greenValue;
+    float blueValue;
+
     // Start is called before the first frame update
     void Start()
     {  
@@ -34,16 +40,18 @@ public class ColorPanel : MonoBehaviour
         actualColor = baseColor;
        blue = red = green = 0;
        globalAlpha = 0;
+
+        SetColor(actualColor);
     }
 
     // Update is called once per frame
     void Update()
     {
-        red = Mathf.Lerp(1f, 0f, (Time.time - timeStartedRedColorDiff)/timeToCompleteRed);
+        red = Mathf.Lerp(redValue, 0f, (Time.time - timeStartedRedColorDiff)/timeToCompleteRed);
 
-        green = Mathf.Lerp(1f, 0f, (Time.time - timeStartedGreenColorDiff)/timeToCompleteGreen);
+        green = Mathf.Lerp(greenValue, 0f, (Time.time - timeStartedGreenColorDiff)/timeToCompleteGreen);
 
-        blue = Mathf.Lerp(1f, 0f, ((Time.time - timeStartedBlueColorDiff)/timeToCompleteBlue));
+        blue = Mathf.Lerp(blueValue, 0f, ((Time.time - timeStartedBlueColorDiff)/timeToCompleteBlue));
 
         if(targetAlpha == 0)
         {
@@ -58,7 +66,7 @@ public class ColorPanel : MonoBehaviour
 
         GetComponent<Renderer>().material.SetFloat("_CutOut", 1-globalAlpha);
         
-        //actualColor = new Color(red, green, blue);
+        actualColor = new Color(red, green, blue);
 
         GetComponent<Renderer>().material.SetColor("_Color",actualColor);
     }
@@ -84,5 +92,23 @@ public class ColorPanel : MonoBehaviour
         }
 
         targetAlpha = 1;
+    }
+
+    internal void SetColor(Color color)
+    {
+
+        redValue = color.r;
+        greenValue = color.g;
+        blueValue = color.b;
+
+        timeStartedRedColorDiff = Time.time;
+        timeToCompleteRed = redValue * colorFactor;
+
+        timeStartedGreenColorDiff = Time.time;
+        timeToCompleteGreen = greenValue * colorFactor;
+
+        timeStartedBlueColorDiff = Time.time;
+        timeToCompleteBlue = blueValue * colorFactor;
+
     }
 }

@@ -7,8 +7,6 @@ public class ParticleFishHooked : MonoBehaviour
     public GameObject particleFishHookedPrefab;
     public GameObject particleFishCatchedPrefab;
 
-    public Transform waterLevel;
-
     private GameObject actualParticle;
 
     bool fishHooked = false;

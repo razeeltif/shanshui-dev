@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WildlifeManager : MonoBehaviour
 {
-    float chanceJumpFish, chanceJumpBird, chanceSpawnBoat;
+    static public WildlifeManager instance;
+
+    public float chanceJumpFish, chanceJumpBird, chanceSpawnBoat;
     float tirageFish, tirageBird, tirageBoat;
     float xMinF, xMaxF, xMinBoat, xMaxBoat;
     float yMinB, yMaxB;
@@ -25,6 +27,18 @@ public class WildlifeManager : MonoBehaviour
     GameObject newBoat;
 
     Animator anim;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

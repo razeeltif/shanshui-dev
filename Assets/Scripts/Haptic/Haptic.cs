@@ -25,9 +25,9 @@ public static class Haptic
     static public float vibrationWHenMovingDurationSeconds = 0.01f;
     static public float vibrationWHenMovingFrequency = 200;
 
-    static public float launchLineDurationSeconds = 0.05f;
-    static public float launchLineFrequency = 50;
-    static public float launchLineAmplitude = 0.5f;
+    static public float launchLineDurationSeconds = 0.1f;
+    static public float launchLineFrequency = 450;
+    static public float launchLineAmplitude = 0.2f;
 
 
 
