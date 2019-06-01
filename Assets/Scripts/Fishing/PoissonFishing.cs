@@ -277,7 +277,7 @@ public class PoissonFishing : MonoBehaviour
     {
         float dist = poseFishing.distanceBetweenFishRodAndPose();
 
-        // the fish move forward the player
+        // the fish move forward to the player
         if (dist < poseFishing.tolerance)
         {
 
@@ -291,6 +291,8 @@ public class PoissonFishing : MonoBehaviour
 
             hapticDistance.enabled = false;
             Haptic.InPose(GameManager.instance.firstHandHoldingThis, GameManager.instance.secondHandHoldingThis);
+
+            EventManager.TriggerEvent(EventsName.InPose);
         }
         else
         {
@@ -303,6 +305,7 @@ public class PoissonFishing : MonoBehaviour
             if (Vector3.Distance(fishInWater.transform.position, targetPosition) > 0.1f)
                 fishInWater.transform.position = Vector3.MoveTowards(fishInWater.transform.position, targetPosition, fishSpeed / 100);
 
+            EventManager.TriggerEvent(EventsName.OutPose);
         }
     }
 
