@@ -16,7 +16,7 @@ MonoBehaviour:
   grabFrequency: 50
   grabAmplitude: 0.5
   inPosebDurationSeconds: 0.05
-  inPoseFrequency: 2000
+  inPoseFrequency: 100
   inPoseAmplitude: 1
   bobberInWaterDurationSeconds: 0.05
   bobberInWaterFrequency: 50

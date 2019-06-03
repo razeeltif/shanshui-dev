@@ -69,7 +69,8 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: ce08cedbce67a63458fabe4dc2d363cf, type: 2}
   difficulty: 7
   tractionForce: 0.8
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0.3019608, g: 0.2784314, b: 0.5254902, a: 0}
+  color2: {r: 0.54901963, g: 0.17254902, b: 0.4156863, a: 0}
   attachPoint: {fileID: 3739819367116847397}
   splash: {fileID: 2466926211816888478, guid: bd3f247c07402984b97b96aea3be3117, type: 3}
   forceAuBoutDuFil: 150

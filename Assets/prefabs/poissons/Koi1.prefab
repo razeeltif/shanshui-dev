@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4070985311956514040}
   - component: {fileID: 676748743332562310}
   m_Layer: 0
-  m_Name: PoissonPlaceHolder3
+  m_Name: Koi1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,9 +85,11 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: ce08cedbce67a63458fabe4dc2d363cf, type: 2}
   difficulty: 4
   tractionForce: 0.8
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0.08235294, g: 0.09411766, b: 0.41960788, a: 0}
+  color2: {r: 0.2627451, g: 0.5568628, b: 0.68235296, a: 0}
   attachPoint: {fileID: 3739819367116847397}
   splash: {fileID: 2466926211816888478, guid: bd3f247c07402984b97b96aea3be3117, type: 3}
+  forceAuBoutDuFil: 150
 --- !u!114 &3291771669569602041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 27d20c402cef6784e845d7c993c8e434, type: 2}
+      objectReference: {fileID: 2100000, guid: 4f3638e9787fe89499438830580da489, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
 --- !u!4 &906998471980792145 stripped
