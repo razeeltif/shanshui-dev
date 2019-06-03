@@ -103,8 +103,10 @@ public class UTimer {
 		while (cooldown < time){
 			if(debug)
 				Debug.Log("Countdown: " + cooldown);
-			yield return new WaitForSecondsRealtime(timerPrecision);
-			cooldown += timerPrecision;
+            //yield return new WaitForSecondsRealtime(timerPrecision);
+            //cooldown += timerPrecision;
+            cooldown += Time.deltaTime;
+            yield return null;
 		}
 		finished = true;
         callbackFunction();

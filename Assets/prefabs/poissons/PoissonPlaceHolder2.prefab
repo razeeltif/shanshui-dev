@@ -85,9 +85,10 @@ MonoBehaviour:
   difficulty: 50
   tractionForce: 0.5
   color: {r: 0, g: 0, b: 0, a: 0}
+  color2: {r: 0, g: 0, b: 0, a: 0}
   attachPoint: {fileID: 3739819367116847397}
   splash: {fileID: 2466926211816888478, guid: bd3f247c07402984b97b96aea3be3117, type: 3}
-  forceAuBoutDuFil: 150
+  forceAuBoutDuFil: 75
 --- !u!114 &3291771669569602041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.072
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d773d6db57cac184e87e38ddc2251445, type: 3}
       propertyPath: m_LocalPosition.y

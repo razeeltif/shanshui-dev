@@ -188,6 +188,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
 
             setBendyPhysic();
 
+            EventManager.TriggerEvent(EventsName.GrabFishrod);
+
         }
 
     }
@@ -227,6 +229,8 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
             this.GetComponent<Rigidbody>().angularVelocity = GameManager.instance.firstHandHoldingThis.GetComponent<SteamVR_Behaviour_Pose>().GetAngularVelocity();
             hand.DetachObject(gameObject, false);
             GameManager.instance.firstHandHoldingThis = null;
+
+            EventManager.TriggerEvent(EventsName.ReleaseFishrod);
         }
         
     }
@@ -289,25 +293,6 @@ public class CanneAPeche : MonoBehaviour, IUseSettings
     protected virtual void OnHandHoverBegin(Hand hand)
     {
         bool showHint = false;
-
-        // "Catch" the throwable by holding down the interaction button instead of pressing it.
-        // Only do this if the throwable is moving faster than the prescribed threshold speed,
-        // and if it isn't attached to another hand
-       /* if (!attached && catchingSpeedThreshold != -1)
-        {
-            float catchingThreshold = catchingSpeedThreshold * SteamVR_Utils.GetLossyScale(Player.instance.trackingOriginTransform);
-
-            GrabTypes bestGrabType = hand.GetBestGrabbingType();
-
-            if (bestGrabType != GrabTypes.None)
-            {
-                if (rigidbody.velocity.magnitude >= catchingThreshold)
-                {
-                    hand.AttachObject(gameObject, bestGrabType, attachmentFlags);
-                    showHint = false;
-                }
-            }
-        }*/
 
         if (showHint)
         {

@@ -12,14 +12,14 @@ public class ImageSwitch : MonoBehaviour
     [SerializeField] float chronoMax;
     float chrono;
 
-    private int currentImageIndex = 0;
+    private int currentImageIndex = 1;
 
 
     // Start is called before the first frame update
     void Start()
     {
         sRenderer = GetComponent<SpriteRenderer>();
-        sRenderer.sprite = images[currentImageIndex];
+        sRenderer.sprite = images[0];
         currColor = sRenderer.color;
         currColor.a = 0f;
         sRenderer.color = currColor;
@@ -53,8 +53,8 @@ public class ImageSwitch : MonoBehaviour
                 if(currentImageIndex < images.Length)
                 {
                     sRenderer.sprite = images[currentImageIndex];
-                    chrono = 0;
                     currentImageIndex++;
+                    chrono = 0;
                 }
                 else
                 {

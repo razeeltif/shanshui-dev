@@ -10,5 +10,9 @@ public enum EventsName {
     ReleaseFish,
     ChangeAppat,
     ChangePose,
+    InPose,
+    OutPose,
+    GrabFishrod,
+    ReleaseFishrod,
     SpawnPoseIndicator
 };
