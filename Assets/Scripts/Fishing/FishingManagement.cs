@@ -84,10 +84,6 @@ public class FishingManagement : MonoBehaviour
             {
                 sameZone = false;
                 
-                /*distance = Random.Range(-initialLength + (coefReduction * i), initialLength - (coefReduction * i));
-                point = bobber2D + posStep + left * distance;*/
-
-                
                 do
                 {
                     // génération d'un point

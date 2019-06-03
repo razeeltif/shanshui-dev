@@ -13,6 +13,10 @@ public class splashInWater : MonoBehaviour
         if (other.tag != "CanneAPeche")
         {
             spawn(other);
+            if (other.gameObject.GetComponent<Appat>())
+            {
+                ColorManager.CM.CreateHookSplash(other.gameObject.GetComponent<Appat>().color, other.transform.position);
+            }
         }
     }
 

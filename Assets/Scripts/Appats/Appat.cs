@@ -18,7 +18,9 @@ public class Appat : MonoBehaviour
     [HideInInspector]
     public bool isAttached = false;
     [HideInInspector]
-    public bool canBeAttached = false; 
+    public bool canBeAttached = false;
+
+    public Color color;
 
     private void OnEnable()
     {

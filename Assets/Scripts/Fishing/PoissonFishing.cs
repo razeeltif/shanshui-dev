@@ -52,6 +52,9 @@ public class PoissonFishing : MonoBehaviour
 
     private float initialDistanceBetweenBobberAndBerge;
 
+    [HideInInspector]
+    public float completionInStep = 0;
+
 
 
     private void OnEnable()
@@ -102,8 +105,10 @@ public class PoissonFishing : MonoBehaviour
             Vector3 player2D = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
             float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, player2D);
 
+            gsetCompletionFishInStep(distancePlayerFish);
+
             // special case for the last step
-            if( currentStep == fishingManagement.difficulty - 1)
+            if ( currentStep == fishingManagement.difficulty - 1)
             {
                 moveFishTowardPlayerOrBackwardIfNeeded(player2D, distancePlayerFish);
 
@@ -123,6 +128,14 @@ public class PoissonFishing : MonoBehaviour
                 moveFishTowardPlayerOrBackwardIfNeeded(player2D, distancePlayerFish);
             }
         }
+    }
+
+    public void gsetCompletionFishInStep(float distancePlayerFish)
+    {
+        float min = (fishingManagement.difficulty - currentStep) * fishingManagement.distanceStep;
+        float max = (fishingManagement.difficulty - (currentStep + 1)) * fishingManagement.distanceStep;
+        float pos = Mathf.InverseLerp(min, max, distancePlayerFish);
+        completionInStep = pos;
     }
 
 
@@ -146,7 +159,6 @@ public class PoissonFishing : MonoBehaviour
         // generate new fish points
         Vector3 initialBobberPosition = bobber.position;
         // if bobber to close to the berge, we put the bobber farther
-        Debug.Log(fishingManagement.getDistanceBerge(bobber.position.z));
         if(fishingManagement.getDistanceBerge(bobber.position.z) < minimumDistanceFromBerge)
         {
             initialBobberPosition = new Vector3(bobber.position.x, bobber.position.y, minimumDistanceFromBerge);
@@ -209,24 +221,33 @@ public class PoissonFishing : MonoBehaviour
 
     private void spwanNewPose(int direction)
     {
-        switch (direction)
+        if(currentStep == 0)
         {
-            // right
-            case 2:
-                poseFishing.spawnNewPoseRightSection();
-                break;
+            poseFishing.spawnFirstPose();
+        }
+        else
+        {
+            switch (direction)
+            {
+                // right
+                case 2:
+                    poseFishing.spawnNewPoseRightSection();
+                    break;
                 
-            // middle
-            case 1:
-                poseFishing.SpawnNewPoseMiddleSection();
-                break;            
+                // middle
+                case 1:
+                    poseFishing.SpawnNewPoseMiddleSection();
+                    break;            
             
-            // left
-            case 0:
-                poseFishing.spawnNewPoseLeftSection();
-                break;
+                // left
+                case 0:
+                    poseFishing.spawnNewPoseLeftSection();
+                    break;
+
+            }
 
         }
+
     }
 
 

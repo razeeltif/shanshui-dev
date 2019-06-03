@@ -37,6 +37,7 @@ public class RepresentationPositionFishing : MonoBehaviour
     [HideInInspector]
     public float tolerance;
 
+    [HideInInspector]
     public int difficultyFish;
     [HideInInspector]
     public int actualDifficulty;
@@ -94,6 +95,18 @@ public class RepresentationPositionFishing : MonoBehaviour
         return GameManager.instance.firstHandHoldingThis;
     }
 
+
+    public void spawnFirstPose()
+    {
+        angleX = Random.Range(-10, 10);
+
+        // generate new angleY
+        angleY = Random.Range(10, 30);
+
+        distance = Random.Range(minDistance, maxDistance);
+
+        actualizeTolerance();
+    }
 
 
     public void spawnNewPoseLeftSection()
@@ -179,8 +192,15 @@ public class RepresentationPositionFishing : MonoBehaviour
 
     private void actualizeTolerance()
     {
+        if(difficultyFish == 1)
+        {
+            tolerance = minTolerance;
+        }
+        else
+        {
+            tolerance = Mathf.Lerp(minTolerance, maxTolerance, (float)(actualDifficulty / difficultyFish - 1));
+        }
         actualDifficulty++;
-        tolerance = Mathf.Lerp(minTolerance, maxTolerance, (float)(actualDifficulty / difficultyFish));
     }
 
 
