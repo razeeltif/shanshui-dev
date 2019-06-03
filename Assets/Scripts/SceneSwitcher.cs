@@ -40,29 +40,39 @@ public class SceneSwitcher : MonoBehaviour
     void Start()
     {
         fullWhiteImage = GetComponentInChildren<Image>();
+        StartCoroutine(FadeOut());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void LoadMainScene()
     {
-        StartCoroutine(FadeIn("water"));
+        StartCoroutine(FadeInAndLoad("water"));
     }
 
     public void LoadEndScene()
     {
         Debug.Log("END SCENE");
-        StartCoroutine(FadeIn("credit"));
+        StartCoroutine(FadeInAndLoad("credit"));
     }
 
-    private IEnumerator FadeIn(string nextScene)
+    private IEnumerator FadeIn()
     {
-        // initialize alpha to 0
-        modifyAlpha(0);
+        float timer = 0;
+        while (timer < timeTransitionIn)
+        {
+            float newFade = Mathf.InverseLerp(0, timeTransitionIn, timer);
+            modifyAlpha(newFade);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeInAndLoad(string nextScene)
+    {
 
         float timer = 0;
         while(timer < timeTransitionIn)

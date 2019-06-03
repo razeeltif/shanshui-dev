@@ -15,5 +15,5 @@ MonoBehaviour:
   timeBeforeShoeFish: 50
   RandomOnTimeBeforeShoe: 1
   TimeBeforeRelease: 30
-  YLimitsBeforeRespawn: -4
+  YLimitsBeforeRespawn: -10
   YFishrodLimitsBeforeRespawn: -2

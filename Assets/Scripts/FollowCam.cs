@@ -14,6 +14,21 @@ public class FollowCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Ray rayTorus = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+        Ray rayElse = cam.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 10, Color.green);
+
+        RaycastHit hitTorus;
+        RaycastHit hitElse;
+
+        //Si le RC touche pas l'UI, que le chrono est dépassé et qu'un point du torus est touché
+        if (!Physics.Raycast(rayElse, out hitElse, Mathf.Infinity, ~LayerMask.GetMask("Torus")) && Physics.Raycast(rayTorus, out hitTorus, Mathf.Infinity, LayerMask.GetMask("Torus")))
+        {
+            target = hitTorus.point;
+            this.transform.position = target;
+            transform.LookAt(cam.transform.position);
+        }
 
     }
 

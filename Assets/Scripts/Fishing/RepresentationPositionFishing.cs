@@ -31,8 +31,15 @@ public class RepresentationPositionFishing : MonoBehaviour
     public float angleX;
     public float angleY;
 
+    public float minTolerance;
+    public float maxTolerance;
 
+    [HideInInspector]
     public float tolerance;
+
+    public int difficultyFish;
+    [HideInInspector]
+    public int actualDifficulty;
 
     [HideInInspector]
     public Vector3 PosePosition;
@@ -97,6 +104,8 @@ public class RepresentationPositionFishing : MonoBehaviour
         angleY = Random.Range(minAngleY, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
+
+        actualizeTolerance();
     }
 
     public void spawnNewPoseRightSection()
@@ -107,6 +116,8 @@ public class RepresentationPositionFishing : MonoBehaviour
         angleY = Random.Range(minAngleY, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
+
+        actualizeTolerance();
     }
 
     public void SpawnNewPoseMiddleSection()
@@ -114,10 +125,12 @@ public class RepresentationPositionFishing : MonoBehaviour
         // generate new angleX
         angleX = Random.Range(-middleZoneAngle, middleZoneAngle);
 
-        // generate new angleY
+        // generate only in the upper side
         angleY = Random.Range(0, maxAngleY);
 
         distance = Random.Range(minDistance, maxDistance);
+
+        actualizeTolerance();
     }
 
     // update de la position de la pose en fonction du casque
@@ -163,6 +176,13 @@ public class RepresentationPositionFishing : MonoBehaviour
 
 
     }
+
+    private void actualizeTolerance()
+    {
+        actualDifficulty++;
+        tolerance = Mathf.Lerp(minTolerance, maxTolerance, (float)(actualDifficulty / difficultyFish));
+    }
+
 
     private void OnDrawGizmos()
     {
