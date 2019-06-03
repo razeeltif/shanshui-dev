@@ -23,9 +23,13 @@ public class Poisson : MonoBehaviour
     public float forceAuBoutDuFil = 150;
 
     private UTimer fishEscapingTimer;
+    private UTimer splashTimer;
+
+    public float timeBeforeColorSplash = 0.5f; 
 
     private float moveFrequence = 0.05f;
 
+    private Vector3 splashPosition;
 
     private void OnEnable()
     {
@@ -49,6 +53,7 @@ public class Poisson : MonoBehaviour
     void Start()
     {
         fishEscapingTimer = UTimer.Initialize(moveFrequence, this, moveEscapingFish);
+        splashTimer = UTimer.Initialize(timeBeforeColorSplash, this, CreateSplash);
         Vector3 force = new Vector3(0, 250, 0) * GetComponent<Rigidbody>().mass;
         GetComponent<Rigidbody>().AddForce(force);
         fishEscapingTimer.start();
@@ -98,8 +103,14 @@ public class Poisson : MonoBehaviour
     {
         if(collider.tag == "water" && hasBeenOnBerge)
         {
-            ColorManager.CM.CreateSplash(color, color2, this.transform.position);
+            splashPosition = this.transform.position;
+            splashTimer.start();
         }
+    }
+
+    private void CreateSplash()
+    {
+        ColorManager.CM.CreateSplash(color, color2, splashPosition);
     }
 
 

@@ -102,6 +102,7 @@ public class PoissonFishing : MonoBehaviour
             Vector3 player2D = fishingManagement.getPlayerPositionFromBerge(playerPosition.position);
             float distancePlayerFish = fishingManagement.getDistanceOnProjectionDirection(fishInWater2D, player2D);
 
+            // special case for the last step
             if( currentStep == fishingManagement.difficulty - 1)
             {
                 moveFishTowardPlayerOrBackwardIfNeeded(player2D, distancePlayerFish);
@@ -137,6 +138,7 @@ public class PoissonFishing : MonoBehaviour
         Appat appat = bobber.GetComponent<Bobber>().actualAppat;
         indexOfFishHooked = appat.getRandomFishIndex();
         fishingManagement.difficulty = appat.typesPoisson[indexOfFishHooked].GetComponent<Poisson>().difficulty;
+        poseFishing.difficultyFish = appat.typesPoisson[indexOfFishHooked].GetComponent<Poisson>().difficulty;
         tractionSpeedMultiplicator = appat.typesPoisson[indexOfFishHooked].GetComponent<Poisson>().tractionForce;
 
 
@@ -177,6 +179,7 @@ public class PoissonFishing : MonoBehaviour
         onCatch = false;
         hapticDistance.enabled = false;
         currentStep = 0;
+        poseFishing.actualDifficulty = 0;
         fishEscapingTimer.Stop();
     }
 
@@ -186,6 +189,7 @@ public class PoissonFishing : MonoBehaviour
         onCatch = false;
         hapticDistance.enabled = false;
         currentStep = 0;
+        poseFishing.actualDifficulty = 0;
         fishEscapingTimer.Stop();
     }
 
