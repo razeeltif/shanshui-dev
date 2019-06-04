@@ -94,7 +94,11 @@ MonoBehaviour:
   distance: 0
   angleX: 83.68
   angleY: 38.77
+  minTolerance: 0.2
+  maxTolerance: 0.4
   tolerance: 0.3
+  difficultyFish: 0
+  actualDifficulty: 0
   PosePosition: {x: -8.44, y: 0, z: 0}
 --- !u!114 &3589936601008142240
 MonoBehaviour:
@@ -139,6 +143,7 @@ MonoBehaviour:
   tractionSpeedMultiplicator: 0.2
   fishDepth: 2
   fishEscapingFrequence: 1
+  completionInStep: 0
 --- !u!114 &1868016203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,11 +177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poseIndicatorPrefab100: {fileID: 5361887408248601972, guid: af2ff1a4434d36f438e6a67913f2b067,
     type: 3}
-  poseIndicatorPrefab75: {fileID: 5361887408248601972, guid: bb2d7144946598c4a916b7d7179aeda9,
+  poseIndicatorPrefab75: {fileID: 5361887408248601972, guid: 5b1ec9340f9cf2143aab3eb94eab6213,
     type: 3}
-  poseIndicatorPrefab50: {fileID: 5361887408248601972, guid: 5b1ec9340f9cf2143aab3eb94eab6213,
+  poseIndicatorPrefab50: {fileID: 5361887408248601972, guid: dec205a84c961b447950b3b46f3ab591,
     type: 3}
-  poseIndicatorPrefab25: {fileID: 5361887408248601972, guid: dec205a84c961b447950b3b46f3ab591,
+  poseIndicatorPrefab25: {fileID: 5361887408248601972, guid: 41588a3335e26d148af0591d662da624,
     type: 3}
 --- !u!114 &933127800
 MonoBehaviour:
@@ -192,10 +197,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels: []
   waterPrefab: {fileID: 0}
-  splashPrefabs:
+  splahsFishPrefabs:
   - {fileID: 2466926211816888478, guid: bd3f247c07402984b97b96aea3be3117, type: 3}
   - {fileID: 2466926211816888478, guid: 142e33eb3dc48ef4586782bcdb0983b7, type: 3}
   - {fileID: 2466926211816888478, guid: 2c2566f51abab4647b8d437e76fd28b9, type: 3}
+  splashHookPrefabs:
+  - {fileID: 2466926211816888478, guid: 95078385678897245b9ac15e67cfb2a6, type: 3}
+  - {fileID: 2466926211816888478, guid: 400bb47f921b5244fbce5d2563ce2d26, type: 3}
+  - {fileID: 2466926211816888478, guid: 7397f2381c789a54990502e67e483cf5, type: 3}
 --- !u!114 &933127801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,5 +217,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eeb06b9bfc76849b5c5157fdeb19cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastFishTimer: 10
+  lastFishTimer: 540
   timeAfterLastFish: 5

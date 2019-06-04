@@ -88,6 +88,8 @@ public class SoundManager : MonoBehaviour
     {
         inPose = false;
 
+        AkSoundEngine.PostEvent("Stop_fish_water", Camera.main.gameObject);
+
         AkSoundEngine.PostEvent("Play_fishing_reward", Camera.main.gameObject);
 
         nbFishCatched++;
@@ -120,11 +122,15 @@ public class SoundManager : MonoBehaviour
     void OnReleaseFish()
     {
         inPose = false;
+
+        AkSoundEngine.PostEvent("Stop_fish_water", Camera.main.gameObject);
     }
 
     void OnHookFish()
     {
         AkSoundEngine.PostEvent("Play_fish_catch", Camera.main.gameObject);
+
+        AkSoundEngine.PostEvent("Play_fish_water", Camera.main.gameObject);
     }
 
 
