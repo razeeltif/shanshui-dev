@@ -77,7 +77,7 @@ public class WildlifeManager : MonoBehaviour
     {
         newFish = Instantiate(fishPrefab, transform);
         newFish.transform.rotation = Quaternion.Euler(newFish.transform.rotation.x, Random.Range(-180, 180), newFish.transform.rotation.z);
-        newFish.transform.position = new Vector3(Random.Range(spawnerFish.transform.position.x - 30, spawnerFish.transform.position.x + 30) , waterPlane.transform.position.y -0.2f, Random.Range(spawnerFish.transform.position.z - 10, spawnerFish.transform.position.z + 10));
+        newFish.transform.position = new Vector3(Random.Range(spawnerFish.transform.position.x - 40, spawnerFish.transform.position.x + 40) , waterPlane.transform.position.y -0.5f, Random.Range(spawnerFish.transform.position.z - 30, spawnerFish.transform.position.z + 30));
     }
 
     void SpawnBirdFlock(int birdtospawn)
