@@ -703,6 +703,8 @@ GameObject:
   - component: {fileID: 96674043}
   - component: {fileID: 96674045}
   - component: {fileID: 96674044}
+  - component: {fileID: 96674047}
+  - component: {fileID: 96674046}
   m_Layer: 0
   m_Name: StaticEvent
   m_TagString: Untagged
@@ -1057,6 +1059,52 @@ MonoBehaviour:
   soundEmitterObject: {fileID: 0}
   transitionDuration: 0
   valueGuid: 28ebc9cebdf14a4e89f3949ffa992aa8
+--- !u!114 &96674046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96674029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d711d2a54fce9c48b9c910240d2958c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  eventID: 930821218
+  m_callbackData: {fileID: 0}
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  valueGuid: eea4800327692a4cbe2ad1f04be7a04b
+--- !u!114 &96674047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 96674029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d711d2a54fce9c48b9c910240d2958c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: 
+  useOtherObject: 0
+  actionOnEventType: 0
+  curveInterpolation: 4
+  enableActionOnEvent: 0
+  eventID: -257901112
+  m_callbackData: {fileID: 0}
+  playingId: 0
+  soundEmitterObject: {fileID: 0}
+  transitionDuration: 0
+  valueGuid: d7f05af2ffbdf8489dbd67a678e8390b
 --- !u!4 &118785073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 99981e08ce8a0f5458519d73c27a6518,
@@ -2671,6 +2719,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6177479184326976075, guid: fa0bdbd1f574d3b468f45590989c7e8f,
         type: 3}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceJumpFish
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceJumpBird
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceSpawnBoat
+      value: 5000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999f035f199700b418ce7ee37bbf0b15, type: 3}
 --- !u!4 &360734068 stripped
@@ -15474,7 +15537,7 @@ PrefabInstance:
     - target: {fileID: 8367519091465707063, guid: b49b17e10c88f674ab97feb0f3f4d168,
         type: 3}
       propertyPath: minimumWaitingTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8367519091465707063, guid: b49b17e10c88f674ab97feb0f3f4d168,
         type: 3}
@@ -19722,12 +19785,12 @@ PrefabInstance:
     - target: {fileID: 5709885767600826019, guid: 390a9f9ca1ffbbc4c8b9c819b9ec2a0f,
         type: 3}
       propertyPath: minimumWaitingTime
-      value: 25
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5709885767600826019, guid: 390a9f9ca1ffbbc4c8b9c819b9ec2a0f,
         type: 3}
       propertyPath: maximumWaitingTime
-      value: 45
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5709885767600826019, guid: 390a9f9ca1ffbbc4c8b9c819b9ec2a0f,
         type: 3}

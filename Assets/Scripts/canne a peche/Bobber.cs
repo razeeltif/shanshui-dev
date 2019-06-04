@@ -25,6 +25,8 @@ public class Bobber : MonoBehaviour, IUseSettings
     // une méthode (dégueu) de contourner ça est de ne compter qu'un appel sur 2
     private int onOutWaterFix = 0;
 
+    public Vector3 rotationer;
+
     private void OnEnable()
     {
         settings.AddGameObjectListening(this);
@@ -172,7 +174,7 @@ public class Bobber : MonoBehaviour, IUseSettings
         actualAppat.isAttached = true;
         actualAppat.transform.position = GetComponentInChildren<AppatSign>().transform.position;
 
-        GetComponentInChildren<AppatSign>().GetComponent<MeshRenderer>().enabled = false;
+        GetComponentInChildren<AppatSign>().GetComponentInChildren<MeshRenderer>().enabled = false;
     }
 
     public void detachAppat()
@@ -185,6 +187,7 @@ public class Bobber : MonoBehaviour, IUseSettings
     {
         actualAppat.transform.position = GetComponentInChildren<AppatSign>().transform.position;
         actualAppat.transform.rotation = GetComponentInChildren<AppatSign>().transform.rotation;
+        actualAppat.transform.Rotate(rotationer);
     }
 
     public bool isInWater()

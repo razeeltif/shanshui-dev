@@ -54,7 +54,7 @@ public class HameçonIndicator : MonoBehaviour
     void EraseIndicator()
     {
         clignotement.Stop();
-        GetComponent<MeshRenderer>().enabled = false;
+        GetComponentInChildren<MeshRenderer>().enabled = false;
         hookIndicator.SetActive(false);
     }
 
@@ -65,12 +65,12 @@ public class HameçonIndicator : MonoBehaviour
         GameManager.instance.firstHandHoldingThis.hapticAction.Execute(0, 0.1f, 1, 0.4f, GameManager.instance.firstHandHoldingThis.handType);
         if (meshOn)
         {
-            GetComponent<MeshRenderer>().enabled = true;
+            GetComponentInChildren<MeshRenderer>().enabled = true;
             hookIndicator.SetActive(true);
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
             hookIndicator.SetActive(false);
         }
         clignotement.start(frequenceIndication);

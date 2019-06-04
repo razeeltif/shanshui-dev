@@ -192,131 +192,314 @@ MonoBehaviour:
     List: []
   BankWwu:
   - Guid: '{8F0AB70A-EC1A-4633-8DD8-16435978ADE1}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 2016410598
+    m_lastTimePart2: -1999181758
+    m_lastTimePsrt1: 364805930
     ParentPhysicalPath: 
     PhysicalPath: SoundBanks\Default Work Unit.wwu
-    List: []
-  - Guid: '{8F05E447-F1D0-49EF-976A-D56548CD1F3F}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 2016490389
-    ParentPhysicalPath: 
-    PhysicalPath: SoundBanks\ShanShui_Test_Musique.wwu
     List:
-    - Guid: 3a3e7ea1147096498fd3014ca437fb2d
+    - Guid: 1e9d8d6e204a7c498c9c8368af0c64b5
       ID: 265264807
-      Name: ShanShui_AMB
-      Path: ShanShui_Test_Musique\ShanShui_AMB
+      Name: ShanShui_Amb
+      Path: Default Work Unit\ShanShui_Amb
       PathAndIcons:
-      - ElementName: ShanShui_Test_Musique
+      - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: ShanShui_AMB
+      - ElementName: ShanShui_Amb
         ObjectType: 7
-    - Guid: 6805e8701467c54fa086fbf6f178b267
+    - Guid: a00b0cae9da1754d86e9a12d4f2d97f9
       ID: -85851130
       Name: ShanShui_Music
-      Path: ShanShui_Test_Musique\ShanShui_Music
+      Path: Default Work Unit\ShanShui_Music
       PathAndIcons:
-      - ElementName: ShanShui_Test_Musique
+      - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: ShanShui_Music
         ObjectType: 7
-    - Guid: def0c54fe7e59846b4d556d23793a482
+    - Guid: 880a03c9bf3b914cb8dfa1e7c230408d
       ID: 619860590
       Name: ShanShui_SFX
-      Path: ShanShui_Test_Musique\ShanShui_SFX
+      Path: Default Work Unit\ShanShui_SFX
       PathAndIcons:
-      - ElementName: ShanShui_Test_Musique
+      - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: ShanShui_SFX
         ObjectType: 7
+    - Guid: b9b7eb50bc7d2940899913aaf698041b
+      ID: 767960680
+      Name: Shansui_Drones
+      Path: Default Work Unit\Shansui_Drones
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Shansui_Drones
+        ObjectType: 7
   EventWwu:
   - Guid: '{4510FF65-B4AE-4E32-99AD-A7BB8743AE13}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 1933009727
+    m_lastTimePart2: -1999181752
+    m_lastTimePsrt1: 961439358
     ParentPhysicalPath: 
     PhysicalPath: Events\Default Work Unit.wwu
-    List: []
-  - Guid: '{4CED0D3C-D3B8-4B7C-A147-0806F774CECF}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 1933029669
-    ParentPhysicalPath: 
-    PhysicalPath: Events\ShanShui_SFX.wwu
     List:
-    - Guid: 075885a4c913294bacad4a1c3197d66c
+    - Guid: 679660f81b8f6d489dbfe651bf6feb0e
+      ID: -328807916
+      Name: Mute_note_luan
+      Path: Default Work Unit\Mute_note_luan
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Mute_note_luan
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 8e7aeda027fe0842a276797917e913e8
+      ID: 931811240
+      Name: Play_Amb_01
+      Path: Default Work Unit\Play_Amb_01
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Amb_01
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 13f1748cadc29844b0e225a4a9c85637
+      ID: 931811243
+      Name: Play_Amb_02
+      Path: Default Work Unit\Play_Amb_02
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Amb_02
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 1d5c3f877c163042a4fec867a9178167
+      ID: 931811242
+      Name: Play_Amb_03
+      Path: Default Work Unit\Play_Amb_03
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Amb_03
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 482b4e6ebcb39541990b7086758ba6d2
       ID: -1440909374
       Name: Play_bouchon_water
-      Path: ShanShui_SFX\Play_bouchon_water
+      Path: Default Work Unit\Play_bouchon_water
       PathAndIcons:
-      - ElementName: ShanShui_SFX
+      - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: Play_bouchon_water
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - Guid: 56190d0db7f8f84cab522f2abd0c7d26
-      ID: -1407748207
-      Name: Play_Fish_ring
-      Path: ShanShui_SFX\Play_Fish_ring
+    - Guid: 9fb2ba265c25e944a864bb688470c694
+      ID: -770802810
+      Name: Play_drone_01
+      Path: Default Work Unit\Play_drone_01
       PathAndIcons:
-      - ElementName: ShanShui_SFX
+      - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Fish_ring
+      - ElementName: Play_drone_01
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - Guid: 75d00a093481b342bf471fb0a0c58481
+    - Guid: 75fb52f5c4010043b7645c0b50bc9407
+      ID: -770802811
+      Name: Play_drone_02
+      Path: Default Work Unit\Play_drone_02
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_drone_02
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 8eb4f531a97d9f46a2093ca121b3ebaf
+      ID: -770802812
+      Name: Play_drone_03
+      Path: Default Work Unit\Play_drone_03
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_drone_03
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 9b46687652829c46be8de97292688de7
+      ID: -770802813
+      Name: Play_drone_04
+      Path: Default Work Unit\Play_drone_04
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_drone_04
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 47e44fc40733d44c888fd43292d97512
+      ID: -770802814
+      Name: Play_drone_05
+      Path: Default Work Unit\Play_drone_05
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_drone_05
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: d0aba381f55e5e4ebdacad332b4cb042
+      ID: -1271296305
+      Name: Play_drone_fishing
+      Path: Default Work Unit\Play_drone_fishing
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_drone_fishing
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 93222b059b651549927017c9d1ad4425
+      ID: 1558986764
+      Name: Play_fish_catch
+      Path: Default Work Unit\Play_fish_catch
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_fish_catch
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: d7f05af2ffbdf8489dbd67a678e8390b
       ID: -2014363638
       Name: Play_fish_water02
-      Path: ShanShui_SFX\Play_fish_water02
+      Path: Default Work Unit\Play_fish_water02
       PathAndIcons:
-      - ElementName: ShanShui_SFX
+      - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: Play_fish_water02
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-  - Guid: '{50F65B5B-BAF8-449E-B6BF-955973C02E80}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 1933019700
-    ParentPhysicalPath: 
-    PhysicalPath: Events\ShanShui_Test_Music.wwu
-    List:
-    - Guid: e8d2e4b8b0c3e74fa4b86117d95510ed
-      ID: -1335434006
-      Name: Play_Amb
-      Path: ShanShui_Test_Music\Play_Amb
+    - Guid: f0b8a1b7c2279c41a1627201d9a35f4e
+      ID: 1044478705
+      Name: Play_fishing_feedbacks
+      Path: Default Work Unit\Play_fishing_feedbacks
       PathAndIcons:
-      - ElementName: ShanShui_Test_Music
+      - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Amb
+      - ElementName: Play_fishing_feedbacks
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - Guid: 16e11adb9098b648af34a25cbc9b9f2f
-      ID: 384966147
-      Name: Play_Drones
-      Path: ShanShui_Test_Music\Play_Drones
+    - Guid: 5c016fe6c6d9474f852a3a78b46408d7
+      ID: 1459572094
+      Name: Play_fishing_reward
+      Path: Default Work Unit\Play_fishing_reward
       PathAndIcons:
-      - ElementName: ShanShui_Test_Music
+      - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Drones
+      - ElementName: Play_fishing_reward
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
-    - Guid: 3febaa666d4e974da8582c4003b449b5
-      ID: -1846493825
-      Name: Play_Loops
-      Path: ShanShui_Test_Music\Play_Loops
+    - Guid: 17550b0eef14a24e81d9005013f7d191
+      ID: 1330963141
+      Name: Play_kanun_loops
+      Path: Default Work Unit\Play_kanun_loops
       PathAndIcons:
-      - ElementName: ShanShui_Test_Music
+      - ElementName: Default Work Unit
         ObjectType: 12
-      - ElementName: Play_Loops
+      - ElementName: Play_kanun_loops
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: e657c4b616cdf446956bc5a06bc1a51b
+      ID: -338990968
+      Name: Play_lac_back
+      Path: Default Work Unit\Play_lac_back
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_lac_back
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: c0013f3b9e18b2469ea75ec02cd48c7e
+      ID: 1553692530
+      Name: Play_lac_front
+      Path: Default Work Unit\Play_lac_front
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_lac_front
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: a3ff51194b0a2c458cc7a6e98a71843b
+      ID: -2104502999
+      Name: Play_note_luan
+      Path: Default Work Unit\Play_note_luan
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_note_luan
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 8aa1649ddcd8614bb10e931cb4f8c1cc
+      ID: 2098078825
+      Name: Stop_drone_fishing
+      Path: Default Work Unit\Stop_drone_fishing
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_drone_fishing
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: eea4800327692a4cbe2ad1f04be7a04b
+      ID: -1656521744
+      Name: Stop_fish_water02
+      Path: Default Work Unit\Stop_fish_water02
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_fish_water02
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 28ebc9cebdf14a4e89f3949ffa992aa8
+      ID: 613866693
+      Name: UnMute_note_luan
+      Path: Default Work Unit\UnMute_note_luan
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: UnMute_note_luan
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
@@ -324,14 +507,32 @@ MonoBehaviour:
   ExpandedItems:
   - /M1_SHANSHUI
   - /M1_SHANSHUI/Events
-  - /M1_SHANSHUI/Events/ShanShui_Test_Music
+  - /M1_SHANSHUI/Events/Default Work Unit
   RtpcWwu:
   - Guid: '{80F216E5-24C2-4A20-BE30-22DAF1F248F4}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 1933039640
+    m_lastTimePart2: -1999181760
+    m_lastTimePsrt1: -1418876406
     ParentPhysicalPath: 
     PhysicalPath: Game Parameters\Default Work Unit.wwu
-    List: []
+    List:
+    - Guid: 8e38783e381bf949995219703aee945b
+      ID: -318287775
+      Name: avance_poisson
+      Path: Default Work Unit\avance_poisson
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: avance_poisson
+        ObjectType: 13
+    - Guid: 0efcae5d0ebe754aae3ae41a0a6382e1
+      ID: 262290038
+      Name: RTPC_Distance
+      Path: Default Work Unit\RTPC_Distance
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: RTPC_Distance
+        ObjectType: 13
   - Guid: '{D7135222-D1DB-42D0-ADC0-930743567776}'
     m_lastTimePart2: -1999185217
     m_lastTimePsrt1: 1933039640
@@ -521,11 +722,64 @@ MonoBehaviour:
     List: []
   SwitchWwu:
   - Guid: '{B74BE684-C43A-44DA-A656-4DF0848C3DB2}'
-    m_lastTimePart2: -1999185217
-    m_lastTimePsrt1: 2016669900
+    m_lastTimePart2: -1999181760
+    m_lastTimePsrt1: -1418786641
     ParentPhysicalPath: 
     PhysicalPath: Switches\Default Work Unit.wwu
-    List: []
+    List:
+    - Guid: 43e288c5f988a340936f2baf6c596aca
+      ID: 1951380152
+      Name: note_luan
+      Path: Default Work Unit\note_luan
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: note_luan
+        ObjectType: 11
+      ValueGuids:
+      - bytes: 730df228d2c5704ebb385f84f727a0e5
+      - bytes: 819cb072f778a04faaba3fa777838735
+      - bytes: c13426754802e64bbe90ba8ac8e4a80a
+      - bytes: c31c16cf35ab844aaf1a84e9ba4d61f3
+      - bytes: 054311afea8ee5468d9d76a712022e9f
+      - bytes: 360e0e7899fbef4088317303802803b7
+      - bytes: 844a060b4c9a7b40a72b2d6934642a2a
+      - bytes: e86742df86d984459f6f3f23128816c4
+      - bytes: 1a1ee20e26c4f942a0082dbd71612fca
+      - bytes: 220623b6021d6d4da407ae84f5e00676
+      ValueIcons:
+      - ElementName: note_01
+        ObjectType: 10
+      - ElementName: note_02
+        ObjectType: 10
+      - ElementName: note_03
+        ObjectType: 10
+      - ElementName: note_04
+        ObjectType: 10
+      - ElementName: note_05
+        ObjectType: 10
+      - ElementName: note_06
+        ObjectType: 10
+      - ElementName: note_07
+        ObjectType: 10
+      - ElementName: note_08
+        ObjectType: 10
+      - ElementName: note_09
+        ObjectType: 10
+      - ElementName: note_10
+        ObjectType: 10
+      valueIDs: b1531155b2531155b3531155b4531155b5531155b6531155b7531155b8531155b953115523551156
+      values:
+      - note_01
+      - note_02
+      - note_03
+      - note_04
+      - note_05
+      - note_06
+      - note_07
+      - note_08
+      - note_09
+      - note_10
   TriggerWwu:
   - Guid: '{8FCA9EBF-1960-4441-8381-53343C71EE46}'
     m_lastTimePart2: -1999185217
