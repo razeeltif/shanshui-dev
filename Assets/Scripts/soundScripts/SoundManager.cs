@@ -6,14 +6,19 @@ public class SoundManager : MonoBehaviour
 {
 
     int nbFishCatched = 0;
+    bool inPose = false;
 
     private void OnEnable()
     {
         EventManager.StartListening(EventsName.InWater, OnInWater);
         EventManager.StartListening(EventsName.OutWater, OnOutWater);
         EventManager.StartListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StartListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StartListening(EventsName.HookFish, OnHookFish);
         EventManager.StartListening(EventsName.ChangePose, OnChangePose);
+        EventManager.StartListening(EventsName.InPose, OnInPose);
+        EventManager.StartListening(EventsName.OutPose, OnOutPose);
+        EventManager.StartListening(EventsName.SpawnPoseIndicator, OnSpawPoseIndicator);
 
     }
 
@@ -22,9 +27,12 @@ public class SoundManager : MonoBehaviour
         EventManager.StopListening(EventsName.InWater, OnInWater);
         EventManager.StopListening(EventsName.OutWater, OnOutWater);
         EventManager.StopListening(EventsName.CatchFish, OnCatchFish);
+        EventManager.StopListening(EventsName.ReleaseFish, OnReleaseFish);
         EventManager.StopListening(EventsName.HookFish, OnHookFish);
         EventManager.StopListening(EventsName.ChangePose, OnChangePose);
-
+        EventManager.StopListening(EventsName.InPose, OnInPose);
+        EventManager.StopListening(EventsName.OutPose, OnOutPose);
+        EventManager.StopListening(EventsName.SpawnPoseIndicator, OnSpawPoseIndicator);
     }
     // Start is called before the first frame update
     void Start()
@@ -35,12 +43,35 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (inPose)
+        {
+            Debug.Log(PoissonFishing.instance.completionInStep * 100);
+            AkSoundEngine.SetRTPCValue("avance_poisson", PoissonFishing.instance.completionInStep * 100, Camera.main.gameObject);
+        }
         
     }
 
     void OnChangePose()
     {
+        inPose = false;
         AkSoundEngine.PostEvent("Play_fishing_feedbacks", Camera.main.gameObject);
+    }
+
+    void OnInPose()
+    {
+        inPose = true;
+        AkSoundEngine.PostEvent("UnMute_note_luan", Camera.main.gameObject);
+    }
+
+    void OnOutPose()
+    {
+        inPose = false;
+        AkSoundEngine.PostEvent("Mute_note_luan", Camera.main.gameObject);
+    }
+
+    void OnSpawPoseIndicator()
+    {
+        AkSoundEngine.PostEvent("Play_note_luan", Camera.main.gameObject);
     }
 
     void OnInWater()
@@ -55,6 +86,7 @@ public class SoundManager : MonoBehaviour
 
     void OnCatchFish()
     {
+        inPose = false;
 
         AkSoundEngine.PostEvent("Play_fishing_reward", Camera.main.gameObject);
 
@@ -83,6 +115,11 @@ public class SoundManager : MonoBehaviour
 
 
         }
+    }
+
+    void OnReleaseFish()
+    {
+        inPose = false;
     }
 
     void OnHookFish()

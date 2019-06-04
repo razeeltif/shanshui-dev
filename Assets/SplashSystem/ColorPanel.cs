@@ -28,6 +28,7 @@ public class ColorPanel : MonoBehaviour
     private float timeToCompleteGreen = 1;
 
     private float colorFactor = 3.5f;
+    private float timeFactor = 3.5f;
 
     float redValue;
     float greenValue;
@@ -47,11 +48,11 @@ public class ColorPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        red = Mathf.Lerp(redValue, 0f, (Time.time - timeStartedRedColorDiff)/timeToCompleteRed);
+        red = Mathf.Lerp(redValue, 0f, (Time.time - timeStartedRedColorDiff)/(timeToCompleteRed * timeFactor));
 
-        green = Mathf.Lerp(greenValue, 0f, (Time.time - timeStartedGreenColorDiff)/timeToCompleteGreen);
+        green = Mathf.Lerp(greenValue, 0f, (Time.time - timeStartedGreenColorDiff)/(timeToCompleteGreen * timeFactor));
 
-        blue = Mathf.Lerp(blueValue, 0f, ((Time.time - timeStartedBlueColorDiff)/timeToCompleteBlue));
+        blue = Mathf.Lerp(blueValue, 0f, ((Time.time - timeStartedBlueColorDiff)/(timeToCompleteBlue * timeFactor)));
 
         if(targetAlpha == 0)
         {

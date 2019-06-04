@@ -110,7 +110,7 @@ public class Poisson : MonoBehaviour
 
     private void CreateSplash()
     {
-        ColorManager.CM.CreateSplash(color, color2, splashPosition);
+        ColorManager.CM.CreateFishSplash(color, color2, splashPosition);
     }
 
 

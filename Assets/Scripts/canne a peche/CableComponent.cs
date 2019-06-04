@@ -15,7 +15,7 @@ public class CableComponent : MonoBehaviour
     // Cable config
      public Vector3 cableStartOffset;
     [HideInInspector] public Vector3 cableEndOffset;
-    [HideInInspector] public float cableLength = 0.5f;
+     public float cableLength = 0.5f;
 	[HideInInspector] public int totalSegments = 5;
 	[SerializeField] private float segmentsPerUnit = 2f;
 	private int segments = 0;
