@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 8367519091465707059}
   m_LocalRotation: {x: 0.6830127, y: 0.18301275, z: 0.18301275, w: 0.6830127}
   m_LocalPosition: {x: 0.019480366, y: -0.026085716, z: -0.030868115}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children:
   - {fileID: 6411400620125527365}
   - {fileID: 5043814747422899008}
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a78c8ba85c2c90a4d91dfd1656ccfeae, type: 2}
+  - {fileID: 2100000, guid: 0747e7eef4efee9438cda9d9b2ff25eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,7 +312,7 @@ MonoBehaviour:
   maximumWaitingTime: 60
   isAttached: 0
   canBeAttached: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 0.6617622, g: 0, b: 0.764151, a: 0}
 --- !u!95 &8367519091465707060
 Animator:
   serializedVersion: 3
@@ -455,6 +455,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.worldSpace
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: ColorModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 56669
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.colorOverLifetime.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.colorOverTrail.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.inheritParticleColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.textureMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221555922204338911, guid: 215d5c066ebaee542be47daa96e8082a,
+        type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 215d5c066ebaee542be47daa96e8082a, type: 3}
