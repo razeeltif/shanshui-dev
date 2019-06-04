@@ -2671,6 +2671,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6177479184326976075, guid: fa0bdbd1f574d3b468f45590989c7e8f,
         type: 3}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceJumpFish
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceJumpBird
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362131094505310211, guid: 999f035f199700b418ce7ee37bbf0b15,
+        type: 3}
+      propertyPath: chanceSpawnBoat
+      value: 5000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999f035f199700b418ce7ee37bbf0b15, type: 3}
 --- !u!4 &360734068 stripped
@@ -15474,7 +15489,7 @@ PrefabInstance:
     - target: {fileID: 8367519091465707063, guid: b49b17e10c88f674ab97feb0f3f4d168,
         type: 3}
       propertyPath: minimumWaitingTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8367519091465707063, guid: b49b17e10c88f674ab97feb0f3f4d168,
         type: 3}
@@ -29243,6 +29258,10 @@ PrefabInstance:
       propertyPath: waterPlane
       value: 
       objectReference: {fileID: 1470676267}
+    - target: {fileID: 796914262, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bc1e0900c1f1445a228ce51718a2f3, type: 3}
 --- !u!1001 &8476147228628413562

@@ -23,7 +23,7 @@ public class AppatSign : MonoBehaviour
             if (GetComponentInParent<Bobber>().actualAppat == null || 
                 GetComponentInParent<Bobber>().actualAppat.gameObject != other.gameObject)
             {
-                GetComponent<MeshRenderer>().enabled = true;
+                GetComponentInChildren<MeshRenderer>().enabled = true;
             }
         }
     }
@@ -32,7 +32,7 @@ public class AppatSign : MonoBehaviour
     {
         if(other.tag == "appat")
         {
-            GetComponent<MeshRenderer>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
         }
     }
 }
